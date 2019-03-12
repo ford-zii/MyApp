@@ -26,7 +26,7 @@
 
   </el-col>
 </el-row>
-  
+
 </template>
 
 <script>
@@ -36,9 +36,52 @@
         user: '',
         pass:''
       }
+
+    },
+    computed: {
+
+    },
+    created() {
+      let data =  this.$store.dispatch("member/getUser");
+      console.log(data);
     }
-}
+    // var mysql = require('mysql');
+    // var connection = mysql.createConnection({
+    //   host: "localhost",
+    //   user: "root",
+    //   password: "1234",
+    //   port:"3306",
+    //   database:"testDB"
+    // });
+    //
+    // connection.connect(function(err) {
+    //   // in case of error
+    //   if(err){
+    //     console.log(err.code);
+    //     console.log(err.fatal);
+    //   }
+    // });
+    //
+    // // Perform a query
+    // var $query = 'SELECT * FROM `user` LIMIT 10';
+    //
+    // connection.query($query, function(err, rows, fields) {
+    //   if(err){
+    //     console.log("An error ocurred performing the query.");
+    //     console.log(err);
+    //     return;
+    //   }
+    //
+    //   console.log("Query succesfully executed", rows);
+    // });
+    //
+    // // Close the connection
+    // connection.end(function(){
+    //   // The connection has been closed
+    // });
+
+  }
 </script>
 <style>
- 
+
 </style>

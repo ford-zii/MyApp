@@ -2,13 +2,20 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { createPersistedState, createSharedMutations } from 'vuex-electron'
+import member from "./modules/member";
 
-import modules from './modules'
+function store(name) {
+  return function (resolve) {
+    require(['./modules/' + name], resolve);
+  }
+}
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-  modules,
+  modules:{
+    member : member,
+  },
   plugins: [
     createPersistedState(),
     createSharedMutations()
