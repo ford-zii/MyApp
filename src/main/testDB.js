@@ -9,17 +9,26 @@ var config = {
 console.log(config);
 function getUser() {
     var con = new  mysql.createConnection(config);
+    var theUser = [];
+
      $query = 'SELECT * FROM `user` ';
-    con.query($query,function (err,rows,) {
+     con.query($query,function (err,rows,) {
         if(err){
             throw err;
         }
         let data = JSON.parse(JSON.stringify(rows));
+
+        // data.forEach(function (el) {
+        //     console.log(el);
+        //     // theUser.insert(el)
+        // });
         console.log("Query succesfully executed", rows,data);
-        return data;
+         console.log(theUser);
+        return theUser.push(data);
 
     });
-
+    console.log(theUser);
+    return theUser;
 
     }
 console.log(getUser(),"fff");

@@ -2,26 +2,32 @@
 
 <el-row>
   <div style="margin: 300px;"></div>
-  <el-col :span="8" :offset="8">
+  <el-col :span="24" >
     <el-card >
 
       <el-row>
-        <el-input v-model="user" placeholder="User"> </el-input>
+        <el-table
+                :data="member"
+                style="width: 100%">
+          <el-table-column
+                  prop="id"
+                  label="ID"
+                  width="180">
+          </el-table-column>
+          <el-table-column
+                  prop="name"
+                  label="Name"
+                  width="180">
+          </el-table-column>
+          <el-table-column
+                  prop="user_name"
+                  label="Usernam">
+          </el-table-column>
+        </el-table>
       </el-row>
 
       <div style="margin: 20px;"></div>
 
-      <el-row>
-        <el-input v-model="pass" placeholder="Pass" show-password></el-input>
-      </el-row>
-
-      <div style="margin: 20px;"></div>
-
-      <el-row :gutter="20">
-        <el-col  :offset="12">
-          <el-button  type="success" plain>Success</el-button>
-        </el-col>
-      </el-row>
     </el-card>
 
   </el-col>
@@ -30,57 +36,54 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        user: '',
-        pass:''
+  var mysql = require('mysql');
+  var config = {
+    host:"localhost",
+    user: "root",
+    password: "1234",
+    port: "3306",
+    database:"testDB"
+  };
+  var con = new  mysql.createConnection(config);
+    export default {
+
+      data() {
+        return {
+          member: []
+        }
+
+      },
+      async created() {
+        con.connect(function (err) {
+          if (err) {
+            console.log(err.code);
+            console.log(err.fatal);
+          }
+        });
+        this.getData;
+        console.log(this.member,"member ");
+      },
+      computed:{
+        getData() {
+          let $query = 'SELECT * FROM `user` ';
+          con.query($query, function (err, rows) {
+            if (err) {
+              console.log("An error ocurred performing the query.");
+              console.log(err);
+            }
+            this.member = JSON.parse(JSON.stringify(rows));
+
+            console.log("Query succesfully executed", rows, this.member);
+            return ;
+          });
+        }
+      },
+      methods: {
+
+
       }
-
-    },
-    computed: {
-
-    },
-    created() {
-      let data =  this.$store.dispatch("member/getUser");
-      console.log(data);
     }
-    // var mysql = require('mysql');
-    // var connection = mysql.createConnection({
-    //   host: "localhost",
-    //   user: "root",
-    //   password: "1234",
-    //   port:"3306",
-    //   database:"testDB"
-    // });
-    //
-    // connection.connect(function(err) {
-    //   // in case of error
-    //   if(err){
-    //     console.log(err.code);
-    //     console.log(err.fatal);
-    //   }
-    // });
-    //
-    // // Perform a query
-    // var $query = 'SELECT * FROM `user` LIMIT 10';
-    //
-    // connection.query($query, function(err, rows, fields) {
-    //   if(err){
-    //     console.log("An error ocurred performing the query.");
-    //     console.log(err);
-    //     return;
-    //   }
-    //
-    //   console.log("Query succesfully executed", rows);
-    // });
-    //
-    // // Close the connection
-    // connection.end(function(){
-    //   // The connection has been closed
-    // });
 
-  }
 </script>
 <style>
 
