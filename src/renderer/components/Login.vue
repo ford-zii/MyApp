@@ -7,7 +7,7 @@
 
       <el-row>
         <el-table
-                :data="member"
+                :data="this.User"
                 style="width: 100%">
           <el-table-column
                   prop="id"
@@ -21,7 +21,7 @@
           </el-table-column>
           <el-table-column
                   prop="user_name"
-                  label="Usernam">
+                  label="Username">
           </el-table-column>
         </el-table>
       </el-row>
@@ -46,13 +46,12 @@
   };
   var con = new  mysql.createConnection(config);
     export default {
-
       data() {
         return {
-          member: []
+        User:[]
         }
-
       },
+
       async created() {
         con.connect(function (err) {
           if (err) {
@@ -60,25 +59,48 @@
             console.log(err.fatal);
           }
         });
-        this.getData;
-        console.log(this.member,"member ");
+        let vm = this;
+        this.getPro(function (rows) {
+          vm.User.push(rows[0]);
+        });
+
+        console.log(this.getPro);
+        console.log(this.User,"member ");
+
+        con.end();
       },
       computed:{
-        getData() {
+        // getData() {
+        //   let $query = 'SELECT * FROM `user` ';
+        //   con.query($query, function (err, rows) {
+        //     if (err) {
+        //       console.log("An error ocurred performing the query.");
+        //       console.log(err);
+        //     }
+        //     let data = JSON.parse(JSON.stringify(rows));
+        //     this.member = rows;
+        //     console.log("Query succesfully executed", rows, data);
+        //     return data
+        //   }); return con
+        //   con.end();
+        // }
+
+      },
+      methods: {
+        getPro:function (callback) {
           let $query = 'SELECT * FROM `user` ';
           con.query($query, function (err, rows) {
             if (err) {
               console.log("An error ocurred performing the query.");
               console.log(err);
+              return;
             }
-            this.member = JSON.parse(JSON.stringify(rows));
-
-            console.log("Query succesfully executed", rows, this.member);
-            return ;
+            let data = JSON.parse(JSON.stringify(rows));
+            callback(rows);
+            console.log("Query succesfully executed", rows, data);
           });
         }
-      },
-      methods: {
+
 
 
       }
