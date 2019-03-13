@@ -8,7 +8,8 @@
       <el-row>
         <el-table
                 :data="this.User"
-                style="width: 100%">
+                style="width: 100%"
+                >
           <el-table-column
                   prop="id"
                   label="ID"
@@ -20,12 +21,14 @@
                   width="180">
           </el-table-column>
           <el-table-column
-                  prop="user_name"
+                  prop="username"
                   label="Username">
           </el-table-column>
         </el-table>
       </el-row>
-
+      <ul>
+          <li v-for="(i,index) in this.User" :key="index"> {{i}}</li>
+      </ul>
       <div style="margin: 20px;"></div>
 
     </el-card>
@@ -38,9 +41,9 @@
 <script>
   var mysql = require('mysql');
   var config = {
-    host:"localhost",
+    host:"127.0.0.1",
     user: "root",
-    password: "1234",
+    password: "12345678",
     port: "3306",
     database:"testDB"
   };
@@ -61,7 +64,7 @@
         });
         let vm = this;
         this.getPro(function (rows) {
-          vm.User.push(rows[0]);
+          vm.User = rows
         });
 
         console.log(this.getPro);
@@ -88,7 +91,7 @@
       },
       methods: {
         getPro:function (callback) {
-          let $query = 'SELECT * FROM `user` ';
+          let $query = 'SELECT * FROM `User` ';
           con.query($query, function (err, rows) {
             if (err) {
               console.log("An error ocurred performing the query.");
@@ -96,7 +99,7 @@
               return;
             }
             let data = JSON.parse(JSON.stringify(rows));
-            callback(rows);
+            callback(data);
             console.log("Query succesfully executed", rows, data);
           });
         }
