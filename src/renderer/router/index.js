@@ -15,9 +15,14 @@ export default new Router({
       redirect: '/'
     },
     {
-      path: '/',
+      path: '/product',
       name: 'Product',
-      component: require('@/components/product').default
+      component: require('@/components/Product')
+    },
+    {
+      path: '/',
+      name: 'menu',
+      component: require('@/components/Menu')
     }
 
   ]

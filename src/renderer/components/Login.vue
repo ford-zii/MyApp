@@ -1,47 +1,47 @@
 <template>
 
 <el-row class="tac">
-  <el-col :span="4">
-    <el-menu
-            default-active="2"
-            class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
-            background-color="#409EFF"
-            text-color="#fff"
-            active-text-color="#ffd04b">
-      <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span>Navigator One</span>
-        </template>
-        <el-menu-item-group title="Group One">
-          <el-menu-item index="1-1">item one</el-menu-item>
-          <el-menu-item index="1-2">item one</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="Group Two">
-          <el-menu-item index="1-3">item three</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template slot="title">item four</template>
-          <el-menu-item index="1-4-1">item one</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span>Navigator Two</span>
-      </el-menu-item>
-      <el-menu-item index="3" disabled>
-        <i class="el-icon-document"></i>
-        <span>Navigator Three</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span>Navigator Four</span>
-      </el-menu-item>
-    </el-menu>
-  </el-col>
-
+  <!--<el-col :span="4">-->
+    <!--<el-menu-->
+            <!--default-active="2"-->
+            <!--class="el-menu-vertical-demo"-->
+            <!--@open="handleOpen"-->
+            <!--@close="handleClose"-->
+            <!--background-color="#409EFF"-->
+            <!--text-color="#fff"-->
+            <!--active-text-color="#ffd04b">-->
+      <!--<el-submenu index="1">-->
+        <!--<template slot="title">-->
+          <!--<i class="el-icon-location"></i>-->
+          <!--<span>Navigator One</span>-->
+        <!--</template>-->
+        <!--<el-menu-item-group title="Group One">-->
+          <!--<el-menu-item index="1-1">item one</el-menu-item>-->
+          <!--<el-menu-item index="1-2">item one</el-menu-item>-->
+        <!--</el-menu-item-group>-->
+        <!--<el-menu-item-group title="Group Two">-->
+          <!--<el-menu-item index="1-3">item three</el-menu-item>-->
+        <!--</el-menu-item-group>-->
+        <!--<el-submenu index="1-4">-->
+          <!--<template slot="title">item four</template>-->
+          <!--<el-menu-item index="1-4-1">item one</el-menu-item>-->
+        <!--</el-submenu>-->
+      <!--</el-submenu>-->
+      <!--<el-menu-item index="2">-->
+        <!--<i class="el-icon-menu"></i>-->
+        <!--<span>Navigator Two</span>-->
+      <!--</el-menu-item>-->
+      <!--<el-menu-item index="3" disabled>-->
+        <!--<i class="el-icon-document"></i>-->
+        <!--<span>Navigator Three</span>-->
+      <!--</el-menu-item>-->
+      <!--<el-menu-item index="4">-->
+        <!--<i class="el-icon-setting"></i>-->
+        <!--<span>Navigator Four</span>-->
+      <!--</el-menu-item>-->
+    <!--</el-menu>-->
+  <!--</el-col>-->
+ <menu></menu>
   <el-col :span="20">
     <el-table
             :data="this.User.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
@@ -69,7 +69,7 @@
           <el-button
                   size="mini"
                   type="danger"
-                  @click="getDelete()">Delete</el-button>
+                  @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -79,6 +79,7 @@
 </template>
 
 <script>
+  import menu from "../../renderer/components/Menu";
   var mysql = require('mysql');
   var config = {
     host:"localhost",
@@ -89,6 +90,9 @@
   };
   var con = new  mysql.createConnection(config);
     export default {
+      comments:{
+        menu : menu,
+      },
       data() {
         return {
           User:[],
@@ -108,26 +112,13 @@
           vm.User = rows
         });
 
-        console.log(this.getPro);
+        // console.log(this.getPro);
         console.log(this.User,"member ");
 
         // con.end();
       },
       computed:{
-        // getData() {
-        //   let $query = 'SELECT * FROM `user` ';
-        //   con.query($query, function (err, rows) {
-        //     if (err) {
-        //       console.log("An error ocurred performing the query.");
-        //       console.log(err);
-        //     }
-        //     let data = JSON.parse(JSON.stringify(rows));
-        //     this.member = rows;
-        //     console.log("Query succesfully executed", rows, data);
-        //     return data
-        //   }); return con
-        //   con.end();
-        // }
+
 
       },
       methods: {
@@ -144,10 +135,10 @@
             console.log("Query succesfully executed", rows, data);
           });
         },
-        getDelete () {
-          // console.log(dataID);
-          let $query = "DELETE FROM user WHERE id = 2";
-          con.query($query,function (err,rows) {
+        getDelete (res) {
+           console.log(res);
+          let $query = "DELETE FROM user WHERE id = ?";
+          con.query($query,[res],function (err,rows) {
             if (err) {
               console.log("An error ocurred performing the query.");
               console.log(err);
@@ -164,10 +155,12 @@
           console.log(key, keyPath);
         },
         handleEdit(index, row) {
-          console.log(index, row);
+
         },
         handleDelete(index, row) {
-          this.getDelete(index,row);
+          // console.log(index,row);
+          console.log(row.id);
+          this.getDelete(row.id);
         }
       }
     }
