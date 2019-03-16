@@ -13,6 +13,17 @@ export default new Router({
     {
       path: '*',
       redirect: '/'
+    },
+    {
+      path: '/product',
+      name: 'Product',
+      component: require('@/components/Product')
+    },
+    {
+      path: '/',
+      name: 'menu',
+      component: require('@/components/Menu')
     }
+
   ]
 })
