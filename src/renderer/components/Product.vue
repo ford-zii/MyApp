@@ -117,9 +117,9 @@ var con = new  mysql.createConnection(config);
                 product:[],
                 productForm:{
                     name: '',
-                    price: '',
+                    price: null,
                     category: '',
-                    unit: '',
+                    unit: null,
                     barcode: ''
                 },
 
@@ -198,7 +198,6 @@ var con = new  mysql.createConnection(config);
 
             },
             handleDelete(index, row) {
-                // console.log(index,row);
                 console.log(row.id);
                 this.getDelete(row.id);
             },
@@ -206,6 +205,8 @@ var con = new  mysql.createConnection(config);
                 console.log(formName.name);
                 this.createProduct(formName);
                 alert('submit!');
+                window.location.reload(true);
+
             },
             resetForm(formName) {
                 this.$refs[formName].resetFields();
