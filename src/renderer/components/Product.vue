@@ -173,6 +173,8 @@ var con = new  mysql.createConnection(config);
                     }
                     // res.sent(rows);
                     console.log("Delete succesfully executed.",rows);
+                    alert('Delete succesfully !');
+                    window.location.reload(true);
                 });
             },
             createProduct (product) {
