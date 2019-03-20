@@ -1,12 +1,54 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+      <el-row class="tac">
+        <el-col :span="4">
+          <el-menu
+                  default-active="1"
+                  class="el-menu-vertical-demo"
+                  @open="handleOpen"
+                  @close="handleClose">
+            <el-menu-item index="1" @click="goMember()">
+                <i class="el-icon-location"></i>
+                <span>Member</span>
+            </el-menu-item>
+            <el-menu-item index="2" @click="goProduct()">
+              <i class="el-icon-menu"></i>
+              <span>Product</span>
+            </el-menu-item>
+            <el-menu-item index="3">
+              <i class="el-icon-document"></i>
+              <span>Navigator Three</span>
+            </el-menu-item>
+            <el-menu-item index="4">
+              <i class="el-icon-setting"></i>
+              <span>Navigator Four</span>
+            </el-menu-item>
+          </el-menu>
+        </el-col>
+        <el-col :span="20">
+          <router-view></router-view>
+        </el-col>
+      </el-row>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'Stockmarket'
+    name: 'Stockmarket',
+    methods:{
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      goMember(){
+        this.$router.push({name:"Member"})
+      },
+      goProduct(){
+        this.$router.push({name:"Product"})
+      }
+    }
   }
 </script>
 
