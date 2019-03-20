@@ -93,22 +93,8 @@
 </template>
 
 <script>
-    var mysql = require('mysql');
-    var config = {
-        host:"localhost",
-        user: "root",
-        password: "1234",
-        port: "3306",
-        database:"testDB"
-    };
-
-
-
-var con = new  mysql.createConnection(config);
     export default {
-
         comments:{
-
         },
         data() {
             return {
@@ -127,7 +113,7 @@ var con = new  mysql.createConnection(config);
         },
 
         async created() {
-            con.connect(function (err) {
+            conDB.connect(function (err) {
 
                 if (err) {
                     console.log(err.code);
@@ -151,7 +137,7 @@ var con = new  mysql.createConnection(config);
         methods: {
             getPro:function (callback) {
                 let $query = 'SELECT * FROM `product` ';
-                con.query($query, function (err, rows) {
+                conDB.query($query, function (err, rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
                         console.log(err);
@@ -165,7 +151,7 @@ var con = new  mysql.createConnection(config);
             getDelete (res) {
                 console.log(res);
                 let $query = "DELETE FROM product WHERE id = ?";
-                con.query($query,[res],function (err,rows) {
+                conDB.query($query,[res],function (err,rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
                         console.log(err);
@@ -180,7 +166,7 @@ var con = new  mysql.createConnection(config);
             createProduct (product) {
                 console.log(product);
                 let $query = "INSERT INTO product SET ?";
-                con.query($query,[product],function (err,rows) {
+                conDB.query($query,[product],function (err,rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
                         console.log(err);

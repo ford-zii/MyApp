@@ -18,7 +18,7 @@
             </el-card>
         </el-col>
         <el-col   style="margin: 200px 200px 300px 500px" >
-            <el-button type="primary" round @click="goRegistermember()">Register</el-button>
+            <el-button type="primary" round @click="goRegistermember()"><span class="iconify" data-icon="mdi:account" data-inline="false"></span>Register</el-button>
         </el-col>
 
 
@@ -27,17 +27,17 @@
 </template>
 
 <script>
-    var mysql = require('mysql');
-    var config = {
-        host:"127.0.0.1",
-        user: "root",
-        password: "12345678",
-        port: "3306",
-        database:"testDB"
-    };
-    var con = new  mysql.createConnection(config);
+    // var mysql = require('mysql');
+    // var config = {
+    //     host:"localhost",
+    //     user: "root",
+    //     password: "1234",
+    //     port: "3306",
+    //     database:"testDB"
+    // };
+    // var con = new  mysql.createConnection(config);
+    //
     export default {
-        name: "Member",
         data() {
             return {
                 currentDate: new Date(),
@@ -45,7 +45,7 @@
             };
         },
         async created() {
-            con.connect(function (err) {
+            conDB.connect(function (err) {
                 if (err) {
                     console.log(err.code);
                     console.log(err.fatal);
@@ -64,7 +64,7 @@
         methods: {
             getPro:function (callback) {
                 let $query = 'SELECT * FROM `User` ';
-                con.query($query, function (err, rows) {
+                conDB.query($query, function (err, rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
                         console.log(err);
@@ -78,7 +78,7 @@
             getDelete (res) {
                 console.log(res);
                 let $query = "DELETE FROM user WHERE id = ?";
-                con.query($query,[res],function (err,rows) {
+                conDB.query($query,[res],function (err,rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
                         console.log(err);
