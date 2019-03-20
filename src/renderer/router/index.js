@@ -7,8 +7,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Member',
-      component: require('@/components/Member').default
+      name: 'Menu',
+      component: require('@/components/Menu').default
     },
     {
       path: '/register',

@@ -30,8 +30,10 @@
                 </el-menu-item>
             </el-menu>
         </el-col>
+    <router-view/>
     </el-row>
 </template>
+
 
 <script>
     export default {
