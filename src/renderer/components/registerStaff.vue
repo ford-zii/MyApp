@@ -44,6 +44,7 @@
     </el-form>
 </template>
 <script>
+
     export default {
         data() {
             return {
@@ -57,10 +58,67 @@
                 checkPass: '',
                 sex: '',
 
-            }
-
+            };
         },
+            async created() {
+                con.connect(function (err) {
+                    if (err) {
+                        console.log(err.code);
+                        console.log(err.fatal);
+                    }
+                });
+                let vm = this;
+                this.getPro(function (rows) {
+                    vm.staff = rows
+                });
+
+                // console.log(this.getPro);
+                console.log(this.staff,"member ");
+
+                // con.end();
+            },
+
         methods :{
+            getPro: function (callback) {
+                let $query = 'SELECT * FROM `staff` ';
+                con.query($query, function (err, rows) {
+                    if (err) {
+                        console.log("An error ocurred performing the query.");
+                        console.log(err);
+                        return;
+                    }
+                    let data = JSON.parse(JSON.stringify(rows));
+                    callback(data);
+                    console.log("Query succesfully executed", rows, data);
+                });
+            },
+            getDelete(res) {
+                console.log(res);
+                let $query = "DELETE FROM user WHERE id = ?";
+                con.query($query, [res], function (err, rows) {
+                    if (err) {
+                        console.log("An error ocurred performing the query.");
+                        console.log(err);
+                        return;
+                    }
+                    // res.sent(rows);
+                    console.log("Delete succesfully executed.", rows);
+                });
+            },
+            handleOpen(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            handleClose(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            handleEdit(index, row) {
+
+            },
+            handleDelete(index, row) {
+                // console.log(index,row);
+                console.log(row.ID);
+                this.getDelete(row.ID);
+            },
             goStaff() {
                 this.$router.push({name: "staff"})
             }
