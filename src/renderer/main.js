@@ -6,6 +6,15 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+const mysql = require('mysql');
+const config = {
+  host:"localhost",
+  user: "root",
+  password: "1234",
+  port: "3306",
+  database:"testDB"
+};
+window.conDB = new  mysql.createConnection(config);
 
 Vue.use(ElementUI);
 

@@ -1,51 +1,32 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import rm from '@/components/registerStaff'
-
+import  rm from '@/components/Registermember'
+import product from '@/components/Product'
+import member from '@/components/Member'
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'Login',
-    //   component: require('@/components/Login')
-    // },
     {
       path: '/',
-<<<<<<< HEAD
-      name: 'staff',
-      component: require('@/components/staff').default
-=======
-      name: 'Product',
-      component: require('@/components/Product').default
->>>>>>> f193a38ed7019c6434da7a7401b5492925c94d89
+      name: 'Login',
+      component: require('@/components/Login').default
     },
     {
-      path: '*',
-      redirect: '/'
+      path: '/register',
+      name: 'register',
+      component: rm
     },
-<<<<<<< HEAD
     {
       path: '/product',
       name: 'Product',
-      component: require('@/components/Product')
+      component: product
     },
     {
-      path:'/registerStaff',
-      name:'registerStaff',
-      component:rm
-
+      path: '/member',
+      name: 'Member',
+      component: member
     },
-    {
-      path: '/',
-      name: 'menu',
-      component: require('@/components/Menu')
-    },
-
-=======
->>>>>>> f193a38ed7019c6434da7a7401b5492925c94d89
-
 
   ]
 })
