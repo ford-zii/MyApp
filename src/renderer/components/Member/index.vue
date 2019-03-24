@@ -103,7 +103,7 @@
                 this.getDelete(row.id);
             },
             goRegistermember () {
-                this.$router.push({name:"register"})
+                this.$router.push({name:"registerMember"})
             }
         }
     }

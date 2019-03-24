@@ -15,9 +15,9 @@
               <i class="el-icon-menu"></i>
               <span>Product</span>
             </el-menu-item>
-            <el-menu-item index="3">
+            <el-menu-item index="3" @click="goStaff()">
               <i class="el-icon-document"></i>
-              <span>Navigator Three</span>
+              <span>Staff</span>
             </el-menu-item>
             <el-menu-item index="4">
               <i class="el-icon-setting"></i>
@@ -30,6 +30,7 @@
         </el-col>
       </el-row>
   </div>
+  <!--<router-view></router-view>-->
 </template>
 
 <script>
@@ -47,6 +48,9 @@
       },
       goProduct(){
         this.$router.push({name:"Product"})
+      },
+      goStaff(){
+        this.$router.push({name:"Staff"})
       }
     }
   }
