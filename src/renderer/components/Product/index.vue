@@ -2,28 +2,28 @@
     <el-row >
         <el-form :model="productForm" ref="productForm" label-width="120px" class="demo-ruleForm">
             <el-col :span="8" :offset="3">
-                <el-form-item label="ชื่อสินค้า" prop="name">
-                    <el-input v-model="productForm.name"></el-input>
+                <el-form-item label="ชื่อสินค้า" prop="Pname">
+                    <el-input v-model="productForm.Pname"></el-input>
                 </el-form-item>
             </el-col>
             <el-col :span="8">
-                <el-form-item label="ราคา" prop="price">
-                    <el-input v-model="productForm.price"></el-input>
+                <el-form-item label="ราคา" prop="Sell_Price">
+                    <el-input v-model="productForm.Sell_Price"></el-input>
                 </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="3">
-                <el-form-item label="ประเภท" prop="category">
-                    <el-input v-model="productForm.category"></el-input>
-                </el-form-item>
-            </el-col>
-            <el-col :span="8">
-                <el-form-item label="จำนวน" prop="unit">
-                    <el-input v-model="productForm.unit"></el-input>
+            <!--<el-col :span="8" :offset="3">-->
+                <!--<el-form-item label="ประเภท" prop="category">-->
+                    <!--<el-input v-model="productForm.category"></el-input>-->
+                <!--</el-form-item>-->
+            <!--</el-col>-->
+            <el-col :span="16" :offset="3">
+                <el-form-item label="จำนวน" prop="Unit_Price">
+                    <el-input v-model="productForm.Unit_Price"></el-input>
                 </el-form-item>
             </el-col>
             <el-col :span="16" :offset="3">
                 <el-form-item label="Barcode" prop="barcode">
-                    <el-input v-model="productForm.barcode"></el-input>
+                    <el-input v-model="productForm.productID"></el-input>
                 </el-form-item>
             </el-col>
             <!--<el-col :span="6">-->
@@ -49,25 +49,25 @@
                     :data="this.product.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
                     style="width: 100%">
                 <el-table-column
-                        label="ID"
-                        prop="id">
+                        label="Barcode"
+                        prop="productID">
                 </el-table-column>
                 <el-table-column
                         label="ชื่อสินค้า"
-                        prop="name">
+                        prop="Pname">
                 </el-table-column>
                 <el-table-column
                         label="จำนวน"
-                        prop="unit">
+                        prop="Unit_Price">
                 </el-table-column>
                 <el-table-column
                         label="ราคา"
-                        prop="price">
+                        prop="Sell_Price">
                 </el-table-column>
-                <el-table-column
-                        label="ประเภท"
-                        prop="category">
-                </el-table-column>
+                <!--<el-table-column-->
+                        <!--label="ประเภท"-->
+                        <!--prop="cateName">-->
+                <!--</el-table-column>-->
                 <el-table-column
                         align="right" >
                     <template slot="header" slot-scope="scope">
@@ -102,11 +102,11 @@
                 search: '',
                 product:[],
                 productForm:{
-                    name: '',
-                    price: null,
-                    category: '',
-                    unit: null,
-                    barcode: ''
+                    Pname: '',
+                    Sell_Price: null,
+                    cateID: '2',
+                    Unit_Price: null,
+                    productID: ''
                 },
 
             }
@@ -120,8 +120,7 @@
                     console.log(err.fatal);
                 }
             });
-            let vm = this;
-            this.getPro(function (rows) {
+            this.loadData(function (rows) {
                 vm.product = rows
             });
 
@@ -135,8 +134,9 @@
 
         },
         methods: {
-            getPro:function (callback) {
-                let $query = 'SELECT * FROM `product` ';
+            loadData () {
+                let vm = this;
+                let $query = 'SELECT * FROM `products` ';
                 conDB.query($query, function (err, rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
@@ -144,16 +144,17 @@
                         return;
                     }
                     let data = JSON.parse(JSON.stringify(rows));
-                    callback(data);
+                    vm.product = data;
+                    // callback(data);
                     console.log("Query succesfully executed", rows, data);
                 });
             },
             getDelete (res) {
                 console.log(res);
-                let $query = "DELETE FROM product WHERE id = ?";
+                let $query = "DELETE FROM products WHERE productID = ?";
                 conDB.query($query,[res],function (err,rows) {
                     if (err) {
-                        console.log("An error ocurred performing the query.");
+                        console.log("Delete error performing the query.");
                         console.log(err);
                         return;
                     }
@@ -165,7 +166,7 @@
             },
             createProduct (product) {
                 console.log(product);
-                let $query = "INSERT INTO product SET ?";
+                let $query = "INSERT INTO products SET ?";
                 conDB.query($query,[product],function (err,rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
@@ -190,10 +191,10 @@
                 this.getDelete(row.id);
             },
             submitForm(formName) {
-                console.log(formName.name);
+                console.log(formName.Pname);
                 this.createProduct(formName);
                 alert('submit!');
-                window.location.reload(true);
+                this.loadData();
 
             },
             resetForm(formName) {

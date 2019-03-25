@@ -26,15 +26,6 @@
 </template>
 
 <script>
-    var mysql = require('mysql');
-    var config = {
-    host:"127.0.0.1",
-    user: "root",
-    password: "12345678",
-    port: "3306",
-    database:"testDB"
-};
-var con = new  mysql.createConnection(config);
     export default {
         data() {
             return {
@@ -43,7 +34,7 @@ var con = new  mysql.createConnection(config);
             };
         },
         async created() {
-            con.connect(function (err) {
+            conDB.connect(function (err) {
                 if (err) {
                     console.log(err.code);
                     console.log(err.fatal);
@@ -61,8 +52,8 @@ var con = new  mysql.createConnection(config);
         },
         methods: {
             getPro: function (callback) {
-                let $query = 'SELECT * FROM `staff` ';
-                con.query($query, function (err, rows) {
+                let $query = 'SELECT * FROM `users` ';
+                conDB.query($query, function (err, rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
                         console.log(err);
@@ -75,8 +66,8 @@ var con = new  mysql.createConnection(config);
             },
             getDelete(res) {
                 console.log(res);
-                let $query = "DELETE FROM user WHERE id = ?";
-                con.query($query, [res], function (err, rows) {
+                let $query = "DELETE FROM users WHERE userID = ?";
+                conDB.query($query, [res], function (err, rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
                         console.log(err);

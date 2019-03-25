@@ -12,7 +12,7 @@ const config = {
   user: "root",
   password: "1234567",
   port: "3306",
-  database:"testDB"
+  database:"stockmarket"
 };
 window.conDB = new  mysql.createConnection(config);
 
