@@ -4,6 +4,7 @@ import  rm from '@/components/Member/Registermember'
 import product from '@/components/Product/index'
 import member from '@/components/Member/index'
 import staff from '@/components/staff/index'
+import rs from '@/components/staff/registerStaff'
 Vue.use(Router)
 
 export default new Router({
@@ -14,7 +15,7 @@ export default new Router({
       component: require('@/components/Login').default
     },
     {
-      path: '/register',
+      path: '/registerMember',
       name: 'registerMember',
       component: rm
     },
@@ -32,6 +33,11 @@ export default new Router({
       path: '/staff',
       name: 'Staff',
       component: staff
+    },
+    {
+      path: '/registerStaff',
+      name: 'registerStaff',
+      component: rs
     },
 
   ]

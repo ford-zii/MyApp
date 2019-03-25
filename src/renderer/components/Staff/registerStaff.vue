@@ -1,46 +1,72 @@
 <template>
-    <el-form>
+    <el-form :model="formStaff">
     <el-col style="margin: 100px 600px 50px 350px">
         <h1> <span> REGISTER STAFF </span></h1>
     </el-col>
+        <el-col :span="16" :offset="3">
+            <el-form-item  prop="Username">
+                <el-input placeholder="Username" v-model="formStaff.Username"></el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span="16" :offset="3">
+            <el-form-item  prop="Password">
+                <el-input placeholder="Password" v-model="formStaff.Password" show-password></el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span="16" :offset="3">
+            <el-form-item  prop="First name">
+                <el-input placeholder="First name" v-model="formStaff.frist_name" ></el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span="16" :offset="3">
+            <el-form-item  prop="Last name">
+                <el-input placeholder="Last name" v-model="formStaff.last_name" ></el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span="16" :offset="3">
+            <el-form-item>
+                <el-button type="success" round  @click="submitForm(formStaff)">SAVE</el-button>
+                <el-button type="danger" round @click="cancelForm()">CANCEL</el-button>
+            </el-form-item>
+        </el-col>
     <!--กรอกข้อมูล-->
-    <el-row :gutter="50" >
-        <el-col :span="10" style="margin-left: 80px"><div class="grid-content bg-purple"></div>
-            <el-input placeholder="Firstname" v-model="first" ></el-input>
-        </el-col>
-        <el-col :span="10"><div class="grid-content bg-purple-light" ></div>
-            <el-input placeholder="Lastname" v-model="last"></el-input>
-        </el-col>
-    </el-row>
-    <el-col :span="16" style="margin-left: 130px"><div class="grid-content bg-purple"></div>
-        <el-input placeholder="ID" v-model="id"  style="margin-top: 20px"> </el-input>
-    </el-col>
-    <el-col :span="16" style="margin-left: 130px"><div class="grid-content bg-purple"></div>
-        <el-input placeholder="telephone number" v-model="phone" style="margin-top: 20px"></el-input>
-    </el-col>
-    <el-col :span="16" style="margin-left: 130px"
-                prop="email"
-                label="Email"
-                :rules="[
-      { required: true, message: 'Please input email address', trigger: 'blur' },
-      { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
-    ]"
-        ><el-input placeholder="Email" v-model="email" style="margin-top: 20px"></el-input><div class="grid-content bg-purple"></div>
-    </el-col>
-    <el-col :span="16" style="margin-left: 130px"><div class="grid-content bg-purple"></div>
-            <el-input placeholder="Password" type="password" v-model="pass" autocomplete="off" style="margin-top: 20px">></el-input>
-     </el-col>
-    <el-col :span="16" style="margin-left: 130px"><div class="grid-content bg-purple"></div>
-            <el-input placeholder="Check Password" type="password" v-model="checkPass" autocomplete="off" style="margin-top: 20px">></el-input>
-    </el-col>
-    <el-col style="margin: 20px 130px"> SEX
-                <el-radio v-model="sex" label="1">Male</el-radio>
-                <el-radio v-model="sex" label="2">Female</el-radio>
-    </el-col>
-    <el-col :span="16" style="margin: 20px  130px"><div class="grid-content bg-purple"></div>
-            <el-button type="success" round @click="goStaff()">SAVE</el-button>
-            <el-button round @click="goStaff()">CANCEL</el-button>
-    </el-col>
+    <!--<el-row :gutter="50" >-->
+        <!--<el-col :span="10" style="margin-left: 80px"><div class="grid-content bg-purple"></div>-->
+            <!--<el-input placeholder="Firstname" v-model="first" ></el-input>-->
+        <!--</el-col>-->
+        <!--<el-col :span="10"><div class="grid-content bg-purple-light" ></div>-->
+            <!--<el-input placeholder="Lastname" v-model="last"></el-input>-->
+        <!--</el-col>-->
+    <!--</el-row>-->
+    <!--<el-col :span="16" style="margin-left: 130px"><div class="grid-content bg-purple"></div>-->
+        <!--<el-input placeholder="ID" v-model="id"  style="margin-top: 20px"> </el-input>-->
+    <!--</el-col>-->
+    <!--<el-col :span="16" style="margin-left: 130px"><div class="grid-content bg-purple"></div>-->
+        <!--<el-input placeholder="telephone number" v-model="phone" style="margin-top: 20px"></el-input>-->
+    <!--</el-col>-->
+    <!--<el-col :span="16" style="margin-left: 130px"-->
+                <!--prop="email"-->
+                <!--label="Email"-->
+                <!--:rules="[-->
+      <!--{ required: true, message: 'Please input email address', trigger: 'blur' },-->
+      <!--{ type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }-->
+    <!--]"-->
+        <!--&gt;<el-input placeholder="Email" v-model="email" style="margin-top: 20px"></el-input><div class="grid-content bg-purple"></div>-->
+    <!--</el-col>-->
+    <!--<el-col :span="16" style="margin-left: 130px"><div class="grid-content bg-purple"></div>-->
+            <!--<el-input placeholder="Password" type="password" v-model="pass" autocomplete="off" style="margin-top: 20px">></el-input>-->
+     <!--</el-col>-->
+    <!--<el-col :span="16" style="margin-left: 130px"><div class="grid-content bg-purple"></div>-->
+            <!--<el-input placeholder="Check Password" type="password" v-model="checkPass" autocomplete="off" style="margin-top: 20px">></el-input>-->
+    <!--</el-col>-->
+    <!--<el-col style="margin: 20px 130px"> SEX-->
+                <!--<el-radio v-model="sex" label="1">Male</el-radio>-->
+                <!--<el-radio v-model="sex" label="2">Female</el-radio>-->
+    <!--</el-col>-->
+    <!--<el-col :span="16" style="margin: 20px  130px"><div class="grid-content bg-purple"></div>-->
+            <!--<el-button type="success" round @click="goStaff()">SAVE</el-button>-->
+            <!--<el-button round @click="goStaff()">CANCEL</el-button>-->
+    <!--</el-col>-->
     </el-form>
 </template>
 <script>
@@ -48,61 +74,27 @@
     export default {
         data() {
             return {
-
-                first: '',
-                last: '',
-                id: '',
-                phone: '',
-                email: '',
-                pass: '',
-                checkPass: '',
-                sex: '',
-
+                formStaff:{
+                    Username:'',
+                    Password:'',
+                    frist_name:'',
+                    last_name:''
+                }
             };
         },
-            async created() {
-                con.connect(function (err) {
-                    if (err) {
-                        console.log(err.code);
-                        console.log(err.fatal);
-                    }
-                });
-                let vm = this;
-                this.getPro(function (rows) {
-                    vm.staff = rows
-                });
-
-                // console.log(this.getPro);
-                console.log(this.staff,"member ");
-
-                // con.end();
-            },
 
         methods :{
-            getPro: function (callback) {
-                let $query = 'SELECT * FROM `staff` ';
-                con.query($query, function (err, rows) {
+            createStaff (form) {
+                console.log(form);
+                let $query = "INSERT INTO users SET ?";
+                conDB.query($query,[form],function (err,rows) {
                     if (err) {
-                        console.log("An error ocurred performing the query.");
-                        console.log(err);
-                        return;
-                    }
-                    let data = JSON.parse(JSON.stringify(rows));
-                    callback(data);
-                    console.log("Query succesfully executed", rows, data);
-                });
-            },
-            getDelete(res) {
-                console.log(res);
-                let $query = "DELETE FROM user WHERE id = ?";
-                con.query($query, [res], function (err, rows) {
-                    if (err) {
-                        console.log("An error ocurred performing the query.");
+                        console.log("createCUS error ocurred performing the query.");
                         console.log(err);
                         return;
                     }
                     // res.sent(rows);
-                    console.log("Delete succesfully executed.", rows);
+                    console.log("createCUS succesfully executed.",rows);
                 });
             },
             handleOpen(key, keyPath) {
@@ -119,8 +111,12 @@
                 console.log(row.ID);
                 this.getDelete(row.ID);
             },
-            goStaff() {
-                this.$router.push({name: "staff"})
+            cancelForm() {
+                this.$router.push({name:"Staff"})
+            },
+            submitForm(form) {
+                this.createStaff(form);
+                this.$router.push({name: "Staff"})
             }
         },
         rules2: {
