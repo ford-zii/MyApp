@@ -1,27 +1,72 @@
 <template>
     <el-row>
-        <el-col :span="8"  :offset="9">
-            <el-card :body-style="{ padding: '50px' }">
-                <img src="https://s.isanook.com/wo/0/rp/r/w700/ya0xa0m1w0/aHR0cHM6Ly9zLmlzYW5vb2suY29tL3dvLzAvdWQvMjAvMTAxNTczL3AuanBn.jpg" class="image" width="250" height="250">
-                <div style="padding: 20px">
-                    <el-col :offset="8">
-                        <span>{{this.Member[0].name}} </span> <br />
-                        <span>{{this.Member[0].id}}</span>
-                    </el-col>
-                    <el-col :offset="10">
-                        <div class="bottom clearfix" >
-                            <el-button type="text" class="button">Edit</el-button>
-                        </div>
-                    </el-col>
-                    <img src="https://pbbeautyschool.com/wp-content/uploads/2014/06/star-student.png" class="image" width="50" height="50" style="margin-left: 80px">
-                </div>
-            </el-card>
+        <!--<el-col :span="8"  :offset="9">-->
+            <!--<el-card :body-style="{ padding: '50px' }">-->
+                <!--<img src="https://s.isanook.com/wo/0/rp/r/w700/ya0xa0m1w0/aHR0cHM6Ly9zLmlzYW5vb2suY29tL3dvLzAvdWQvMjAvMTAxNTczL3AuanBn.jpg" class="image" width="250" height="250">-->
+                <!--<div style="padding: 20px">-->
+                    <!--<el-col :offset="8">-->
+                        <!--<span>{{this.Member[0].name}} </span> <br />-->
+                        <!--<span>{{this.Member[0].id}}</span>-->
+                    <!--</el-col>-->
+                    <!--<el-col :offset="10">-->
+                        <!--<div class="bottom clearfix" >-->
+                            <!--<el-button type="text" class="button">Edit</el-button>-->
+                        <!--</div>-->
+                    <!--</el-col>-->
+                    <!--<img src="https://pbbeautyschool.com/wp-content/uploads/2014/06/star-student.png" class="image" width="50" height="50" style="margin-left: 80px">-->
+                <!--</div>-->
+            <!--</el-card>-->
+        <!--</el-col>-->
+        <!--<el-col   style="margin: 200px 200px 300px 500px" >-->
+            <!--<el-button type="primary" round @click="goRegistermember()"><span class="iconify" data-icon="mdi:account" data-inline="false"></span>Register</el-button>-->
+        <!--</el-col>-->
+        <el-col :offset="3"  >
+        <el-button type="primary" round @click="goRegistermember()"><span class="iconify" data-icon="mdi:account" data-inline="false"></span>Register</el-button>
         </el-col>
-        <el-col   style="margin: 200px 200px 300px 500px" >
-            <el-button type="primary" round @click="goRegistermember()"><span class="iconify" data-icon="mdi:account" data-inline="false"></span>Register</el-button>
+        <el-col :span="18" :offset="3">
+            <el-table
+                    :data="this.Member.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+                    style="width: 100%">
+                <!--<el-table-column-->
+                        <!--label="Barcode"-->
+                        <!--prop="Cus_ID">-->
+                <!--</el-table-column>-->
+                <el-table-column
+                        label="ชื่อ-นามสกุล"
+                        prop="Cus_name">
+                </el-table-column>
+                <el-table-column
+                        label="เบอร์โทร"
+                        prop="Contact_no">
+                </el-table-column>
+                <el-table-column
+                        label="ที่อยุ๋"
+                        prop="Cus_address">
+                </el-table-column>
+                <!--<el-table-column-->
+                <!--label="ประเภท"-->
+                <!--prop="cateName">-->
+                <!--</el-table-column>-->
+                <el-table-column
+                        align="right" >
+                    <template slot="header" slot-scope="scope">
+                        <el-input
+                                v-model="search"
+                                size="mini"
+                                placeholder="ค้นหา"/>
+                    </template>
+                    <template slot-scope="scope">
+                        <!--<el-button-->
+                        <!--size="mini"-->
+                        <!--@click="handleEdit(scope.$index, scope.row)">Edit</el-button>-->
+                        <el-button
+                                size="mini"
+                                type="danger"
+                                @click="handleDelete(scope.$index, scope.row)">ลบสินค้า</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
         </el-col>
-
-
     </el-row>
 
 </template>
@@ -41,7 +86,8 @@
         data() {
             return {
                 currentDate: new Date(),
-                Member:[]
+                Member:[],
+                search:''
             };
         },
         async created() {
@@ -51,19 +97,17 @@
                     console.log(err.fatal);
                 }
             });
-            let vm = this;
-            this.getPro(function (rows) {
-                vm.Member = rows
-            });
 
+            this.loadData();
             // console.log(this.getPro);
             console.log(this.Member,"member ");
 
             // con.end();
         },
         methods: {
-            getPro:function (callback) {
-                let $query = 'SELECT * FROM `User` ';
+            loadData() {
+                let vm = this;
+                let $query = 'SELECT * FROM `customer` ';
                 conDB.query($query, function (err, rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
@@ -71,13 +115,13 @@
                         return;
                     }
                     let data = JSON.parse(JSON.stringify(rows));
-                    callback(data);
+                    vm.Member = data;
                     console.log("Query succesfully executed", rows, data);
                 });
             },
             getDelete (res) {
                 console.log(res);
-                let $query = "DELETE FROM user WHERE id = ?";
+                let $query = "DELETE FROM customer WHERE Cus_ID = ?";
                 conDB.query($query,[res],function (err,rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
@@ -101,6 +145,7 @@
                 // console.log(index,row);
                 console.log(row.id);
                 this.getDelete(row.id);
+                this.loadData();
             },
             goRegistermember () {
                 this.$router.push({name:"registerMember"})

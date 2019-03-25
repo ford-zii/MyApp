@@ -120,10 +120,7 @@
                     console.log(err.fatal);
                 }
             });
-            this.loadData(function (rows) {
-                vm.product = rows
-            });
-
+            this.loadData();
             // console.log(this.getPro);
             console.log(this.User,"member ");
 
@@ -161,7 +158,7 @@
                     // res.sent(rows);
                     console.log("Delete succesfully executed.",rows);
                     alert('Delete succesfully !');
-                    window.location.reload(true);
+
                 });
             },
             createProduct (product) {
@@ -189,6 +186,7 @@
             handleDelete(index, row) {
                 console.log(row.id);
                 this.getDelete(row.id);
+                this.loadData();
             },
             submitForm(formName) {
                 console.log(formName.Pname);
