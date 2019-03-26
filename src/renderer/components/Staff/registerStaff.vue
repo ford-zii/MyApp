@@ -106,11 +106,8 @@
             handleEdit(index, row) {
 
             },
-            handleDelete(index, row) {
-                // console.log(index,row);
-                console.log(row.ID);
-                this.getDelete(row.ID);
-            },
+
+
             cancelForm() {
                 this.$router.push({name:"Staff"})
             },

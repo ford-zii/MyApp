@@ -39,14 +39,14 @@
             <el-col :span="16" :offset="3">
                 <el-form-item>
                     <el-button type="primary" @click="submitForm(productForm)">บันทึก</el-button>
-                    <el-button @click="resetForm(productForm)">Reset</el-button>
+                    <!--<el-button @click="resetForm(productForm)">Reset</el-button>-->
                 </el-form-item>
             </el-col>
 
         </el-form>
         <el-col :span="18" :offset="3">
             <el-table
-                    :data="this.product.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+                    :data="this.product.filter(data => !search || data.Pname.toLowerCase().includes(search.toLowerCase()))"
                     style="width: 100%">
                 <el-table-column
                         label="Barcode"
@@ -106,7 +106,7 @@
                     Sell_Price: null,
                     cateID: '2',
                     Unit_Price: null,
-                    productID: ''
+                    productID: null
                 },
 
             }
@@ -184,8 +184,8 @@
 
             },
             handleDelete(index, row) {
-                console.log(row.id);
-                this.getDelete(row.id);
+                console.log(row.productID);
+                this.getDelete(row.productID);
                 this.loadData();
             },
             submitForm(formName) {

@@ -126,6 +126,7 @@
                     }
                     // res.sent(rows);
                     console.log("Delete succesfully executed.", rows);
+
                 });
             },
             handleOpen(key, keyPath) {
@@ -139,8 +140,8 @@
             },
             handleDelete(index, row) {
                 // console.log(index,row);
-                console.log(row.ID);
-                this.getDelete(row.ID);
+                console.log(row.userID);
+                this.getDelete(row.userID);
                 this.loadData();
             },
             goregisterStaff(){

@@ -19,10 +19,7 @@
               <i class="el-icon-document"></i>
               <span>Staff</span>
             </el-menu-item>
-            <el-menu-item index="4">
-              <i class="el-icon-setting"></i>
-              <span>Navigator Four</span>
-            </el-menu-item>
+
           </el-menu>
         </el-col>
         <el-col :span="20">

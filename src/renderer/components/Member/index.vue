@@ -40,7 +40,7 @@
                         prop="Contact_no">
                 </el-table-column>
                 <el-table-column
-                        label="ที่อยุ๋"
+                        label="ที่อยู่"
                         prop="Cus_address">
                 </el-table-column>
                 <!--<el-table-column-->
@@ -100,7 +100,7 @@
 
             this.loadData();
             // console.log(this.getPro);
-            console.log(this.Member,"member ");
+            console.log(this.loadData,"member ");
 
             // con.end();
         },
@@ -143,8 +143,8 @@
             },
             handleDelete(index, row) {
                 // console.log(index,row);
-                console.log(row.id);
-                this.getDelete(row.id);
+                console.log(row.Cus_ID);
+                this.getDelete(row.Cus_ID);
                 this.loadData();
             },
             goRegistermember () {
