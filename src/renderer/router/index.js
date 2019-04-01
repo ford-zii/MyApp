@@ -5,6 +5,7 @@ import product from '@/components/Product/index'
 import member from '@/components/Member/index'
 import staff from '@/components/staff/index'
 import rs from '@/components/staff/registerStaff'
+import  sell from '@/components/Sell/index'
 Vue.use(Router)
 
 export default new Router({
@@ -39,6 +40,11 @@ export default new Router({
       name: 'registerStaff',
       component: rs
     },
+    {
+      path: '/index',
+      name: 'index',
+      component: sell
+    }
 
   ]
 })
