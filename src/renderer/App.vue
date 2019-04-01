@@ -19,6 +19,10 @@
               <i class="el-icon-document"></i>
               <span>Staff</span>
             </el-menu-item>
+            <el-menu-item index="3" @click="goSell()">
+              <i class="el-icon-document"></i>
+              <span>Sell</span>
+            </el-menu-item>
 
           </el-menu>
         </el-col>
@@ -48,6 +52,9 @@
       },
       goStaff(){
         this.$router.push({name:"Staff"})
+      },
+      goSell(){
+        this.$router.push({name:"Sell"})
       }
     }
   }
