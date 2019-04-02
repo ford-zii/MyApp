@@ -21,7 +21,7 @@
         <!--</el-col>-->
 
         <el-col :offset="3"  >
-            <el-button type="primary" round @click="alert()"><span class="iconify" data-icon="mdi:account" data-inline="false"></span>Register</el-button>
+            <el-button type="primary" round @click="$router.push({name:'registerStaff'})"><span class="iconify" data-icon="mdi:account" data-inline="false"></span>Register</el-button>
         </el-col>
         <el-col :span="18" :offset="3">
             <el-table
@@ -46,7 +46,7 @@
 
                 <!--<el-table-column-->
                 <!--label="ประเภท"-->
-                <!--prop="cateName">-->
+                <!--&gt;-->
                 <!--</el-table-column>-->
                 <el-table-column
                         align="right" >
@@ -63,7 +63,7 @@
                         <el-button
                                 size="mini"
                                 type="danger"
-                                @click="handleDelete(scope.$index, scope.row)">ลบสินค้า</el-button>
+                                @click="handleDelete(scope.$index, scope.row)">ลบข้อมูล</el-button>
                     </template>
                 </el-table-column>
             </el-table>

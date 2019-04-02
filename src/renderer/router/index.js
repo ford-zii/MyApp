@@ -4,6 +4,7 @@ import  rm from '@/components/Member/Registermember'
 import product from '@/components/Product/index'
 import member from '@/components/Member/index'
 import staff from '@/components/staff/index'
+import sell from '@/components/Sell/index'
 import rs from '@/components/staff/registerStaff'
 Vue.use(Router)
 
@@ -43,6 +44,11 @@ export default new Router({
           path: 'registerStaff',
           name: 'registerStaff',
           component: rs
+        },
+        {
+          path: 'sell',
+          name: 'sell',
+          component: sell
         },
         ]
     }

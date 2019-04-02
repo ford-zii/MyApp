@@ -19,7 +19,17 @@
                     <i class="el-icon-document"></i>
                     <span>Staff</span>
                 </el-menu-item>
+                <el-menu-item index="4" @click="goSell()">
+                    <font-awesome-icon icon="tags" />
+                    <i class="el-icon-goods"></i>
+                    <span>Sell</span>
+                </el-menu-item>
+                <el-menu-item index="5" @click="logout()">
+                    <font-awesome-icon icon="sign-out" />
 
+                    <!--<i class="el-icon-goods"></i>-->
+                    <span>Logout</span>
+                </el-menu-item>
             </el-menu>
         </el-col>
         <el-col :span="20">
@@ -46,6 +56,12 @@
             },
             goStaff(){
                 this.$router.push({name:"Staff"})
+            },
+            goSell(){
+                this.$router.push({name:"sell"})
+            },
+            logout(){
+                this.$router.push({name:"Login"})
             }
         }
     }
