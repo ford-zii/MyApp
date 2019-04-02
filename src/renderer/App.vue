@@ -16,12 +16,9 @@
               <!--<span>Product</span>-->
             <!--</el-menu-item>-->
             <!--<el-menu-item index="3" @click="goStaff()">-->
+              <!--<font-awesome-icon icon="coffee" />-->
               <!--<i class="el-icon-document"></i>-->
               <!--<span>Staff</span>-->
-            <!--</el-menu-item>-->
-            <!--<el-menu-item index="3" @click="goSell()">-->
-              <!--<i class="el-icon-document"></i>-->
-              <!--<span>Sell</span>-->
             <!--</el-menu-item>-->
 
           <!--</el-menu>-->
@@ -52,9 +49,6 @@
       },
       goStaff(){
         this.$router.push({name:"Staff"})
-      },
-      goSell(){
-        this.$router.push({name:"Sell"})
       }
     }
   }
@@ -64,5 +58,6 @@
 #app{
   font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
+
   /* CSS */
 </style>
