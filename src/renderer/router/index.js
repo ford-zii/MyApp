@@ -10,40 +10,42 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'Login',
-    //   component: require('@/components/Login').default
-    // },
     {
-      path: '/registerMember',
-      name: 'registerMember',
-      component: rm
+      path: '/',
+      name: 'Login',
+      component: require('@/components/Login').default
     },
     {
-      path: '/product',
-      name: 'Product',
-      component: product
-    },
-    {
-      path: '/member',
-      name: 'Member',
-      component: member
-    },
-    {
-      path: '/staff',
-      name: 'Staff',
-      component: staff
-    },
-    {
-      path: '/registerStaff',
-      name: 'registerStaff',
-      component: rs
-    },
-    {
-      path: '/index',
-      name: 'index',
-      component: sell
+      path: '/market',
+      name: 'marketTM',
+      component: require("@/components/template").default,
+      children: [
+        {
+          path: 'registerMember',
+          name: 'registerMember',
+          component: rm
+        },
+        {
+          path: 'product',
+          name: 'Product',
+          component: product
+        },
+        {
+          path: 'member',
+          name: 'Member',
+          component: member
+        },
+        {
+          path: 'staff',
+          name: 'Staff',
+          component: staff
+        },
+        {
+          path: 'registerStaff',
+          name: 'registerStaff',
+          component: rs
+        },
+        ]
     }
 
   ]

@@ -1,23 +1,19 @@
 <template>
   <!--<div style="width: 200px " ></div>-->
+
   <el-row>
     <el-col :span="12" :offset="5">
-      <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
-        <el-form-item label="User" prop="user">
-          <el-input type="text" v-model="ruleForm2.user" autocomplete="off"></el-input>
+      <el-form :model="form" status-icon  ref="form" label-width="120px" class="demo-ruleForm">
+        <i class="fas fa-id-card"></i>
+        <el-form-item label="User" prop="user" >
+          <el-input type="text" v-model="form.username" autocomplete="off" ></el-input>
         </el-form-item>
-        <el-form-item label="Password" prop="pass">
-          <el-input type="password" v-model="ruleForm2.pass" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="Confirm" prop="checkPass">
-          <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="Age" prop="age">
-          <el-input v-model.number="ruleForm2.age"></el-input>
+        <el-form-item label="Password" prop="pass" >
+          <el-input type="password" v-model="form.password" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm2')">Submit</el-button>
-          <el-button @click="resetForm('ruleForm2')">Reset</el-button>
+          <el-button type="primary" @click="submitForm('form')">Login</el-button>
+
         </el-form-item>
       </el-form>
     </el-col>
@@ -27,59 +23,12 @@
 <script>
     export default {
       data() {
-        var checkAge = (rule, value, callback) => {
-          if (!value) {
-            return callback(new Error('Please input the age'));
-          }
-          setTimeout(() => {
-            if (!Number.isInteger(value)) {
-              callback(new Error('Please input digits'));
-            } else {
-              if (value < 18) {
-                callback(new Error('Age must be greater than 18'));
-              } else {
-                callback();
-              }
-            }
-          }, 1000);
-        };
-        var validatePass = (rule, value, callback) => {
-          if (value === '') {
-            callback(new Error('Please input the password'));
-          } else {
-            if (this.ruleForm2.checkPass !== '') {
-              this.$refs.ruleForm2.validateField('checkPass');
-            }
-            callback();
-          }
-        };
-        var validatePass2 = (rule, value, callback) => {
-          if (value === '') {
-            callback(new Error('Please input the password again'));
-          } else if (value !== this.ruleForm2.pass) {
-            callback(new Error('Two inputs don\'t match!'));
-          } else {
-            callback();
-          }
-        };
+
         return {
-          ruleForm2: {
-            user:'',
-            pass: '',
-            checkPass: '',
-            age: ''
+          form: {
+            username:'',
+            password: ''
           },
-          rules2: {
-            pass: [
-              { validator: validatePass, trigger: 'blur' }
-            ],
-            checkPass: [
-              { validator: validatePass2, trigger: 'blur' }
-            ],
-            age: [
-              { validator: checkAge, trigger: 'blur' }
-            ]
-          }
         };
       },
       methods: {
@@ -87,6 +36,7 @@
           this.$refs[formName].validate((valid) => {
             if (valid) {
               alert('submit!');
+              this.$router.push({name:"Product"});
             } else {
               console.log('error submit!!');
               return false;

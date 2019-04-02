@@ -5,6 +5,14 @@ import 'element-ui/lib/theme-chalk/index.css';
 import App from './App'
 import router from './router'
 import store from './store'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import VueSwal from 'vue-swal'
+
+library.add(faCoffee);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.config.productionTip = false;
 
 const mysql = require('mysql');
 const config = {
@@ -16,7 +24,7 @@ const config = {
   database:"stock"
 };
 window.conDB = new  mysql.createConnection(config);
-
+Vue.use(VueSwal);
 Vue.use(ElementUI);
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'));
