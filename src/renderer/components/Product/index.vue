@@ -1,5 +1,5 @@
 <template>
-    <el-row >
+    <el-row style="margin-top: 50px">
         <el-form :model="productForm" ref="productForm" label-width="120px" class="demo-ruleForm">
             <el-col :span="8" :offset="3">
                 <el-form-item label="ชื่อสินค้า" prop="Pname">
@@ -36,7 +36,7 @@
                     <!--<el-input type="textarea" v-model="ruleForm.desc"></el-input>-->
                 <!--</el-form-item>-->
             <!--</el-col >-->
-            <el-col :span="16" :offset="3">
+            <el-col :span="16" :offset="3" style="margin-left: 350px">
                 <el-form-item>
                     <el-button type="primary" @click="submitForm(productForm)">บันทึก</el-button>
                     <!--<el-button @click="resetForm(productForm)">Reset</el-button>-->

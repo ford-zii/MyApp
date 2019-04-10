@@ -21,7 +21,7 @@ const config = {
   user: "root",
   password: "12345678",
   port: "3306",
-  database:"stock"
+  database:"store"
 };
 window.conDB = new  mysql.createConnection(config);
 Vue.use(VueSwal);

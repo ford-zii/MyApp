@@ -1,14 +1,14 @@
-<template>
-    <el-col  >
+    <template  >
+        <el-col >
         <!--ชื่อหัวเรื่อง-->
-        <el-col style="margin: 100px 600px 50px 350px">
+        <el-col style="margin: 100px 600px 50px 450px">
             <h1> <span>REGISTER MEMBER </span></h1>
         </el-col>
-        <!--กรอกข้อมูล-->
 
-        <el-form ref="form" :model="formCUS" label-width="120px">
-            <el-col :span="16" :offset="3">
-                <el-form-item  prop="Cus_name">
+        <!--กรอกข้อมูล-->
+        <el-form ref="form" :model="formCUS" label-width="120px" style="margin: 100px 50px 100px 40px">
+            <el-col :span="16" :offset="3" >
+                <el-form-item  prop="Cus_name" >
                     <el-input placeholder="Name" v-model="formCUS.Cus_name"></el-input>
                 </el-form-item>
             </el-col>
@@ -22,8 +22,9 @@
                     <el-input placeholder="Contact" v-model="formCUS.Contact_no" ></el-input>
                 </el-form-item>
             </el-col>
-            <el-col :span="16" :offset="3">
-                <el-form-item>
+
+            <el-col :span="16" :offset="4" >
+                <el-form-item style="margin: 50px 160px ">
                     <el-button type="success" round  @click="submitForm(formCUS)">SAVE</el-button>
                     <el-button type="danger" round @click="cancelForm()">CANCEL</el-button>
                 </el-form-item>
@@ -47,12 +48,7 @@
         <!--</div>-->
         <!--&lt;!&ndash;ปุ่ม&ndash;&gt;-->
         <!--<br/>-->
-
-
-
-
-
-
+    
     </el-col>
 
 </template>
@@ -98,6 +94,9 @@
 
 </script>
 
-<style scoped>
-
+<style >
+    body{
+        background-color: powderblue;
+        background-size: cover;
+    }
 </style>
