@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 import ElementUI from 'element-ui';
+import th from "element-ui/lib/locale/lang/th";
 import 'element-ui/lib/theme-chalk/index.css';
 import App from './App'
 import router from './router'
@@ -29,7 +30,7 @@ const config = {
 };
 window.conDB = new  mysql.createConnection(config);
 Vue.use(VueSwal);
-Vue.use(ElementUI);
+Vue.use(ElementUI,{locale :th});
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'));
 Vue.http = Vue.prototype.$http = axios;

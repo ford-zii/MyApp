@@ -2,7 +2,7 @@
     <el-row class="tac">
         <el-col :span="4">
             <el-menu
-                    default-active="1"
+                    default-active="2"
                     class="menu"
                     @open="handleOpen"
                     @close="handleClose">

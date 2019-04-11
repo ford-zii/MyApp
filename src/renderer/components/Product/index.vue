@@ -1,93 +1,53 @@
 <template>
     <el-row >
-        <el-form :model="productForm" ref="productForm" label-width="120px" class="demo-ruleForm">
-            <el-col :span="8" :offset="3">
-                <el-form-item label="ชื่อสินค้า" prop="Pname">
-                    <el-input v-model="productForm.name"></el-input>
-                </el-form-item>
-            </el-col>
-            <el-col :span="8">
-                <el-form-item label="ราคา" prop="Sell_Price">
-                    <el-input v-model="productForm.price"></el-input>
-                </el-form-item>
-            </el-col>
-            <!--<el-col :span="8" :offset="3">-->
-                <!--<el-form-item label="ประเภท" prop="category">-->
-                    <!--<el-input v-model="productForm.category"></el-input>-->
-                <!--</el-form-item>-->
-            <!--</el-col>-->
-            <el-col :span="16" :offset="3">
-                <el-form-item label="จำนวน" prop="Unit_Price">
-                    <el-input v-model="productForm.unit"></el-input>
-                </el-form-item>
-            </el-col>
-            <el-col :span="16" :offset="3">
-                <el-form-item label="Barcode" prop="barcode">
-                    <el-input v-model="productForm.barcode"></el-input>
-                </el-form-item>
-            </el-col>
-            <!--<el-col :span="6">-->
-                <!--<el-form-item>-->
-                    <!--<el-button type="primary" @click="submitForm('ruleForm')">Generate</el-button>-->
-                <!--</el-form-item>-->
-            <!--</el-col>-->
-            <!--<el-col :span="16" :offset="3">-->
-                <!--<el-form-item label="รายละเอียดสินค้า" prop="desc">-->
-                    <!--<el-input type="textarea" v-model="ruleForm.desc"></el-input>-->
-                <!--</el-form-item>-->
-            <!--</el-col >-->
-            <el-col :span="16" :offset="3">
-                <el-form-item>
-                    <el-button type="primary" @click="submitForm(productForm)">บันทึก</el-button>
-                    <!--<el-button @click="resetForm(productForm)">Reset</el-button>-->
-                </el-form-item>
-            </el-col>
+        <el-card>
+            <div>
+                    <el-button type="primary" round @click="goImport()">Add</el-button>
+            </div>
+            <div>
+                <el-col :span="18" :offset="3">
+                    <el-table
+                            :data="this.product.filter(data => !search || data.Pname.toLowerCase().includes(search.toLowerCase()))"
+                            style="width: 100%">
+                        <el-table-column
+                                label="Barcode"
+                                prop="barcode">
+                        </el-table-column>
+                        <el-table-column
+                                label="ชื่อสินค้า"
+                                prop="name">
+                        </el-table-column>
+                        <el-table-column
+                                label="จำนวน"
+                                prop="unit">
+                        </el-table-column>
+                        <el-table-column
+                                label="ราคา"
+                                prop="price">
+                        </el-table-column>
 
-        </el-form>
-        <el-col :span="18" :offset="3">
-            <el-table
-                    :data="this.product.filter(data => !search || data.Pname.toLowerCase().includes(search.toLowerCase()))"
-                    style="width: 100%">
-                <el-table-column
-                        label="Barcode"
-                        prop="barcode">
-                </el-table-column>
-                <el-table-column
-                        label="ชื่อสินค้า"
-                        prop="name">
-                </el-table-column>
-                <el-table-column
-                        label="จำนวน"
-                        prop="unit">
-                </el-table-column>
-                <el-table-column
-                        label="ราคา"
-                        prop="price">
-                </el-table-column>
-                <!--<el-table-column-->
-                        <!--label="ประเภท"-->
-                        <!--prop="cateName">-->
-                <!--</el-table-column>-->
-                <el-table-column
-                        align="right" >
-                    <template slot="header" slot-scope="scope">
-                        <el-input
-                                v-model="search"
+                        <el-table-column
+                                align="right" >
+                            <template slot="header" slot-scope="scope">
+                                <el-input
+                                        v-model="search"
+                                        size="mini"
+                                        placeholder="ค้นหา"/>
+                            </template>
+                            <template slot-scope="scope">
+                                <el-button
                                 size="mini"
-                                placeholder="ค้นหา"/>
-                    </template>
-                    <template slot-scope="scope">
-                        <!--<el-button-->
-                                <!--size="mini"-->
-                                <!--@click="handleEdit(scope.$index, scope.row)">Edit</el-button>-->
-                        <el-button
-                                size="mini"
-                                type="danger"
-                                @click="handleDelete(scope.$index, scope.row)">ลบสินค้า</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-        </el-col>
+                                @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+                                <el-button
+                                        size="mini"
+                                        type="danger"
+                                        @click="handleDelete(scope.$index, scope.row)">ลบสินค้า</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </el-col>
+            </div>
+        </el-card>
     </el-row>
 
 </template>
@@ -102,13 +62,7 @@
                 User:[],
                 search: '',
                 product:[],
-                productForm:{
-                    name: '',
-                    price: null,
-                    category_id: '2',
-                    unit: null,
-                    barcode: null
-                },
+
 
             }
         },
@@ -162,19 +116,7 @@
 
                 });
             },
-            createProduct (product) {
-                console.log(product);
-                let $query = "INSERT INTO products SET ?";
-                conDB.query($query,[product],function (err,rows) {
-                    if (err) {
-                        console.log("An error ocurred performing the query.");
-                        console.log(err);
-                        return;
-                    }
-                    // res.sent(rows);
-                    console.log("createProduct succesfully executed.",rows);
-                });
-            },
+
             handleOpen(key, keyPath) {
                 console.log(key, keyPath);
             },
@@ -185,20 +127,14 @@
 
             },
             handleDelete(index, row) {
-                console.log(row.productID);
-                this.getDelete(row.productID);
+                console.log(row.id);
+                this.getDelete(row.id);
                 this.loadData();
             },
-            submitForm(formName) {
-                console.log(formName.Pname);
-                this.createProduct(formName);
-                alert('submit!');
-                this.loadData();
-
-            },
-            resetForm(formName) {
-                this.$refs[formName].resetFields();
+            goImport(){
+                this.$router.push({name:"NImport"});
             }
+
         }
     }
 

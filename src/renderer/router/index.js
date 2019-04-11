@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import  rm from '@/components/Member/Registermember'
 import product from '@/components/Product/index'
+import Nim from '@/components/Product/newImport'
 import member from '@/components/Member/index'
 import staff from '@/components/staff/index'
 import sell from '@/components/Sell/index'
@@ -29,6 +30,11 @@ export default new Router({
           path: 'product',
           name: 'Product',
           component: product
+        },
+        {
+          path: 'NImport',
+          name: 'NImport',
+          component: Nim
         },
         {
           path: 'member',
