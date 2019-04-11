@@ -56,15 +56,14 @@
                                 size="mini"
                                 placeholder="ค้นหา"/>
                     </template>
-                    <template slot-scope="scope">
-                        <!--<el-button-->
-                        <!--size="mini"-->
-                        <!--@click="handleEdit(scope.$index, scope.row)">Edit</el-button>-->
-                        <el-button
-                                size="mini"
-                                type="danger"
-                                @click="handleDelete(scope.$index, scope.row)">ลบข้อมูล</el-button>
-                    </template>
+
+                </el-table-column>
+                <el-table-column>
+                    <el-button
+                            size="mini"
+                            type="danger"
+                            @click="handleDelete(scope.$index, scope.row)">ลบข้อมูล</el-button>
+
                 </el-table-column>
             </el-table>
         </el-col>

@@ -1,5 +1,5 @@
 <template>
-    <el-row style="background-color: powderblue">
+    <el-row >
         <!--<el-col :span="8"  :offset="9">-->
             <!--<el-card :body-style="{ padding: '50px' }">-->
                 <!--<img src="https://s.isanook.com/wo/0/rp/r/w700/ya0xa0m1w0/aHR0cHM6Ly9zLmlzYW5vb2suY29tL3dvLzAvdWQvMjAvMTAxNTczL3AuanBn.jpg" class="image" width="250" height="250">-->
@@ -72,16 +72,7 @@
 </template>
 
 <script>
-    // var mysql = require('mysql');
-    // var config = {
-    //     host:"localhost",
-    //     user: "root",
-    //     password: "1234",
-    //     port: "3306",
-    //     database:"testDB"
-    // };
-    // var con = new  mysql.createConnection(config);
-    //
+
     export default {
         data() {
             return {

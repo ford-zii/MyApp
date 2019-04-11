@@ -1,14 +1,14 @@
 <template>
-    <el-row style="margin-top: 50px">
+    <el-row >
         <el-form :model="productForm" ref="productForm" label-width="120px" class="demo-ruleForm">
             <el-col :span="8" :offset="3">
                 <el-form-item label="ชื่อสินค้า" prop="Pname">
-                    <el-input v-model="productForm.Pname"></el-input>
+                    <el-input v-model="productForm.name"></el-input>
                 </el-form-item>
             </el-col>
             <el-col :span="8">
                 <el-form-item label="ราคา" prop="Sell_Price">
-                    <el-input v-model="productForm.Sell_Price"></el-input>
+                    <el-input v-model="productForm.price"></el-input>
                 </el-form-item>
             </el-col>
             <!--<el-col :span="8" :offset="3">-->
@@ -18,12 +18,12 @@
             <!--</el-col>-->
             <el-col :span="16" :offset="3">
                 <el-form-item label="จำนวน" prop="Unit_Price">
-                    <el-input v-model="productForm.Unit_Price"></el-input>
+                    <el-input v-model="productForm.unit"></el-input>
                 </el-form-item>
             </el-col>
             <el-col :span="16" :offset="3">
                 <el-form-item label="Barcode" prop="barcode">
-                    <el-input v-model="productForm.productID"></el-input>
+                    <el-input v-model="productForm.barcode"></el-input>
                 </el-form-item>
             </el-col>
             <!--<el-col :span="6">-->
@@ -36,7 +36,7 @@
                     <!--<el-input type="textarea" v-model="ruleForm.desc"></el-input>-->
                 <!--</el-form-item>-->
             <!--</el-col >-->
-            <el-col :span="16" :offset="3" style="margin-left: 350px">
+            <el-col :span="16" :offset="3">
                 <el-form-item>
                     <el-button type="primary" @click="submitForm(productForm)">บันทึก</el-button>
                     <!--<el-button @click="resetForm(productForm)">Reset</el-button>-->
@@ -50,19 +50,19 @@
                     style="width: 100%">
                 <el-table-column
                         label="Barcode"
-                        prop="productID">
+                        prop="barcode">
                 </el-table-column>
                 <el-table-column
                         label="ชื่อสินค้า"
-                        prop="Pname">
+                        prop="name">
                 </el-table-column>
                 <el-table-column
                         label="จำนวน"
-                        prop="Unit_Price">
+                        prop="unit">
                 </el-table-column>
                 <el-table-column
                         label="ราคา"
-                        prop="Sell_Price">
+                        prop="price">
                 </el-table-column>
                 <!--<el-table-column-->
                         <!--label="ประเภท"-->
@@ -103,11 +103,11 @@
                 search: '',
                 product:[],
                 productForm:{
-                    Pname: '',
-                    Sell_Price: null,
-                    cateID: '2',
-                    Unit_Price: null,
-                    productID: null
+                    name: '',
+                    price: null,
+                    category_id: '2',
+                    unit: null,
+                    barcode: null
                 },
 
             }
@@ -134,7 +134,7 @@
         methods: {
             loadData () {
                 let vm = this;
-                let $query = 'SELECT * FROM `products` ';
+                let $query = 'SELECT * FROM `product` ';
                 conDB.query($query, function (err, rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
@@ -147,10 +147,10 @@
                     console.log("Query succesfully executed", rows, data);
                 });
             },
-            getDelete (res) {
-                console.log(res);
-                let $query = "DELETE FROM products WHERE productID = ?";
-                conDB.query($query,[res],function (err,rows) {
+            getDelete (id) {
+                console.log(id);
+                let $query = "DELETE FROM product WHERE id = ?";
+                conDB.query($query,[id],function (err,rows) {
                     if (err) {
                         console.log("Delete error performing the query.");
                         console.log(err);

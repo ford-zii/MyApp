@@ -16,12 +16,16 @@ Vue.config.productionTip = false;
 
 const mysql = require('mysql');
 const config = {
-  // host:"localhost",
-  host:"127.0.0.1",
+  host:"localhost",
+  //host:"127.0.0.1",
   user: "root",
-  password: "12345678",
+  password: "1234567",
   port: "3306",
-  database:"store"
+
+ // database:"store"
+
+  database:"stockmarket"
+
 };
 window.conDB = new  mysql.createConnection(config);
 Vue.use(VueSwal);

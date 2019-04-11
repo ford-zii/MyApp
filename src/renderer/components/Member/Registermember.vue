@@ -95,8 +95,5 @@
 </script>
 
 <style >
-    body{
-        background-color: powderblue;
-        background-size: cover;
-    }
+
 </style>

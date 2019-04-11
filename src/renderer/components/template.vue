@@ -3,7 +3,7 @@
         <el-col :span="4">
             <el-menu
                     default-active="1"
-                    class="el-menu-vertical-demo"
+                    class="menu"
                     @open="handleOpen"
                     @close="handleClose">
                 <el-menu-item index="1" @click="goMember()">
@@ -61,7 +61,23 @@
                 this.$router.push({name:"sell"})
             },
             logout(){
-                this.$router.push({name:"Login"})
+               this.$swal({
+                    title: "Are you sure?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            this.$swal("Poof! Your imaginary file has been deleted!", {
+                                icon: "success",
+                            });
+                            this.$router.push({name:"Login"})
+                        } else {
+                            this.$swal("Your imaginary file is safe!");
+                        }
+                    });
+
             }
         }
     }
@@ -69,5 +85,7 @@
 </script>
 
 <style scoped>
-
+    .menu {
+        min-height: 1200px;
+    }
 </style>
