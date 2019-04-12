@@ -7,15 +7,15 @@
                     @open="handleOpen"
                     @close="handleClose">
                 <el-menu-item index="1" @click="goMember()">
-                    <font-awesome-icon icon="address-card" size="2x"/>
+                    <font-awesome-icon icon="address-card" size="lg"/>
                     <span>Member</span>
                 </el-menu-item>
                 <el-menu-item index="2" @click="goProduct()">
-                    <font-awesome-icon icon="store" size="2x"/>
+                    <font-awesome-icon icon="store" size="lg"/>
                     <span>Product</span>
                 </el-menu-item>
                 <el-menu-item index="3" @click="goStaff()">
-                    <font-awesome-icon icon="user" size="2x" />
+                    <font-awesome-icon icon="user" size="lg" />
                     <span>Staff</span>
                 </el-menu-item>
                 <el-menu-item index="4" @click="goSell()">
@@ -29,7 +29,7 @@
                     <span>Management</span>
                 </el-menu-item>
                 <el-menu-item index="6" @click="logout()">
-                    <font-awesome-icon icon="sign-out" />
+                    <font-awesome-icon icon="sign-out-alt" size="lg"/>
 
                     <!--<i class="el-icon-goods"></i>-->
                     <span>Logout</span>

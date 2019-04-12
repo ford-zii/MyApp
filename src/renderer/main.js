@@ -10,14 +10,12 @@ import router from './router'
 import store from './store'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee ,faUser,faAddressCard,faShoppingCart,faStore,faDollarSign,faCogs} from '@fortawesome/free-solid-svg-icons'
+import { faCoffee ,faUser,faAddressCard,faShoppingCart,faStore,faDollarSign,faCogs,faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import VueSwal from 'vue-swal'
-import Vuetify from 'vuetify'
 
-Vue.use(Vuetify,{iconfont: 'mdi'});
-library.add(faCoffee,faUser,faAddressCard,faShoppingCart,faStore,faDollarSign,faCogs);
+library.add(faCoffee,faUser,faAddressCard,faShoppingCart,faStore,faDollarSign,faCogs,faSignOutAlt);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
 Vue.use(VueSwal);
