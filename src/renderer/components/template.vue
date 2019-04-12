@@ -1,40 +1,42 @@
 <template>
-    <el-row class="tac">
+    <el-row class="tac ">
         <el-col :span="4">
-            <el-menu
-                    default-active="2"
-                    class="menu"
-                    @open="handleOpen"
-                    @close="handleClose">
-                <el-menu-item index="1" @click="goMember()">
-                    <font-awesome-icon icon="address-card" size="lg"/>
-                    <span>Member</span>
-                </el-menu-item>
-                <el-menu-item index="2" @click="goProduct()">
-                    <font-awesome-icon icon="store" size="lg"/>
-                    <span>Product</span>
-                </el-menu-item>
-                <el-menu-item index="3" @click="goStaff()">
-                    <font-awesome-icon icon="user" size="lg" />
-                    <span>Staff</span>
-                </el-menu-item>
-                <el-menu-item index="4" @click="goSell()">
-                    <font-awesome-icon icon="dollar-sign" size="2x" />
-                    <!--<font-awesome-icon icon="shopping-cart" size="2x" />-->
+            <el-card class="box-card full-height">
+                <el-menu
+                        default-active="2"
+                        class="menu"
+                        @open="handleOpen"
+                        @close="handleClose">
+                    <el-menu-item index="1" @click="goMember()">
+                        <font-awesome-icon icon="address-card" size="lg"/>
+                        <span>Member</span>
+                    </el-menu-item>
+                    <el-menu-item index="2" @click="goProduct()">
+                        <font-awesome-icon icon="store" size="lg"/>
+                        <span>Product</span>
+                    </el-menu-item>
+                    <el-menu-item index="3" @click="goStaff()">
+                        <font-awesome-icon icon="user" size="lg" />
+                        <span>Staff</span>
+                    </el-menu-item>
+                    <el-menu-item index="4" @click="goSell()">
+                        <font-awesome-icon icon="dollar-sign" size="2x" />
+                        <!--<font-awesome-icon icon="shopping-cart" size="2x" />-->
 
-                    <span> Sell</span>
-                </el-menu-item>
-                <el-menu-item index="5" @click="goManagement()">
-                    <font-awesome-icon icon="cogs" size="lg" />
-                    <span>Management</span>
-                </el-menu-item>
-                <el-menu-item index="6" @click="logout()">
-                    <font-awesome-icon icon="sign-out-alt" size="lg"/>
+                        <span> Sell</span>
+                    </el-menu-item>
+                    <el-menu-item index="5" @click="goManagement()">
+                        <font-awesome-icon icon="cogs" size="lg" />
+                        <span>Management</span>
+                    </el-menu-item>
+                    <el-menu-item index="6" @click="logout()">
+                        <font-awesome-icon icon="sign-out-alt" size="lg"/>
 
-                    <!--<i class="el-icon-goods"></i>-->
-                    <span>Logout</span>
-                </el-menu-item>
-            </el-menu>
+                        <!--<i class="el-icon-goods"></i>-->
+                        <span>Logout</span>
+                    </el-menu-item>
+                </el-menu>
+            </el-card>
         </el-col>
         <el-col :span="20">
         <router-view></router-view>
@@ -93,6 +95,14 @@
 
 <style scoped>
     .menu {
-        min-height: 1200px;
+        max-height: 1000px;
+    }
+    .box-card {
+        width: auto;
+        /*height: 1000px;*/
+    }
+    .full-height {
+        height: 100% ;
+        background: yellow;
     }
 </style>
