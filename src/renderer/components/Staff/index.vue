@@ -44,10 +44,6 @@
                         prop="last_name">
                 </el-table-column>
 
-                <!--<el-table-column-->
-                <!--label="ประเภท"-->
-                <!--&gt;-->
-                <!--</el-table-column>-->
                 <el-table-column
                         align="right" >
                     <template slot="header" slot-scope="scope">
@@ -56,14 +52,12 @@
                                 size="mini"
                                 placeholder="ค้นหา"/>
                     </template>
-
-                </el-table-column>
-                <el-table-column>
-                    <el-button
-                            size="mini"
-                            type="danger"
-                            @click="handleDelete(scope.$index, scope.row)">ลบข้อมูล</el-button>
-
+                    <template slot-scope="scope">
+                        <el-button
+                                size="mini"
+                                type="danger"
+                                @click="handleDelete(scope.$index, scope.row)">ลบข้อมูล</el-button>
+                    </template>
                 </el-table-column>
             </el-table>
         </el-col>

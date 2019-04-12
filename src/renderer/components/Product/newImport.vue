@@ -10,11 +10,18 @@
                 <el-input v-model="productForm.price"></el-input>
             </el-form-item>
         </el-col>
-        <!--<el-col :span="8" :offset="3">-->
-        <!--<el-form-item label="ประเภท" prop="category">-->
-        <!--<el-input v-model="productForm.category"></el-input>-->
-        <!--</el-form-item>-->
-        <!--</el-col>-->
+        <el-col :span="8" :offset="3">
+        <el-form-item label="ประเภท" prop="category_id">
+            <el-select v-model="productForm.category_id" placeholder="Select">
+                <el-option
+                        v-for="item in category"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id">
+                </el-option>
+            </el-select>
+        </el-form-item>
+        </el-col>
         <el-col :span="16" :offset="3">
             <el-form-item label="จำนวน" prop="Unit_Price">
                 <el-input v-model="productForm.unit"></el-input>
@@ -44,10 +51,11 @@
               productForm:{
                   name: '',
                   price: null,
-                  category_id: '2',
+                  category_id: '',
                   unit: null,
                   barcode: null
               },
+              category:[]
           }
         },
         async created() {
@@ -58,9 +66,24 @@
                     console.log(err.fatal);
                 }
             });
-
+        this.getCategory();
         },
         methods:{
+            getCategory () {
+                let vm = this;
+                let $query = 'SELECT * FROM `category` ';
+                conDB.query($query, function (err, rows) {
+                    if (err) {
+                        console.log("An error ocurred performing the query.");
+                        console.log(err);
+                        return;
+                    }
+                    let data = JSON.parse(JSON.stringify(rows));
+                    vm.category = data;
+                    // callback(data);
+                    console.log("Query succesfully executed", rows, data);
+                });
+            },
             createProduct (product) {
                 console.log(product);
                 let $query = "INSERT INTO product SET ?";
@@ -78,7 +101,7 @@
                 console.log(formName.name);
                 this.createProduct(formName);
                 alert('submit!');
-                this.loadData();
+                this.$router.push({name:"Product"})
 
             },
             resetForm(formName) {

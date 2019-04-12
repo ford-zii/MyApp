@@ -18,6 +18,10 @@
                                 prop="name">
                         </el-table-column>
                         <el-table-column
+                                label="ประเภท"
+                                prop="cateName">
+                        </el-table-column>
+                        <el-table-column
                                 label="จำนวน"
                                 prop="unit">
                         </el-table-column>
@@ -88,7 +92,7 @@
         methods: {
             loadData () {
                 let vm = this;
-                let $query = 'SELECT * FROM `product` ';
+                let $query = 'SELECT p.id,p.name,p.barcode,p.price,p.unit,c.name as cateName FROM product p INNER JOIN category c ON p.category_id = c.id ';
                 conDB.query($query, function (err, rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
@@ -112,7 +116,21 @@
                     }
                     // res.sent(rows);
                     console.log("Delete succesfully executed.",rows);
-                    alert('Delete succesfully !');
+                    this.$swal('Delete','Complete','success');
+
+                });
+            },
+            getByID (id){
+                console.log(id);
+                let $query = 'SELECT * FROM `product` WHERE id = ?';
+                conDB.query($query,[id],function (err,rows) {
+                    if (err) {
+                        console.log("get error performing the query.");
+                        console.log(err);
+                        return;
+                    }
+                    // res.sent(rows);
+                    console.log("get by id  succesfully executed.",rows);
 
                 });
             },
@@ -124,11 +142,14 @@
                 console.log(key, keyPath);
             },
             handleEdit(index, row) {
-
-            },
-            handleDelete(index, row) {
                 console.log(row.id);
-                this.getDelete(row.id);
+                this.getByID(row.id);
+                this.loadData();
+            },
+            async  handleDelete(index, row) {
+                console.log(row.id);
+                await this.getDelete(row.id);
+                await this.$swal("Your imaginary file is safe!");
                 this.loadData();
             },
             goImport(){

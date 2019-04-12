@@ -11,10 +11,10 @@
           <el-form :model="form" status-icon  ref="form"  class="demo-ruleForm">
             <i class="fas fa-id-card"></i>
             <el-form-item prop="Username" >
-              <el-input placeholder="user" type="text" v-model="form.username" autocomplete="off" ></el-input>
+              <el-input placeholder="Username" type="text" v-model="form.username" autocomplete="off" ></el-input>
             </el-form-item>
             <el-form-item  prop="Password" >
-              <el-input placeholder="password" type="password" v-model="form.password" autocomplete="off"></el-input>
+              <el-input placeholder="Password" type="password" v-model="form.password" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item >
               <el-button type="primary"  @click="submitForm('form')" style="padding-left: 5em;padding-right: 5em;">&nbsp;Login</el-button>
