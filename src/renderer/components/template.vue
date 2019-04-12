@@ -7,24 +7,28 @@
                     @open="handleOpen"
                     @close="handleClose">
                 <el-menu-item index="1" @click="goMember()">
-                    <i class="el-icon-location"></i>
+                    <font-awesome-icon icon="address-card" size="2x"/>
                     <span>Member</span>
                 </el-menu-item>
                 <el-menu-item index="2" @click="goProduct()">
-                    <i class="el-icon-menu"></i>
+                    <font-awesome-icon icon="store" size="2x"/>
                     <span>Product</span>
                 </el-menu-item>
                 <el-menu-item index="3" @click="goStaff()">
-                    <font-awesome-icon icon="coffee" />
-                    <i class="el-icon-document"></i>
+                    <font-awesome-icon icon="user" size="2x" />
                     <span>Staff</span>
                 </el-menu-item>
                 <el-menu-item index="4" @click="goSell()">
-                    <font-awesome-icon icon="tags" />
-                    <i class="el-icon-goods"></i>
-                    <span>Sell</span>
+                    <font-awesome-icon icon="dollar-sign" size="2x" />
+                    <!--<font-awesome-icon icon="shopping-cart" size="2x" />-->
+
+                    <span> Sell</span>
                 </el-menu-item>
-                <el-menu-item index="5" @click="logout()">
+                <el-menu-item index="5" @click="goManagement()">
+                    <font-awesome-icon icon="cogs" size="lg" />
+                    <span>Management</span>
+                </el-menu-item>
+                <el-menu-item index="6" @click="logout()">
                     <font-awesome-icon icon="sign-out" />
 
                     <!--<i class="el-icon-goods"></i>-->
@@ -59,6 +63,9 @@
             },
             goSell(){
                 this.$router.push({name:"sell"})
+            },
+            goManagement(){
+                this.$router.push({name:"management"})
             },
             logout(){
                this.$swal({

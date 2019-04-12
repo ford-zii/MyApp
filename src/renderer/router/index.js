@@ -6,6 +6,7 @@ import Nim from '@/components/Product/newImport'
 import member from '@/components/Member/index'
 import staff from '@/components/staff/index'
 import sell from '@/components/Sell/index'
+import mnm from '@/components/Management/index'
 import rs from '@/components/staff/registerStaff'
 Vue.use(Router)
 
@@ -55,6 +56,11 @@ export default new Router({
           path: 'sell',
           name: 'sell',
           component: sell
+        },
+        {
+          path: 'management',
+          name: 'management',
+          component: mnm
         },
         ]
     }
