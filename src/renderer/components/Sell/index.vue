@@ -1,5 +1,5 @@
 <template>
-    
+
 </template>
 
 <script>
@@ -9,5 +9,8 @@
 </script>
 
 <style scoped>
+    .box-card {
+        width: 480px;
 
+    }
 </style>

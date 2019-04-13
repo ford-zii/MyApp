@@ -1,46 +1,52 @@
 <template>
-    <el-form :model="productForm" ref="productForm" label-width="120px" class="demo-ruleForm">
-        <el-col :span="8" :offset="3">
-            <el-form-item label="ชื่อสินค้า" prop="Pname">
-                <el-input v-model="productForm.name"></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8">
-            <el-form-item label="ราคา" prop="Sell_Price">
-                <el-input v-model="productForm.price"></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="8" :offset="3">
-        <el-form-item label="ประเภท" prop="category_id">
-            <el-select v-model="productForm.category_id" placeholder="Select">
-                <el-option
-                        v-for="item in category"
-                        :key="item.id"
-                        :label="item.name"
-                        :value="item.id">
-                </el-option>
-            </el-select>
-        </el-form-item>
-        </el-col>
-        <el-col :span="16" :offset="3">
-            <el-form-item label="จำนวน" prop="Unit_Price">
-                <el-input v-model="productForm.unit"></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="16" :offset="3">
-            <el-form-item label="Barcode" prop="barcode">
-                <el-input v-model="productForm.barcode"></el-input>
-            </el-form-item>
-        </el-col>
+    <el-card>
+        <el-container>
+            <el-main>
+                <el-form :model="productForm" ref="productForm" label-width="120px" class="demo-ruleForm">
+                    <el-col :span="8" :offset="3">
+                        <el-form-item label="ชื่อสินค้า" prop="Pname">
+                            <el-input v-model="productForm.name"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-form-item label="ราคา" prop="Sell_Price">
+                            <el-input v-model="productForm.price"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8" :offset="3">
+                        <el-form-item label="ประเภท" prop="category_id">
+                            <el-select v-model="productForm.category_id" placeholder="Select">
+                                <el-option
+                                        v-for="item in category"
+                                        :key="item.id"
+                                        :label="item.name"
+                                        :value="item.id">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="16" :offset="3">
+                        <el-form-item label="จำนวน" prop="Unit_Price">
+                            <el-input v-model="productForm.unit"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="16" :offset="3">
+                        <el-form-item label="Barcode" prop="barcode">
+                            <el-input v-model="productForm.barcode"></el-input>
+                        </el-form-item>
+                    </el-col>
 
-        <el-col :span="16" :offset="3">
-            <el-form-item>
-                <el-button type="primary" @click="submitForm(productForm)">บันทึก</el-button>
-                <!--<el-button @click="resetForm(productForm)">Reset</el-button>-->
-            </el-form-item>
-        </el-col>
+                    <el-col :span="16" :offset="3">
+                        <el-form-item>
+                            <el-button type="primary" @click="submitForm(productForm)">บันทึก</el-button>
+                            <!--<el-button @click="resetForm(productForm)">Reset</el-button>-->
+                        </el-form-item>
+                    </el-col>
 
-    </el-form>
+                </el-form>
+            </el-main>
+        </el-container>
+    </el-card>
 </template>
 
 <script>
@@ -100,7 +106,7 @@
             submitForm(formName) {
                 console.log(formName.name);
                 this.createProduct(formName);
-                alert('submit!');
+                this.$swal('submit!');
                 this.$router.push({name:"Product"})
 
             },

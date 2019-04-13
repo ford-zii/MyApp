@@ -1,10 +1,8 @@
 <template>
-    <el-row class="tac ">
-        <el-col :span="4">
-            <el-card class="box-card full-height">
+    <el-container>
+        <el-aside width="200px"  style="background-color: rgb(238, 241, 246);height: auto">
                 <el-menu
                         default-active="2"
-                        class="menu"
                         @open="handleOpen"
                         @close="handleClose">
                     <el-menu-item index="1" @click="goMember()">
@@ -36,12 +34,15 @@
                         <span>Logout</span>
                     </el-menu-item>
                 </el-menu>
-            </el-card>
-        </el-col>
-        <el-col :span="20">
-        <router-view></router-view>
-        </el-col>
-    </el-row>
+        </el-aside>
+
+        <el-container>
+            <el-main>
+                <router-view></router-view>
+            </el-main>
+        </el-container>
+    </el-container>
+
 </template>
 
 <script>
@@ -99,7 +100,7 @@
     }
     .box-card {
         width: auto;
-        /*height: 1000px;*/
+        /*padding-bottom: 300px;*/
     }
     .full-height {
         height: 100% ;

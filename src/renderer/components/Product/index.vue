@@ -1,14 +1,14 @@
 <template>
-    <el-row >
-        <el-card>
-            <div>
-                    <el-button type="primary" round @click="goImport()">Add</el-button>
-            </div>
-            <div>
-                <el-col :span="18" :offset="3">
+    <el-card>
+        <el-container>
+            <el-header>
+                <el-button  type="primary" round @click="goImport()">Add</el-button>
+            </el-header>
+            <el-main >
+                <el-col  >
                     <el-table
-                            :data="this.product.filter(data => !search || data.Pname.toLowerCase().includes(search.toLowerCase()))"
-                            style="width: 100%">
+                        :data="this.product.filter(data => !search || data.Pname.toLowerCase().includes(search.toLowerCase()))"
+                        style="width: 100%">
                         <el-table-column
                                 label="Barcode"
                                 prop="barcode">
@@ -40,8 +40,8 @@
                             </template>
                             <template slot-scope="scope">
                                 <el-button
-                                size="mini"
-                                @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+                                        size="mini"
+                                        @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
                                 <el-button
                                         size="mini"
                                         type="danger"
@@ -50,10 +50,9 @@
                         </el-table-column>
                     </el-table>
                 </el-col>
-            </div>
-        </el-card>
-    </el-row>
-
+            </el-main>
+        </el-container>
+    </el-card>
 </template>
 
 <script>
@@ -160,6 +159,9 @@
     }
 
 </script>
-<style>
-
+<style scoped>
+    .box-card{
+        width:2000px;
+        height: 769px;
+    }
 </style>
