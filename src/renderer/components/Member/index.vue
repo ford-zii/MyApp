@@ -8,26 +8,26 @@
                 <el-table
                         :data="this.Member.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
                         style="width: 100%">
-                    <!--<el-table-column-->
-                    <!--label="Barcode"-->
-                    <!--prop="Cus_ID">-->
-                    <!--</el-table-column>-->
                     <el-table-column
-                            label="ชื่อ-นามสกุล"
-                            prop="Cus_name">
+                            label="ชื่อ"
+                            prop="firstname">
+                    </el-table-column>
+                    <el-table-column
+                            label="นามสกุล"
+                            prop="lastname">
                     </el-table-column>
                     <el-table-column
                             label="เบอร์โทร"
-                            prop="Contact_no">
+                            prop="contact">
                     </el-table-column>
                     <el-table-column
                             label="ที่อยู่"
-                            prop="Cus_address">
+                            prop="address">
                     </el-table-column>
-                    <!--<el-table-column-->
-                    <!--label="ประเภท"-->
-                    <!--prop="cateName">-->
-                    <!--</el-table-column>-->
+                    <el-table-column
+                        label="เพศ"
+                        prop="sex">
+                    </el-table-column>
                     <el-table-column
                             align="right" >
                         <template slot="header" slot-scope="scope">
