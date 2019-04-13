@@ -1,5 +1,14 @@
 <template>
-
+    <el-card>
+        <el-container>
+            <el-main>
+                Main
+            </el-main>
+            <el-footer >
+                Footer
+            </el-footer>
+        </el-container>
+    </el-card>
 </template>
 
 <script>
@@ -9,8 +18,13 @@
 </script>
 
 <style scoped>
-    .box-card {
-        width: 480px;
-
+    el-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: black;
+        color: aquamarine;
+        text-align: center;
+        line-height: 60px;
     }
 </style>

@@ -19,7 +19,11 @@
                         </el-col>
                         <el-col :span="16" :offset="3">
                             <el-form-item  prop="Cus_address">
-                                <el-input placeholder="Address" v-model="formCUS.address"></el-input>
+                                <el-input
+                                        placeholder="Address"
+                                        v-model="formCUS.address"
+                                        type="textarea"
+                                        :autosize="{ minRows: 4, maxRows: 6}"></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col :span="16" :offset="3">
