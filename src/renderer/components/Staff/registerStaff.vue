@@ -1,30 +1,50 @@
 <template>
+
     <el-form :model="formStaff">
     <el-col style="margin: 100px 600px 50px 350px">
-        <h1> <span> REGISTER STAFF </span></h1>
+        <h1> <span class="Text"> REGISTER STAFF </span></h1>
     </el-col>
         <el-col :span="16" :offset="3">
             <el-form-item  prop="Username">
-                <el-input placeholder="Username" v-model="formStaff.Username"></el-input>
+                <el-input placeholder="Username" v-model="formStaff.username"></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="16" :offset="3">
             <el-form-item  prop="Password">
-                <el-input placeholder="Password" v-model="formStaff.Password" show-password></el-input>
+                <el-input placeholder="Password" v-model="formStaff.password" show-password></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="16" :offset="3">
             <el-form-item  prop="First name">
-                <el-input placeholder="First name" v-model="formStaff.frist_name" ></el-input>
+                <el-input placeholder="First name" v-model="formStaff.firstname" ></el-input>
             </el-form-item>
         </el-col>
         <el-col :span="16" :offset="3">
             <el-form-item  prop="Last name">
-                <el-input placeholder="Last name" v-model="formStaff.last_name" ></el-input>
+                <el-input placeholder="Last name" v-model="formStaff.lastname" ></el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span="16" :offset="3">
+            <el-form-item
+                    prop="email"
+
+                    :rules="[
+                { required: true, message: 'Please input email address', trigger: 'blur' },
+                { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
+                ]"
+                >
+                <el-input placeholder="Email" v-model="formStaff.email"></el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span="16" :offset="3">
+            <el-form-item prop="SEX">
+            <el-radio v-model="formStaff.sex" label="1">MALE</el-radio>
+            <el-radio v-model="formStaff.sex" label="2">FEMALE</el-radio>
             </el-form-item>
         </el-col>
         <el-col :span="16" :offset="3">
             <el-form-item>
+
                 <el-button type="success" round  @click="submitForm(formStaff)">SAVE</el-button>
                 <el-button type="danger" round @click="cancelForm()">CANCEL</el-button>
             </el-form-item>
@@ -44,15 +64,8 @@
     <!--<el-col :span="16" style="margin-left: 130px"><div class="grid-content bg-purple"></div>-->
         <!--<el-input placeholder="telephone number" v-model="phone" style="margin-top: 20px"></el-input>-->
     <!--</el-col>-->
-    <!--<el-col :span="16" style="margin-left: 130px"-->
-                <!--prop="email"-->
-                <!--label="Email"-->
-                <!--:rules="[-->
-      <!--{ required: true, message: 'Please input email address', trigger: 'blur' },-->
-      <!--{ type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }-->
-    <!--]"-->
-        <!--&gt;<el-input placeholder="Email" v-model="email" style="margin-top: 20px"></el-input><div class="grid-content bg-purple"></div>-->
-    <!--</el-col>-->
+
+
     <!--<el-col :span="16" style="margin-left: 130px"><div class="grid-content bg-purple"></div>-->
             <!--<el-input placeholder="Password" type="password" v-model="pass" autocomplete="off" style="margin-top: 20px">></el-input>-->
      <!--</el-col>-->
@@ -68,25 +81,35 @@
             <!--<el-button round @click="goStaff()">CANCEL</el-button>-->
     <!--</el-col>-->
     </el-form>
+
 </template>
 <script>
+
 
     export default {
         data() {
             return {
                 formStaff:{
-                    Username:'',
-                    Password:'',
-                    frist_name:'',
-                    last_name:''
-                }
-            };
+                    username:'',
+                    password:'',
+                    firstname:'',
+                    lastname:'',
+                    email:'',
+                    sex:''
+
+                },
+            }
         },
+        created ()
+        {
+            console.log("in Created")
+
+        }   ,
 
         methods :{
             createStaff (form) {
                 console.log(form);
-                let $query = "INSERT INTO users SET ?";
+                let $query = "INSERT INTO user SET ?";
                 conDB.query($query,[form],function (err,rows) {
                     if (err) {
                         console.log("createCUS error ocurred performing the query.");
@@ -109,11 +132,16 @@
 
 
             cancelForm() {
-                this.$router.push({name:"Staff"})
+                this.$router.push({name:"Staff"});
             },
-            submitForm(form) {
-                this.createStaff(form);
+            async submitForm(form) {
+                console.log("submit Action");
+                await this.createStaff(form);
+                await this.$swal('REGISTER SUCCESS');
                 this.$router.push({name: "Staff"})
+
+
+
             }
         },
         rules2: {
@@ -151,4 +179,12 @@
     }
 </script>
 <style scoped>
+
+    .Text{
+        font-size: 60px;
+        text-align: center;
+
+    }
+
+
 </style>

@@ -33,7 +33,7 @@
 
 <script>
   export default {
-    name: 'Stockmarket',
+    name: 'stockmarket',
     methods:{
       handleOpen(key, keyPath) {
         console.log(key, keyPath);

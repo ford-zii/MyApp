@@ -1,8 +1,8 @@
-<template>
-    <el-card>
+<template >
+    <el-card class="BG">
         <el-container>
             <el-header>
-                <el-button type="primary" round @click="$router.push({name:'registerStaff'})"><span class="iconify" data-icon="mdi:account" data-inline="false"></span>Register</el-button>
+                <el-button type="success" round @click="$router.push({name:'registerStaff'})"><span class="iconify" data-icon="mdi:account" data-inline="false"></span>Register</el-button>
             </el-header>
             <el-main>
                 <el-table
@@ -24,6 +24,10 @@
                     <el-table-column
                             label="Email"
                             prop="email">
+                    </el-table-column>
+                    <el-table-column
+                            label="เพศ"
+                            prop="SEX">
                     </el-table-column>
                     <el-table-column
                             align="right" >
@@ -68,7 +72,7 @@
 
 
             // console.log(this.getPro);
-            console.log(this.staff,"member ");
+            console.log(this.staff," user ");
 
             // con.end();
         },
@@ -87,9 +91,10 @@
                     console.log("Query succesfully executed", rows, data);
                 });
             },
+
             getDelete(res) {
                 console.log(res);
-                let $query = "DELETE FROM users WHERE userID = ?";
+                let $query = "DELETE FROM user WHERE id = ?";
                 conDB.query($query, [res], function (err, rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
@@ -110,20 +115,19 @@
             handleEdit(index, row) {
 
             },
-            handleDelete(index, row) {
+            async handleDelete(index, row) {
                 // console.log(index,row);
-                console.log(row.userID);
-                this.getDelete(row.userID);
+                console.log(row.id);
+                await  this.getDelete(row.id);
+
                 this.loadData();
             },
-            goregisterStaff(){
-                this.$router.push({name:"registerStaff"})
+            goregisterStaff() {
+                this.$router.push({name: "registerStaff"})
             },
             alert() {
                 this.$swal("Good job!", "You clicked the button!", "success");
-            }
-
-
+            },
         }
     }
 </script>

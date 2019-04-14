@@ -17,7 +17,7 @@
               <el-input placeholder="Password" type="password" v-model="form.password" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item >
-              <el-button type="primary"  @click="submitForm('form')" style="padding-left: 5em;padding-right: 5em;">&nbsp;Login</el-button>
+              <el-button class="button"  plain="" @click="submitForm('form')" style="padding-left: 5em;padding-right: 5em;">Login</el-button>
             </el-form-item>
           </el-form>
 
@@ -61,13 +61,20 @@
 
 <style >
   body {
-    background-color: lavender;
+    background-color: #3D5B96;
     background-size: cover;
 
   }
   .box-card {
     width: 480px;
+
   }
+  .button {
+    background-color: #BFC7D6;
+
+  }
+
+
 
 
 </style>
