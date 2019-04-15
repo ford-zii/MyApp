@@ -9,6 +9,10 @@
                         :data="this.Member.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
                         style="width: 100%">
                     <el-table-column
+                            label="id"
+                            prop="ID">
+                    </el-table-column>
+                    <el-table-column
                             label="ชื่อ"
                             prop="firstname">
                     </el-table-column>
@@ -25,8 +29,16 @@
                             prop="address">
                     </el-table-column>
                     <el-table-column
-                        label="เพศ"
-                        prop="sex">
+                            label="เพศ"
+                            prop="sex">
+                    </el-table-column>
+                    <el-table-column
+                            label="email"
+                            prop="email">
+                    </el-table-column>
+                    <el-table-column
+                            label="Rank ID"
+                            prop="Rank ID">
                     </el-table-column>
                     <el-table-column
                             align="right" >
@@ -37,15 +49,22 @@
                                     placeholder="ค้นหา"/>
                         </template>
                         <template slot-scope="scope">
+                            <el-button type="primary" icon="el-icon-edit" circle  plain @click="handleEdit(scope.$index, scope.row)"></el-button>
                             <!--<el-button-->
                             <!--size="mini"-->
-                            <!--@click="handleEdit(scope.$index, scope.row)">Edit</el-button>-->
-                            <el-button
-                                    size="mini"
-                                    type="danger"
-                                    @click="handleDelete(scope.$index, scope.row)">ลบสมาชิก</el-button>
+
+                            <el-button type="danger" icon="el-icon-delete" circle @click="handleDelete(scope.$index, scope.row)"></el-button>
+                            <!--size="mini"-->
+                            <!--type="danger"-->
+                            <!--@click="handleDelete(scope.$index, scope.row)">ลบสมาชิก</el-button>-->
+
+                            <!--<el-button-->
+                            <!--size="mini"-->
+                            <!--type="danger"-->
+                            <!--@click="handleDelete(scope.$index, scope.row)">ลบข้อมูล</el-button>-->
                         </template>
                     </el-table-column>
+
                 </el-table>
             </el-main>
         </el-container>
@@ -95,15 +114,16 @@
             getDelete (res) {
                 console.log(res);
                 let $query = "DELETE FROM customer WHERE Cus_ID = ?";
-                conDB.query($query,[res],function (err,rows) {
+                conDB.query($query, [res], function (err, rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
                         console.log(err);
                         return;
                     }
                     // res.sent(rows);
-                    console.log("Delete succesfully executed.",rows);
+                    console.log("Delete succesfully executed.", rows);
                 });
+
             },
             handleOpen(key, keyPath) {
                 console.log(key, keyPath);

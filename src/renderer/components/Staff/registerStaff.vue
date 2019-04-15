@@ -1,54 +1,54 @@
 <template>
-
-    <el-form :model="formStaff">
-    <el-col style="margin: 100px 600px 50px 350px">
-        <h1> <span class="Text"> REGISTER STAFF </span></h1>
-    </el-col>
-        <el-col :span="16" :offset="3">
-            <el-form-item  prop="Username">
-                <el-input placeholder="Username" v-model="formStaff.username"></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="16" :offset="3">
-            <el-form-item  prop="Password">
-                <el-input placeholder="Password" v-model="formStaff.password" show-password></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="16" :offset="3">
-            <el-form-item  prop="First name">
-                <el-input placeholder="First name" v-model="formStaff.firstname" ></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="16" :offset="3">
-            <el-form-item  prop="Last name">
-                <el-input placeholder="Last name" v-model="formStaff.lastname" ></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="16" :offset="3">
-            <el-form-item
-                    prop="email"
-
-                    :rules="[
-                { required: true, message: 'Please input email address', trigger: 'blur' },
-                { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
-                ]"
-                >
-                <el-input placeholder="Email" v-model="formStaff.email"></el-input>
-            </el-form-item>
-        </el-col>
-        <el-col :span="16" :offset="3">
-            <el-form-item prop="SEX">
-            <el-radio v-model="formStaff.sex" label="1">MALE</el-radio>
-            <el-radio v-model="formStaff.sex" label="2">FEMALE</el-radio>
-            </el-form-item>
-        </el-col>
-        <el-col :span="16" :offset="3">
-            <el-form-item>
-
-                <el-button type="success" round  @click="submitForm(formStaff)">SAVE</el-button>
-                <el-button type="danger" round @click="cancelForm()">CANCEL</el-button>
-            </el-form-item>
-        </el-col>
+    <el-card>
+        <el-container>
+            <el-header>
+                <h1> <span class="Text" style="..."> REGISTER STAFF </span></h1>
+            </el-header>
+            <el-main>
+                <el-form :model="formStaff">
+                    <el-col :span="16" :offset="3">
+                        <el-form-item  prop="Username">
+                            <el-input placeholder="Username" v-model="formStaff.username"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="16" :offset="3">
+                        <el-form-item  prop="Password">
+                            <el-input placeholder="Password" v-model="formStaff.password" show-password></el-input>
+                         </el-form-item>
+                    </el-col>
+                    <el-col :span="16" :offset="3">
+                        <el-form-item  prop="First name">
+                            <el-input placeholder="First name" v-model="formStaff.firstname" ></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="16" :offset="3">
+                        <el-form-item  prop="Last name">
+                            <el-input placeholder="Last name" v-model="formStaff.lastname" ></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="16" :offset="3">
+                        <el-form-item
+                                prop="email"
+                                :rules="[
+                            { required: true, message: 'Please input email address', trigger: 'blur' },
+                            { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
+                            ]"
+                            >
+                                <el-input placeholder="Email" v-model="formStaff.email"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="16" :offset="3">
+                        <el-form-item prop="SEX">
+                            <el-radio v-model="formStaff.sex" label="MALE"></el-radio>
+                            <el-radio v-model="formStaff.sex" label="FEMALE"></el-radio>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="16" :offset="3">
+                        <el-form-item>
+                            <el-button type="success" round  @click="submitForm(formStaff)">SAVE</el-button>
+                            <el-button type="danger" round @click="cancelForm()">CANCEL</el-button>
+                        </el-form-item>
+                    </el-col>
     <!--กรอกข้อมูล-->
     <!--<el-row :gutter="50" >-->
         <!--<el-col :span="10" style="margin-left: 80px"><div class="grid-content bg-purple"></div>-->
@@ -80,7 +80,10 @@
             <!--<el-button type="success" round @click="goStaff()">SAVE</el-button>-->
             <!--<el-button round @click="goStaff()">CANCEL</el-button>-->
     <!--</el-col>-->
-    </el-form>
+                </el-form>
+            </el-main>
+        </el-container>
+    </el-card>
 
 </template>
 <script>
@@ -112,12 +115,12 @@
                 let $query = "INSERT INTO user SET ?";
                 conDB.query($query,[form],function (err,rows) {
                     if (err) {
-                        console.log("createCUS error ocurred performing the query.");
+                        console.log("createCUS error occurred performing the query.");
                         console.log(err);
                         return;
                     }
                     // res.sent(rows);
-                    console.log("createCUS succesfully executed.",rows);
+                    console.log("createCUS successfully executed.",rows);
                 });
             },
             handleOpen(key, keyPath) {
@@ -181,7 +184,7 @@
 <style scoped>
 
     .Text{
-        font-size: 60px;
+        font-size: 20px;
         text-align: center;
 
     }

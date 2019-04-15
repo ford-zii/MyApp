@@ -27,7 +27,7 @@
                     </el-table-column>
                     <el-table-column
                             label="เพศ"
-                            prop="SEX">
+                            prop="sex">
                     </el-table-column>
                     <el-table-column
                             align="right" >
@@ -38,10 +38,19 @@
                                     placeholder="ค้นหา"/>
                         </template>
                         <template slot-scope="scope">
-                            <el-button
-                                    size="mini"
-                                    type="danger"
-                                    @click="handleDelete(scope.$index, scope.row)">ลบข้อมูล</el-button>
+                                <el-button type="primary" icon="el-icon-edit" circle  plain @click="handleEdit(scope.$index, scope.row)"></el-button>
+                                <!--<el-button-->
+                                <!--size="mini"-->
+
+                                <el-button type="danger" icon="el-icon-delete" circle @click="handleDelete(scope.$index, scope.row)"></el-button>
+                                <!--size="mini"-->
+                                <!--type="danger"-->
+                                <!--@click="handleDelete(scope.$index, scope.row)">ลบสมาชิก</el-button>-->
+
+                            <!--<el-button-->
+                                    <!--size="mini"-->
+                                    <!--type="danger"-->
+                                    <!--@click="handleDelete(scope.$index, scope.row)">ลบข้อมูล</el-button>-->
                         </template>
                     </el-table-column>
                 </el-table>
@@ -82,13 +91,13 @@
                 let $query = 'SELECT * FROM `user` ';
                 conDB.query($query, function (err, rows) {
                     if (err) {
-                        console.log("An error ocurred performing the query.");
+                        console.log("An error occurred performing the query.");
                         console.log(err);
                         return;
                     }
                     let data = JSON.parse(JSON.stringify(rows));
                     vm.staff = data;
-                    console.log("Query succesfully executed", rows, data);
+                    console.log("Query successfully executed", rows, data);
                 });
             },
 
@@ -97,12 +106,12 @@
                 let $query = "DELETE FROM user WHERE id = ?";
                 conDB.query($query, [res], function (err, rows) {
                     if (err) {
-                        console.log("An error ocurred performing the query.");
+                        console.log("An error occurred performing the query.");
                         console.log(err);
                         return;
                     }
                     // res.sent(rows);
-                    console.log("Delete succesfully executed.", rows);
+                    console.log("Delete successfully executed.", rows);
 
                 });
             },

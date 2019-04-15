@@ -1,24 +1,34 @@
 <template  >
     <el-card>
         <el-container>
-            <el-header style="margin-left: 500px">
-                <h1> <span>REGISTER MEMBER </span></h1>
+            <el-header >
+                <h1> <span >REGISTER MEMBER </span></h1>
             </el-header>
             <el-main>
                 <!--กรอกข้อมูล-->
-                    <el-form ref="form" :model="formCUS" label-width="120px" >
-                        <el-col :span="16" :offset="3" >
-                            <el-form-item  prop="Cus_name" >
-                                <el-input placeholder="Firstame" v-model="formCUS.firstname"></el-input>
+                    <el-form :model="formCUS">
+                        <el-col :span="16" :offset="3">ID
+                            <el-form-item  prop="id">
+                                <el-input placeholder="ID" v-model="formCUS.id"></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="16" :offset="3" >
-                            <el-form-item  prop="Cus_name" >
-                                <el-input placeholder="Lastname" v-model="formCUS.lastname"></el-input>
+                        <el-col :span="16" :offset="3">Rank ID
+                            <el-form-item  prop="rank_id">
+                                <el-input placeholder="ID" v-model="formCUS.rank_id"></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="16" :offset="3">
-                            <el-form-item  prop="Cus_address">
+                        <el-col :span="16" :offset="3" >FIRST NAME
+                            <el-form-item  prop="firstname">
+                                <el-input placeholder="First name" v-model="formCUS.firstname"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="16" :offset="3" >LAST NAME
+                            <el-form-item  prop="lastname" >
+                                <el-input placeholder="Last name" v-model="formCUS.lastname"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="16" :offset="3">Address
+                            <el-form-item  prop="address">
                                 <el-input
                                         placeholder="Address"
                                         v-model="formCUS.address"
@@ -26,21 +36,42 @@
                                         :autosize="{ minRows: 4, maxRows: 6}"></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="16" :offset="3">
-                            <el-form-item  prop="Contact_no">
+                        <el-col :span="16" :offset="3">Contact
+                            <el-form-item  prop="contact">
                                 <el-input placeholder="Contact" v-model="formCUS.contact" ></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="16" :offset="3" style="margin-left: 300px">
-                            <el-form-item>
-                                <el-radio v-model="formCUS.rank_id" label="1">SILVER</el-radio>
-                                <el-radio v-model="formCUS.rank_id" label="2">GOLD</el-radio>
-                                <el-radio v-model="formCUS.rank_id" label="3">PLATINUN</el-radio>
+                        <el-col :span="16" :offset="3">Email
+                            <el-form-item
+                                    prop="email"
+                                    :rules="[
+                            { required: true, message: 'Please input email address', trigger: 'blur' },
+                            { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
+                            ]"
+                            >
+                                <el-input placeholder="Email" v-model="formCUS.email"></el-input>
                             </el-form-item>
                         </el-col>
-
-                        <el-col :span="16" :offset="4" >
-                            <el-form-item style="margin: 50px 160px ">
+                        <el-col :span="16" :offset="3">ID card number
+                            <el-form-item
+                                    prop="ssn"
+                                    :rules="[
+                            { required: true, message: 'Please input ID card number', trigger: 'blur' },
+                            { type: 'ssn', message: 'Please input correct ID card number', trigger: ['blur', 'change' ]}
+                            ]"
+                            >
+                                <el-input placeholder="รหัสประชาชน" v-model="formCUS.ssn"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="16" :offset="3">
+                            <el-form-item>
+                                <el-radio v-model="formCUS.rank" label="1">SILVER</el-radio>
+                                <el-radio v-model="formCUS.rank" label="2">GOLD</el-radio>
+                                <el-radio v-model="formCUS.rank" label="3">PLATINUM</el-radio>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="16" :offset="3" >
+                            <el-form-item>
                                 <el-button type="success" round  @click="submitForm(formCUS)">SAVE</el-button>
                                 <el-button type="danger" round @click="cancelForm()">CANCEL</el-button>
                             </el-form-item>
@@ -53,16 +84,20 @@
 </template>
 
 <script>
-    const Customerlevel = ['SILVER', 'GOLD', 'PLATINUN'];
+    const Customerlevel = ['SILVER', 'GOLD', 'PLATINUM'];
     export default {
         data() {
             return {
                 formCUS:{
-                    firstname:"",
-                    lastname:"",
-                    address:"",
-                    contact:"",
-                    rank_id:""
+                    id:' ',
+                    rank_id:' ',
+                    firstname:' ',
+                    lastname:' ',
+                    address:' ',
+                    contact:' ',
+                    email:' ',
+                    ssn:' '
+
                 },
                 rank:[]
             }
@@ -73,14 +108,14 @@
                 let $query = 'SELECT * FROM `rank` ';
                 conDB.query($query, function (err, rows) {
                     if (err) {
-                        console.log("An error ocurred performing the query.");
+                        console.log("An error occurred performing the query.");
                         console.log(err);
                         return;
                     }
                     let data = JSON.parse(JSON.stringify(rows));
                     vm.rank = data;
                     // callback(data);
-                    console.log("Query succesfully executed", rows, data);
+                    console.log("Query successfully executed", rows, data);
                 });
             },
             createCustomer (form) {
@@ -88,12 +123,12 @@
                 let $query = "INSERT INTO customer SET ?";
                 conDB.query($query,[form],function (err,rows) {
                     if (err) {
-                        console.log("createCUS error ocurred performing the query.");
+                        console.log("createCUS error occurred performing the query.");
                         console.log(err);
                         return;
                     }
                     // res.sent(rows);
-                    console.log("createCUS succesfully executed.",rows);
+                    console.log("createCUS successfully executed.",rows);
                 });
             },
             cancelForm() {
@@ -113,6 +148,6 @@
 
 </script>
 
-<style >
+<style scoped >
 
 </style>
