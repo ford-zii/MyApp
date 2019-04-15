@@ -127,6 +127,10 @@
     }
 </script>
 
-<style scoped>
+<style >
+    body{
+        background-color: powderblue;
+        background-size: cover;
+    }
 
 </style>

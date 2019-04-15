@@ -10,12 +10,12 @@ import router from './router'
 import store from './store'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee ,faUser,faAddressCard,faShoppingCart,faStore,faDollarSign,faCogs,faSignOutAlt,faAngry} from '@fortawesome/free-solid-svg-icons'
+import { faCoffee ,faUser,faAddressCard,faShoppingCart,faStore,faDollarSign,faCogs,faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import VueSwal from 'vue-swal'
 
-library.add(faCoffee,faUser,faAddressCard,faShoppingCart,faStore,faDollarSign,faCogs,faSignOutAlt,faAngry);
+library.add(faCoffee,faUser,faAddressCard,faShoppingCart,faStore,faDollarSign,faCogs,faSignOutAlt);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
 Vue.use(VueSwal);
@@ -23,13 +23,13 @@ Vue.use(ElementUI,{locale :th});
 
 const mysql = require('mysql');
 const config = {
-  //host:"localhost",
-  host:"127.0.0.1",
+  host:"localhost",
+  //host:"127.0.0.1",
   user: "root",
-  password: "12345678",
+  password: "1234567",
   port: "3306",
 
-  //database:"store"
+ // database:"store"
 
   database:"stockmarket"
 

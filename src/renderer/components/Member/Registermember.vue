@@ -1,7 +1,7 @@
 <template  >
     <el-card>
         <el-container>
-            <el-header>
+            <el-header style="margin-left: 500px">
                 <h1> <span>REGISTER MEMBER </span></h1>
             </el-header>
             <el-main>
@@ -31,11 +31,11 @@
                                 <el-input placeholder="Contact" v-model="formCUS.contact" ></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="16" :offset="3">
+                        <el-col :span="16" :offset="3" style="margin-left: 300px">
                             <el-form-item>
-                                <el-radio v-model="formCUS.rank_id" label="1">Option A</el-radio>
-                                <el-radio v-model="formCUS.rank_id" label="2">Option B</el-radio>
-                                <el-radio v-model="formCUS.rank_id" label="3">Option C</el-radio>
+                                <el-radio v-model="formCUS.rank_id" label="1">SILVER</el-radio>
+                                <el-radio v-model="formCUS.rank_id" label="2">GOLD</el-radio>
+                                <el-radio v-model="formCUS.rank_id" label="3">PLATINUN</el-radio>
                             </el-form-item>
                         </el-col>
 
@@ -100,7 +100,10 @@
                 this.$router.push({name:"Member"})
             },
             submitForm(form){
+                console.log(form.name);
                 this.createCustomer(form);
+                this.$swal('submit!');
+                //this.createCustomer(form);
                 this.$router.push({name:"Member"});
             }
 
