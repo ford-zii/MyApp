@@ -6,12 +6,9 @@
             </el-header>
             <el-main>
                 <el-table
-                        :data="this.Member.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+                        :data="this.Member.filter(data => !search || data.firstname.toLowerCase().includes(search.toLowerCase()))"
                         style="width: 100%">
-                    <el-table-column
-                            label="id"
-                            prop="ID">
-                    </el-table-column>
+
                     <el-table-column
                             label="ชื่อ"
                             prop="firstname">
@@ -37,8 +34,8 @@
                             prop="email">
                     </el-table-column>
                     <el-table-column
-                            label="Rank ID"
-                            prop="Rank ID">
+                            label="Rank"
+                            prop="rank_name">
                     </el-table-column>
                     <el-table-column
                             align="right" >
@@ -99,7 +96,7 @@
         methods: {
             loadData() {
                 let vm = this;
-                let $query = 'SELECT * FROM `customer` ';
+                let $query = 'SELECT C.id,C.firstname,C.lastname,C.address,C.contact,C.email,C.sex,C.ssn,R.name as rank_name FROM customer C INNER JOIN customerRank R ON C.rank_id = R.id;';
                 conDB.query($query, function (err, rows) {
                     if (err) {
                         console.log("An error ocurred performing the query.");
