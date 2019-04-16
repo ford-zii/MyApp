@@ -7,17 +7,17 @@
             <el-main>
                 <!--กรอกข้อมูล-->
                     <el-form :model="formCUS">
-                        <el-col :span="16" :offset="3" >FIRST NAME
+                        <el-col :span="16" :offset="3" >
                             <el-form-item  prop="firstname">
                                 <el-input placeholder="First name" v-model="formCUS.firstname"></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="16" :offset="3" >LAST NAME
+                        <el-col :span="16" :offset="3" >
                             <el-form-item  prop="lastname" >
                                 <el-input placeholder="Last name" v-model="formCUS.lastname"></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="16" :offset="3">Address
+                        <el-col :span="16" :offset="3">
                             <el-form-item  prop="address">
                                 <el-input
                                         placeholder="Address"
@@ -26,12 +26,12 @@
                                         :autosize="{ minRows: 4, maxRows: 6}"></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="16" :offset="3">Contact
+                        <el-col :span="16" :offset="3">
                             <el-form-item  prop="contact">
                                 <el-input placeholder="Contact" v-model="formCUS.contact" ></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="16" :offset="3">Email
+                        <el-col :span="16" :offset="3">
                             <el-form-item
                                     prop="email"
                                     :rules="[
@@ -42,7 +42,7 @@
                                 <el-input placeholder="Email" v-model="formCUS.email"></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="16" :offset="3">ID card number
+                        <el-col :span="16" :offset="3">
                             <el-form-item
                                     prop="ssn"
                                     :rules="[
@@ -50,7 +50,7 @@
                             { type: 'ssn', message: 'Please input correct ID card number', trigger: ['blur', 'change' ]}
                             ]"
                             >
-                                <el-input placeholder="รหัสประชาชน" v-model="formCUS.ssn"></el-input>
+                                <el-input placeholder="ID Card Number" v-model="formCUS.ssn"></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col :span="16" :offset="3">

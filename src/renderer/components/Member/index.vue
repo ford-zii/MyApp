@@ -2,7 +2,7 @@
     <el-card>
         <el-container >
             <el-header>
-                <el-button type="primary" round @click="goRegistermember()"><span class="iconify" data-icon="mdi:account" data-inline="false"></span>Register</el-button>
+                <el-button type="success" plain round @click="goRegistermember()"><span class="iconify" data-icon="mdi:account" data-inline="false"></span>Register</el-button>
             </el-header>
             <el-main>
                 <el-table
@@ -99,13 +99,13 @@
                 let $query = 'SELECT C.id,C.firstname,C.lastname,C.address,C.contact,C.email,C.sex,C.ssn,R.name as rank_name FROM customer C INNER JOIN customerRank R ON C.rank_id = R.id;';
                 conDB.query($query, function (err, rows) {
                     if (err) {
-                        console.log("An error ocurred performing the query.");
+                        console.log("An error occurred performing the query.");
                         console.log(err);
                         return;
                     }
                     let data = JSON.parse(JSON.stringify(rows));
                     vm.Member = data;
-                    console.log("Query succesfully executed", rows, data);
+                    console.log("Query successfully executed", rows, data);
                 });
             },
             getDelete (res) {
@@ -113,12 +113,12 @@
                 let $query = "DELETE FROM customer WHERE Cus_ID = ?";
                 conDB.query($query, [res], function (err, rows) {
                     if (err) {
-                        console.log("An error ocurred performing the query.");
+                        console.log("An error occurred performing the query.");
                         console.log(err);
                         return;
                     }
                     // res.sent(rows);
-                    console.log("Delete succesfully executed.", rows);
+                    console.log("Delete successfully executed.", rows);
                 });
 
             },

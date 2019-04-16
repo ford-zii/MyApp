@@ -2,7 +2,7 @@
     <el-card>
         <el-container>
             <el-header>
-                <el-button  type="primary" round @click="goImport()">Add</el-button>
+                <el-button  type="success" plain round @click="goImport()">Add</el-button>
             </el-header>
             <el-main >
                 <el-col  >

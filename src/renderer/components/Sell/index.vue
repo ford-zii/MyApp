@@ -2,7 +2,7 @@
     <el-card>
         <el-container>
             <el-main >
-                <el-form :inline="true" :model="formInline" class="demo-form-inline">
+                <el-form :inline="true" :model="formInline" :span="6" :offset="3" class="demo-form-inline">
                     <el-form-item label="รหัสลูกค้า">
                         <el-input v-model="formInline.No" ></el-input>
                     </el-form-item>
@@ -12,60 +12,72 @@
                     <el-form-item label="ระดับ">
                         <el-input v-model="formInline.Rank" ></el-input>
                     </el-form-item>
-                    <el-form-item >
-                        <el-input placeholder="0.00" v-model="input"></el-input>
-                    </el-form-item>
-                    <el-form :inline="true" :model="Calculate" class="demo-form-inline" style="margin-left: 150px">
-                        <el-form-item label="ส่วนลด">
-                            <el-input v-model="formInline.Discount" ></el-input>
+                    
+                    <el-table
+                            :data="this.loadData(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+                                style= "width: 70% ">
+                            <el-table-column
+                                    prop="ID"
+                                    label="ID">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="Item"
+                                    label="รายการ">
+
+                            </el-table-column>
+                            <el-table-column
+                                    prop="Type"
+                                    label="Type">
+
+                            </el-table-column>
+                            <el-table-column
+                                    prop="Unit"
+                                    label="Unit">
+
+                            </el-table-column>
+                            <el-table-column
+                                    prop="Price"
+                                    label="Price">
+
+                            </el-table-column>
+                    </el-table>
+
+                    <el-form :inline="true" :model="Calculate" class="demo-form-inline"  >
+
+                        <el-col :span="5" :offset="17" >
+                        <el-form-item >ส่วนลด
+                            <el-input placeholder="0.00"  v-model="formInline.Discount" ></el-input>
                         </el-form-item>
-                        <el-form-item label="รับเงิน">
-                            <el-input v-model="formInline.Getmoney" ></el-input>
+                        </el-col>
+
+                        <el-col :span="5" :offset="17" >
+                        <el-form-item >จำนวนเงิน
+                            <el-input placeholder="0.00" v-model="formInline.money"></el-input>
                         </el-form-item>
-                        <el-form-item label="เงินทอน">
-                            <el-input v-model="formInline.Refund" ></el-input>
+                        </el-col>
+
+                        <el-col :span="5" :offset="17">
+                        <el-form-item >รับเงิน
+                            <el-input placeholder="0.00"  v-model="formInline.Getmoney" ></el-input>
                         </el-form-item>
+                        </el-col>
+
+                        <el-col :span="5" :offset="17" >
+                        <el-form-item >เงินทอน
+                            <el-input placeholder="0.00"  v-model="formInline.Refund" ></el-input>
+                        </el-form-item>
+                        </el-col>
                     </el-form>
 
+
                 </el-form>
-                <el-form style="margin-left: 200px">
-                    <el-table
-                            :data="tableData"
-                            border
-                            style="width: 75%" >
-                        <el-table-column
-                                prop="ID"
-                                label="ID"
-                                width="100">
-                        </el-table-column>
-                        <el-table-column
-                                prop="Item"
-                                label="รายการ"
-                                width="280">
-                        </el-table-column>
-                        <el-table-column
-                                prop="Type"
-                                label="Type"
-                                width="130">
-                        </el-table-column>
-                        <el-table-column
-                                prop="Unit"
-                                label="Unit"
-                                width="50">
-                        </el-table-column>
-                        <el-table-column
-                                prop="Price"
-                                label="Price"
-                                width="70">
-                        </el-table-column>
-                    </el-table>
-                </el-form>
+
 
             </el-main>
 
-            <el-footer>
-                <el-form style="margin-left: 500px">
-                    <el-button  type="primary" @click="submitForm(productForm)">คิดเงิน</el-button>
+            <el-footer >
+                <el-form style="margin-left: 350px">
+                    <el-button  type="warning"  style="background-color: #f4736b" @click="submitForm(productForm)">คิดเงิน</el-button>
                 </el-form>
 
             </el-footer>
@@ -78,29 +90,63 @@
     export default {
         data() {
             return {
-                formInline:{
-                    No:'',
-                    Name:'',
-                    Rank:'',
-                    input:''
-                },
-                Calculate:{
-                    Discount:'',
-                    Getmoney:'',
-                    Refund:''
+                formInline: {
+                    No: '',
+                    Name: '',
+                    Rank: '',
 
                 },
-                tableDate:{
-                    ID:'',
-                    Item:'',
-                    Type:'',
-                    Unit:'',
-                    Price:''
+                Calculate: {
+                    Discount: '',
+                    money: ' ',
+                    Getmoney: '',
+                    Refund: ''
+
+                },
+                tableDate: {
+                    ID: '',
+                    Item: '',
+                    Type: '',
+                    Unit: '',
+                    Price: ''
 
                 }
             }
+        },
+        async created() {
+            conDB.connect(function (err) {
+                if (err) {
+                    console.log(err.code);
+                    console.log(err.fatal);
+                }
+            });
+
+            this.loadData();
+
+
+            // console.log(this.getPro);
+            console.log(this.loadData, " sellproduct ");
+
+            // con.end();
+        },
+        methods: {
+            loadData() {
+                let vm = this;
+                let $query = 'SELECT * FROM `sellproduct` ';
+                conDB.query($query, function (err, rows) {
+                    if (err) {
+                        console.log("An error occurred performing the query.");
+                        console.log(err);
+                        return;
+                    }
+                    let data = JSON.parse(JSON.stringify(rows));
+                    vm.staff = data;
+                    console.log("Query successfully executed", rows, data);
+                });
+            }
         }
     }
+
 
 </script>
 
@@ -113,5 +159,7 @@
         color: aquamarine;
         text-align: center;
         line-height: 60px;
+
+
     }
 </style>
