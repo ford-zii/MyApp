@@ -7,16 +7,6 @@
             <el-main>
                 <!--กรอกข้อมูล-->
                     <el-form :model="formCUS">
-                        <el-col :span="16" :offset="3">ID
-                            <el-form-item  prop="id">
-                                <el-input placeholder="ID" v-model="formCUS.id"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="16" :offset="3">Rank ID
-                            <el-form-item  prop="rank_id">
-                                <el-input placeholder="ID" v-model="formCUS.rank_id"></el-input>
-                            </el-form-item>
-                        </el-col>
                         <el-col :span="16" :offset="3" >FIRST NAME
                             <el-form-item  prop="firstname">
                                 <el-input placeholder="First name" v-model="formCUS.firstname"></el-input>
@@ -65,9 +55,9 @@
                         </el-col>
                         <el-col :span="16" :offset="3">
                             <el-form-item>
-                                <el-radio v-model="formCUS.rank" label="1">SILVER</el-radio>
-                                <el-radio v-model="formCUS.rank" label="2">GOLD</el-radio>
-                                <el-radio v-model="formCUS.rank" label="3">PLATINUM</el-radio>
+                                <el-radio v-model="formCUS.rank_id" label="1">SILVER</el-radio>
+                                <el-radio v-model="formCUS.rank_id" label="2">GOLD</el-radio>
+                                <el-radio v-model="formCUS.rank_id" label="3">PLATINUM</el-radio>
                             </el-form-item>
                         </el-col>
                         <el-col :span="16" :offset="3" >
@@ -89,35 +79,20 @@
         data() {
             return {
                 formCUS:{
-                    id:' ',
-                    rank_id:' ',
-                    firstname:' ',
-                    lastname:' ',
-                    address:' ',
-                    contact:' ',
-                    email:' ',
-                    ssn:' '
+                    rank_id:'',
+                    firstname:'',
+                    lastname:'',
+                    address:'',
+                    contact:'',
+                    email:null,
+                    sex:'',
+                    ssn:''
 
                 },
-                rank:[]
+
             }
         },
         methods :{
-            getRank () {
-                let vm = this;
-                let $query = 'SELECT * FROM `rank` ';
-                conDB.query($query, function (err, rows) {
-                    if (err) {
-                        console.log("An error occurred performing the query.");
-                        console.log(err);
-                        return;
-                    }
-                    let data = JSON.parse(JSON.stringify(rows));
-                    vm.rank = data;
-                    // callback(data);
-                    console.log("Query successfully executed", rows, data);
-                });
-            },
             createCustomer (form) {
                 console.log(form);
                 let $query = "INSERT INTO customer SET ?";
@@ -134,12 +109,12 @@
             cancelForm() {
                 this.$router.push({name:"Member"})
             },
-            submitForm(form){
-                console.log(form.name);
-                this.createCustomer(form);
-                this.$swal('submit!');
+            async submitForm(form){
+                await this.createCustomer(form);
+                await this.$swal('submit!');
                 //this.createCustomer(form);
                 this.$router.push({name:"Member"});
+
             }
 
         }

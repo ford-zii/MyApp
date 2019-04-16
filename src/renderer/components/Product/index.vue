@@ -235,9 +235,6 @@
                 console.log(key, keyPath);
             },
             async saveEdit(form,id){
-                console.log(form);
-                let name = form.name;
-                //let price = form.price;
                 await this.Update(form,id);
                 await this.loadData();
                 this.dialogFormVisible = false;
