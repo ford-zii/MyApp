@@ -7,7 +7,7 @@
             <el-main >
                 <el-col  >
                     <el-table
-                        :data="this.product.filter(data => !search || data.Pname.toLowerCase().includes(search.toLowerCase()))"
+                        :data="this.product.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
                         style="width: 100%">
                         <el-table-column
                                 label="Barcode"
@@ -42,6 +42,8 @@
                                 <el-button
                                         size="mini"
                                         @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+
+
                                 <el-button
                                         size="mini"
                                         type="danger"
@@ -51,21 +53,74 @@
                     </el-table>
                 </el-col>
             </el-main>
+            <el-dialog title="Shipping address"  :visible.sync="dialogFormVisible">
+                <el-card>
+                    <el-form :model="editForm" ref="editForm"  class="demo-ruleForm">
+                        <el-col :span="8" :offset="3">
+                            <el-form-item label="ชื่อสินค้า" prop="name">
+                                <el-input v-model="editForm.name"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-form-item label="ราคา" prop="Price">
+                                <el-input v-model="editForm.price"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="8" :offset="3">
+                            <el-form-item label="ประเภท" prop="category">
+                                <el-select v-model="editForm.category_id" placeholder="Select">
+                                    <el-option
+                                            v-for="item in category"
+                                            :key="item.id"
+                                            :label="item.name"
+                                            :value="item.id">
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="16" :offset="3">
+                            <el-form-item label="จำนวน" prop="Unit">
+                                <el-input v-model="editForm.unit"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="16" :offset="3">
+                            <el-form-item label="Barcode" prop="barcode">
+                                <el-input v-model="editForm.barcode"></el-input>
+                            </el-form-item>
+                        </el-col>
+
+                        <el-col :span="16" :offset="3">
+                            <el-form-item>
+
+                                    <el-button @click="dialogFormVisible = false">Cancel</el-button>
+                                    <el-button type="primary" @click="saveEdit(editForm,editForm.id)">Confirm</el-button>
+
+                            </el-form-item>
+                        </el-col>
+
+                    </el-form>
+                </el-card>
+
+            </el-dialog>
         </el-container>
     </el-card>
+
+
 </template>
 
 <script>
+
     export default {
         name:'Product',
         comments:{
         },
         data() {
             return {
-                User:[],
+                category:[],
                 search: '',
                 product:[],
-
+                dialogFormVisible: false,
+                editForm:[],
 
             }
         },
@@ -79,10 +134,16 @@
                 }
             });
             this.loadData();
+            this.getCategory();
             // console.log(this.getPro);
-            console.log(this.User,"member ");
+            console.log(this.product,"member ");
 
             // con.end();
+        },
+        mounted(){
+
+            // this.getByID();
+            // console.log(this.editForm,"form ");
         },
         computed:{
 
@@ -119,18 +180,51 @@
 
                 });
             },
-            getByID (id){
+            getCategory () {
+                let vm = this;
+                let $query = 'SELECT * FROM `category` ';
+                conDB.query($query, function (err, rows) {
+                    if (err) {
+                        console.log("An error ocurred performing the query.");
+                        console.log(err);
+                        return;
+                    }
+                    let data = JSON.parse(JSON.stringify(rows));
+                    vm.category = data;
+                    // callback(data);
+                    console.log("Query succesfully executed", rows, data);
+                });
+            },
+             getByID (id){
+                let vm = this;
                 console.log(id);
                 let $query = 'SELECT * FROM `product` WHERE id = ?';
-                conDB.query($query,[id],function (err,rows) {
+                 conDB.query($query,[id], function (err,rows) {
                     if (err) {
                         console.log("get error performing the query.");
                         console.log(err);
                         return;
                     }
-                    // res.sent(rows);
+                    let data = JSON.parse(JSON.stringify(rows));
+                    vm.editForm = data[0];
                     console.log("get by id  succesfully executed.",rows);
-
+                    console.log(vm.editForm,"Form");
+                });
+            },
+            Update(form){
+                let vm = this;
+                console.log(form,"to SAVE");
+                let $query = 'UPDATE product SET name = ?,price = ?,unit = ?,barcode = ?,category_id = ? WHERE id = ?';
+                conDB.query($query,[form.name,form.price,form.unit,form.barcode,form.category_id,form.id], function (err,rows) {
+                    if (err) {
+                        console.log("get error performing the query.");
+                        console.log(err);
+                        return;
+                    }
+                    // let data = JSON.parse(JSON.stringify(rows));
+                    // vm.editForm = data[0];
+                    console.log("update succesfully executed.",rows);
+                    // console.log(vm.editForm,"Form");
                 });
             },
 
@@ -140,12 +234,23 @@
             handleClose(key, keyPath) {
                 console.log(key, keyPath);
             },
-            handleEdit(index, row) {
-                console.log(row.id);
-                this.getByID(row.id);
-                this.loadData();
+            async saveEdit(form,id){
+                console.log(form);
+                let name = form.name;
+                //let price = form.price;
+                await this.Update(form,id);
+                await this.loadData();
+                this.dialogFormVisible = false;
+                this.$swal('','Edit success','success');
+
             },
-            async  handleDelete(index, row) {
+            async handleEdit(index, row) {
+                let vm = this;
+                console.log(row);
+                await this.getByID(row.id);
+                this.dialogFormVisible = true;
+            },
+            async handleDelete(index, row) {
                 console.log(row.id);
                 await this.getDelete(row.id);
                 await this.$swal("Your imaginary file is safe!");
