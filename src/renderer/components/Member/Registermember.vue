@@ -2,7 +2,7 @@
     <el-card>
         <el-container>
             <el-header >
-                <h1> <span >REGISTER MEMBER </span></h1>
+                <h1> <span >REGISTER MEMBER </span><font-awesome-icon icon="user-plus" size="2x"/></h1>
             </el-header>
             <el-main>
                 <!--กรอกข้อมูล-->

@@ -15,12 +15,12 @@
                     </el-col>
                     <el-col :span="8" :offset="3">
                         <el-form-item label="ประเภท" prop="category_id">
-                            <el-select v-model="productForm.category_id" placeholder="Select">
+                            <el-select v-model="productForm.category" placeholder="Select">
                                 <el-option
                                         v-for="item in category"
-                                        :key="item.id"
-                                        :label="item.name"
-                                        :value="item.id">
+                                        :key="item.name"
+                                        :label="item.id"
+                                        :value="item.name">
                                 </el-option>
                             </el-select>
                         </el-form-item>
@@ -52,18 +52,35 @@
 <script>
     export default {
         name: "newImport",
-        data(){
-          return{
-              productForm:{
-                  name: '',
-                  price: null,
-                  category_id: '',
-                  unit: null,
-                  barcode: null
-              },
-              category:[]
-          }
+        data() {
+            return {
+                productForm: {
+                    name: '',
+                    price: null,
+                    category_id: '',
+                    unit: null,
+                    barcode: null,
+                    // category: [{
+                    //     value: 'Drink',
+                    //     label: 'เครื่องดื่ม'
+                    // }, {
+                    //     value: 'Desert',
+                    //     label: 'ของหวาน'
+                    // }, {
+                    //     value: '',
+                    //     label: 'Option3'
+                    // }, {
+                    //     value: 'Option4',
+                    //     label: 'Option4'
+                    // }, {
+                    //     value: 'Option5',
+                    //     label: 'Option5'
+                    // }],
+                    // value: ''
+                }
+            }
         },
+
         async created() {
             conDB.connect(function (err) {
 
@@ -80,7 +97,7 @@
                 let $query = 'SELECT * FROM `category` ';
                 conDB.query($query, function (err, rows) {
                     if (err) {
-                        console.log("An error ocurred performing the query.");
+                        console.log("An error occurred performing the query.");
                         console.log(err);
                         return;
                     }
@@ -95,12 +112,12 @@
                 let $query = "INSERT INTO product SET ?";
                 conDB.query($query,[product],function (err,rows) {
                     if (err) {
-                        console.log("An error ocurred performing the query.");
+                        console.log("An error occurred performing the query.");
                         console.log(err);
                         return;
                     }
                     // res.sent(rows);
-                    console.log("createProduct succesfully executed.",rows);
+                    console.log("createProduct successfully executed.",rows);
                 });
             },
             submitForm(formName) {

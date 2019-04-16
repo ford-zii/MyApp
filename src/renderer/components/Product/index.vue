@@ -2,7 +2,8 @@
     <el-card>
         <el-container>
             <el-header>
-                <el-button  type="success" plain round @click="goImport()">Add</el-button>
+                <el-button  type="success" plain round @click="goImport()">Add
+                    <font-awesome-icon icon="cart-plus"/></el-button>
             </el-header>
             <el-main >
                 <el-col  >
@@ -39,15 +40,10 @@
                                         placeholder="ค้นหา"/>
                             </template>
                             <template slot-scope="scope">
-                                <el-button
-                                        size="mini"
-                                        @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+                                <el-button type="warning" style="background-color: #f4f0c1" icon="el-icon-edit" circle  plain @click="handleEdit(scope.$index, scope.row)"></el-button>
 
 
-                                <el-button
-                                        size="mini"
-                                        type="danger"
-                                        @click="handleDelete(scope.$index, scope.row)">ลบสินค้า</el-button>
+                                <el-button type="danger" icon="el-icon-delete" circle @click="handleDelete(scope.$index, scope.row)"></el-button>
                             </template>
                         </el-table-column>
                     </el-table>

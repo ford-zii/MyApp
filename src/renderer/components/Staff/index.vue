@@ -2,7 +2,8 @@
     <el-card class="BG">
         <el-container>
             <el-header>
-                <el-button  type="success" plain round @click="$router.push({name:'registerStaff'})"><span class="iconify" data-icon="mdi:account" data-inline="false"></span>Register</el-button>
+                <el-button type="success" plain round @click="$router.push({name:'registerStaff'})"><span class="iconify" data-icon="mdi:account" data-inline="false"></span>Register
+                    <font-awesome-icon icon="user-plus"/></el-button>
             </el-header>
             <el-main>
                 <el-table
@@ -38,7 +39,7 @@
                                     placeholder="ค้นหา"/>
                         </template>
                         <template slot-scope="scope">
-                                <el-button type="primary" icon="el-icon-edit" circle  plain @click="handleEdit(scope.$index, scope.row)"></el-button>
+                                <el-button type="warning" style="background-color: #f4f0c1" icon="el-icon-edit" circle  plain @click="handleEdit(scope.$index, scope.row)"></el-button>
                                 <!--<el-button-->
                                 <!--size="mini"-->
 

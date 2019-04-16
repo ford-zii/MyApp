@@ -12,10 +12,13 @@
                     <el-form-item label="ระดับ">
                         <el-input v-model="formInline.Rank" ></el-input>
                     </el-form-item>
+                    <el-form-item label="รหัสสินค้า">
+                        <el-input v-model="formInline.product" ></el-input>
+                    </el-form-item>
                     
                     <el-table
                             :data="this.loadData(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
-                                style= "width: 70% ">
+                                style= "width: 50% ">
                             <el-table-column
                                     prop="ID"
                                     label="ID">
@@ -43,6 +46,7 @@
                     </el-table>
 
                     <el-form :inline="true" :model="Calculate" class="demo-form-inline"  >
+
 
                         <el-col :span="5" :offset="17" >
                         <el-form-item >ส่วนลด
@@ -94,6 +98,7 @@
                     No: '',
                     Name: '',
                     Rank: '',
+                    product:''
 
                 },
                 Calculate: {
