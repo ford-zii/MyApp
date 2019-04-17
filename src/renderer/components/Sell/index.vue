@@ -1,83 +1,81 @@
 <template>
     <el-card>
         <el-container>
-            <el-header>
 
-                    <el-input v-model="ketGet" @change="selectM()"></el-input>
-
-                <!--<el-input v-model="formInline.firstname" ></el-input>-->
-                <!--<el-input v-model="formInline.rank_id" ></el-input>-->
-            </el-header>
             <el-main >
-                <el-form  :inline="true"  ref="formInline" class="demo-form-inline">
-
-                    <!--<el-form-item label="ชื่อลูกค้า">-->
-
-                    <!--</el-form-item>-->
-                    <!--<el-form-item label="ระดับ">-->
-
-                    <!--</el-form-item>-->
+                <el-form  :inline="true" class="demo-form-inline">
+                    <el-form-item label="รหัสลูกค้า">
+                        <el-input v-model="keyGet" @change="selectM()"></el-input>
+                    </el-form-item>
+                    <el-form-item label="ชื่อลูกค้า">
+                        <el-input v-model="formCUS.firstname" ></el-input>
+                    </el-form-item>
+                    <el-form-item label="ระดับ">
+                        <el-input v-model="formCUS.rankName" ></el-input>
+                    </el-form-item>
+                    <el-form-item label="รหัสสินค้า">
+                    <el-input v-model="formPID" @change="selectP()"></el-input>
+                    </el-form-item>
                 </el-form>
-                    <!--<el-form-item label="รหัสสินค้า">-->
-                        <!--<el-input v-model="formInline.product" ></el-input>-->
-                    <!--</el-form-item>-->
-                    <!---->
-                    <!--<el-table-->
-                            <!--:data="this.loadData(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"-->
-                                <!--style= "width: 50% ">-->
-                            <!--<el-table-column-->
-                                    <!--prop="ID"-->
-                                    <!--label="ID">-->
-                            <!--</el-table-column>-->
-                            <!--<el-table-column-->
-                                    <!--prop="Item"-->
-                                    <!--label="รายการ">-->
-
-                            <!--</el-table-column>-->
-                            <!--<el-table-column-->
-                                    <!--prop="Type"-->
-                                    <!--label="Type">-->
-
-                            <!--</el-table-column>-->
-                            <!--<el-table-column-->
-                                    <!--prop="Unit"-->
-                                    <!--label="Unit">-->
-
-                            <!--</el-table-column>-->
-                            <!--<el-table-column-->
-                                    <!--prop="Price"-->
-                                    <!--label="Price">-->
-
-                            <!--</el-table-column>-->
-                    <!--</el-table>-->
-
-                    <el-form :inline="true" :model="Calculate" class="demo-form-inline"  >
 
 
-                        <el-col :span="5" :offset="17" >
-                        <el-form-item >ส่วนลด
-                            <el-input placeholder="0.00"  v-model="formInline.Discount" ></el-input>
-                        </el-form-item>
-                        </el-col>
+                    <el-table
+                            :data="this.formProduct"
+                                style= "width: 50% ">
+                        <el-table-column
+                                prop="barcode"
+                                label="BarCode">
 
-                        <el-col :span="5" :offset="17" >
-                        <el-form-item >จำนวนเงิน
-                            <el-input placeholder="0.00" v-model="formInline.money"></el-input>
-                        </el-form-item>
-                        </el-col>
+                        </el-table-column>
+                            <el-table-column
+                                    prop="name"
+                                    label="รายการ">
 
-                        <el-col :span="5" :offset="17">
-                        <el-form-item >รับเงิน
-                            <el-input placeholder="0.00"  v-model="formInline.Getmoney" ></el-input>
-                        </el-form-item>
-                        </el-col>
+                            </el-table-column>
+                            <el-table-column
+                                    prop="cateName"
+                                    label="Type">
 
-                        <el-col :span="5" :offset="17" >
-                        <el-form-item >เงินทอน
-                            <el-input placeholder="0.00"  v-model="formInline.Refund" ></el-input>
-                        </el-form-item>
-                        </el-col>
-                    </el-form>
+                            </el-table-column>
+                            <el-table-column
+                                    prop="unit"
+                                    label="Unit">
+
+                            </el-table-column>
+                            <el-table-column
+                                    prop="price"
+                                    label="Price">
+
+                            </el-table-column>
+                    </el-table>
+
+                    <!--<el-form :inline="true" :model="Calculate" class="demo-form-inline"  >-->
+
+
+                        <!--<el-col :span="5" :offset="17" >-->
+                        <!--<el-form-item >ส่วนลด-->
+                            <!--<el-input placeholder="0.00"  v-model="formInline.Discount" ></el-input>-->
+                        <!--</el-form-item>-->
+                        <!--</el-col>-->
+
+                        <!--<el-col :span="5" :offset="17" >-->
+                        <!--<el-form-item >จำนวนเงิน-->
+                            <!--<el-input placeholder="0.00" v-model="formInline.money"></el-input>-->
+                        <!--</el-form-item>-->
+                        <!--</el-col>-->
+
+                        <!--<el-col :span="5" :offset="17">-->
+                        <!--<el-form-item >รับเงิน-->
+                            <!--<el-input placeholder="0.00"  v-model="formInline.Getmoney" ></el-input>-->
+                        <!--</el-form-item>-->
+                        <!--</el-col>-->
+
+                        <!--<el-col :span="5" :offset="17" >-->
+                        <!--<el-form-item >เงินทอน-->
+                            <!--<el-input placeholder="0.00"  v-model="formInline.Refund" ></el-input>-->
+                        <!--</el-form-item>-->
+                        <!--</el-col>-->
+                    <!--</el-form>-->
             </el-main>
 
             <el-footer >
@@ -87,72 +85,6 @@
 
             </el-footer>
 
-
-            <el-dialog title="Members"  :visible.sync="dialogFormVisible">
-                <el-card>
-                    <el-form >
-                        <el-col :span="16" :offset="3" >
-                            <el-form-item  prop="firstname">
-                                <el-input placeholder="First name" v-model="formCUS.firstname"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="16" :offset="3" >
-                            <el-form-item  prop="lastname" >
-                                <el-input placeholder="Last name" v-model="formCUS.lastname"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="16" :offset="3">
-                            <el-form-item  prop="address">
-                                <el-input
-                                        placeholder="Address"
-                                        v-model="formCUS.address"
-                                        type="textarea"
-                                        :autosize="{ minRows: 4, maxRows: 6}"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="16" :offset="3">
-                            <el-form-item  prop="contact">
-                                <el-input placeholder="Contact" v-model="formCUS.contact" ></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="16" :offset="3">
-                            <el-form-item
-                                    prop="email"
-                                    :rules="[
-                            { required: true, message: 'Please input email address', trigger: 'blur' },
-                            { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
-                            ]"
-                            >
-                                <el-input placeholder="Email" v-model="formCUS.email"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="16" :offset="3">
-                            <el-form-item
-                                    prop="ssn"
-                                    :rules="[
-                            { required: true, message: 'Please input ID card number', trigger: 'blur' },
-                            { type: 'ssn', message: 'Please input correct ID card number', trigger: ['blur', 'change' ]}
-                            ]"
-                            >
-                                <el-input placeholder="ID Card Number" v-model="formCUS.ssn"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="16" :offset="3">
-                            <el-form-item>
-                                <el-radio v-model="formCUS.rank_id" label="1">SILVER</el-radio>
-                                <el-radio v-model="formCUS.rank_id" label="2">GOLD</el-radio>
-                                <el-radio v-model="formCUS.rank_id" label="3">PLATINUM</el-radio>
-                            </el-form-item>
-                        </el-col>
-                        <!--<el-col :span="16" :offset="3" >-->
-                        <!--<el-form-item>-->
-                            <!--<el-button type="success" round  @click="submitForm(formCUS)">SAVE</el-button>-->
-                            <!--<el-button type="danger" round @click="cancelForm()">CANCEL</el-button>-->
-                        <!--</el-form-item>-->
-                    <!--</el-col>-->
-                    </el-form>
-                </el-card>
-            </el-dialog>
         </el-container>
     </el-card>
 </template>
@@ -161,9 +93,10 @@
     export default {
         data() {
             return {
-                ketGet:'',
+                keyGet:'',
                 formCUS:[],
-                formInline:[],
+                formPID:'',
+                formProduct:[],
                 Calculate: {
                     Discount: '',
                     money: '',
@@ -182,7 +115,7 @@
                 dialogFormVisible: false,
             }
         },
-        mounted:function () {
+        created:function () {
             conDB.connect(function (err) {
                 if (err) {
                     console.log(err.code);
@@ -190,7 +123,7 @@
                 }
             });
             // con.end();
-            this.getMember(8850161160851);
+            //this.getMember(8850161160851);
         },
         // mounted:function(){
         //     console.log(formInline,"test")
@@ -202,9 +135,23 @@
         // },
 
         methods: {
+            getProductbyBarcode(bc){
+                let vm = this;
+                let $query = 'SELECT p.id,p.name,p.barcode,p.price,p.unit,c.name as cateName FROM product p INNER JOIN category c ON p.category_id = c.id WHERE barcode = ? ';
+                conDB.query($query,[bc], function (err, rows) {
+                    if (err) {
+                        console.log("An error occurred performing the query.");
+                        console.log(err);
+                        return;
+                    }
+                    let data = JSON.parse(JSON.stringify(rows));
+                    vm.formProduct = data;
+                    console.log("Query successfully executed", rows, data);
+                });
+            },
              getMember(ssn) {
                 let vm = this;
-                let $query = 'SELECT * FROM `customer` WHERE ssn = ? ';
+                let $query = 'SELECT c.firstname,r.name AS rankName FROM customer c INNER JOIN customerrank r ON c.rank_id = r.id WHERE ssn = ? ';
                  conDB.query($query,[ssn], function (err, rows) {
                     if (err) {
                         console.log("An error occurred performing the query.");
@@ -212,16 +159,21 @@
                         return;
                     }
                     let data = JSON.parse(JSON.stringify(rows));
-                     vm.formCUS = data;
+                     vm.formCUS = data[0];
                     console.log("Query successfully executed", rows, data);
                 });
             },
             async selectM(){
                 let vm = this ;
-                await vm.getMember(this.ketGet);
+                console.log(this.keyGet);
+                await vm.getMember(this.keyGet);
 
-                await console.log(vm.formInline,"ggggggg");
-                 this.dialogFormVisible = true;
+                await console.log(vm.formCUS,"ggggggg");
+
+            },
+            async selectP(){
+                let vm = this ;
+                await vm.getProductbyBarcode(this.formPID);
             }
         }
     }
