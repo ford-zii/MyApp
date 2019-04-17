@@ -6,7 +6,7 @@
                         @open="handleOpen"
                         @close="handleClose">
                     <el-menu-item index="1" @click="goMember()">
-                        <font-awesome-icon icon="address-card" size="lg"/>
+                        <font-awesome-icon icon="address-card" size="lg" style="color: yellowgreen"/>
                         <span>Member</span>
                     </el-menu-item>
                     <el-menu-item index="2" @click="goProduct()">
