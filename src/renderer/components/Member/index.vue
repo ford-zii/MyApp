@@ -65,6 +65,58 @@
 
                 </el-table>
             </el-main>
+            <el-dialog title="Shipping address"  :visible.sync="dialogFormVisible" v-if="editForm">
+                <el-card>
+                    <el-form :model="editForm[0]" ref="editForm"  class="demo-ruleForm">
+                        <el-col :span="8" :offset="3">
+                            <el-form-item label="ชื่อ" prop="firstname">
+                                <el-input v-model="editForm.firstname"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-form-item label="นามสกุล" prop="lastname">
+                                <el-input v-model="editForm.lastname"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="16" :offset="3">
+                            <el-form-item label="เบอร์โทร" prop="contact">
+                                <el-input v-model="editForm.contact"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="16" :offset="3">
+                            <el-form-item label="ที่อยู่" prop="address">
+                                <el-input v-model="editForm.address"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="16" :offset="3">
+                            <el-form-item label="เพศ" prop="sex">
+                                <el-input v-model="editForm.sex"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="16" :offset="3">
+                                <el-form-item label="email" prop="email">
+                                <el-input v-model="editForm.email"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="16" :offset="3">
+                            <el-form-item label="Rank" prop="rank_id">
+                                <el-input v-model="editForm.rank_id"></el-input>
+                            </el-form-item>
+                        </el-col>
+
+                        <el-col :span="16" :offset="3">
+                            <el-form-item>
+
+                                <el-button @click="dialogFormVisible = false">Cancel</el-button>
+                                <el-button type="primary" @click="saveEdit(editForm,editForm.id)">Confirm</el-button>
+
+                            </el-form-item>
+                        </el-col>
+
+                    </el-form>
+                </el-card>
+
+            </el-dialog>
         </el-container>
     </el-card>
 
@@ -77,7 +129,9 @@
             return {
                 currentDate: new Date(),
                 Member:[],
-                search:''
+                search:'',
+                dialogFormVisible: false,
+                editForm:[]
             };
         },
         async created() {
@@ -123,14 +177,57 @@
                 });
 
             },
+            getByID (id){
+                let vm = this;
+                console.log(id);
+                let $query = 'SELECT * FROM `customer` WHERE id = ?';
+                conDB.query($query,[id], function (err,rows) {
+                    if (err) {
+                        console.log("get error performing the query.");
+                        console.log(err);
+                        return;
+                    }
+                    let data = JSON.parse(JSON.stringify(rows));
+                    vm.editForm = data[0];
+                    console.log("get by id  succesfully executed.",rows);
+                    console.log(vm.editForm,"Form");
+                });
+            },
+            Update(form){
+                let vm = this;
+                console.log(form,"to SAVE");
+                let $query = 'UPDATE customer SET firstname = ?,lastname = ?,contact = ?,address = ?,sex = ?,email = ?,rank_id = ?';
+                conDB.query($query,[form.firstname,form.lastname,form.contact,form.address,form.sex,form.email,form.rank_id], function (err,rows) {
+                    if (err) {
+                        console.log("get error performing the query.");
+                        console.log(err);
+                        return;
+                    }
+                    // let data = JSON.parse(JSON.stringify(rows));
+                    // vm.editForm = data[0];
+                    console.log("update succesfully executed.",rows);
+                    // console.log(vm.editForm,"Form");
+                });
+            },
             handleOpen(key, keyPath) {
                 console.log(key, keyPath);
             },
             handleClose(key, keyPath) {
                 console.log(key, keyPath);
             },
-            handleEdit(index, row) {
+            async saveEdit(form,id){
+                await this.Update(form,id);
+                await this.loadData();
+                this.dialogFormVisible = false;
+                this.$swal('','Edit success','success');
 
+            },
+
+            async handleEdit(index, row) {
+                let vm = this;
+                console.log(row);
+                await this.getByID(row.id);
+                this.dialogFormVisible = true;
             },
             handleDelete(index, row) {
                 // console.log(index,row);
@@ -140,7 +237,7 @@
             },
             goRegistermember () {
                 this.$router.push({name:"registerMember"})
-            }
+            },
         }
     }
 </script>

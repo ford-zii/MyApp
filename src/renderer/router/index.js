@@ -8,6 +8,7 @@ import staff from '@/components/staff/index'
 import sell from '@/components/Sell/index'
 import mnm from '@/components/Management/index'
 import rs from '@/components/staff/registerStaff'
+
 Vue.use(Router)
 
 export default new Router({
@@ -63,7 +64,8 @@ export default new Router({
           component: mnm
         },
         ]
-    }
+    },
+
 
   ]
 })

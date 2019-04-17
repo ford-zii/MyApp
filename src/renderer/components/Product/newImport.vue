@@ -15,12 +15,12 @@
                     </el-col>
                     <el-col :span="8" :offset="3">
                         <el-form-item label="ประเภท" prop="category_id">
-                            <el-select v-model="productForm.category" placeholder="Select">
+                            <el-select v-model="productForm.category_id" placeholder="Select">
                                 <el-option
                                         v-for="item in category"
                                         :key="item.name"
-                                        :label="item.id"
-                                        :value="item.name">
+                                        :label="item.name"
+                                        :value="item.id">
                                 </el-option>
                             </el-select>
                         </el-form-item>
@@ -57,7 +57,7 @@
                 productForm: {
                     name: '',
                     price: null,
-                    category_id: '',
+                    category_id:'',
                     unit: null,
                     barcode: null,
                     // category: [{
@@ -77,7 +77,8 @@
                     //     label: 'Option5'
                     // }],
                     // value: ''
-                }
+                },
+                category:[]
             }
         },
 

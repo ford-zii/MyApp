@@ -27,8 +27,14 @@
                             </el-form-item>
                         </el-col>
                         <el-col :span="16" :offset="3">
-                            <el-form-item  prop="contact">
-                                <el-input placeholder="Contact" v-model="formCUS.contact" ></el-input>
+                            <el-form-item
+                                    prop="contact"
+                                    :rules="[
+                            { required: true, message: 'Please input contact', trigger: 'blur' },
+                            { type: 'string',message: 'Please input contact', trigger: ['blur', 'change'] }
+                            ]"
+                            >
+                                <el-input placeholder="Contact" v-model="formCUS.contact" :maxlength="10"></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col :span="16" :offset="3">
@@ -43,14 +49,14 @@
                             </el-form-item>
                         </el-col>
                         <el-col :span="16" :offset="3">
-                            <el-form-item
+                            <el-form-item :min="1" :max="13"
                                     prop="ssn"
                                     :rules="[
                             { required: true, message: 'Please input ID card number', trigger: 'blur' },
-                            { type: 'ssn', message: 'Please input correct ID card number', trigger: ['blur', 'change' ]}
+                            { type: 'number', message: 'Please input correct ID card number', trigger: ['blur', 'change' ]}
                             ]"
                             >
-                                <el-input placeholder="ID Card Number" v-model="formCUS.ssn"></el-input>
+                                <el-input placeholder="ID Card Number" v-model.number="formCUS.ssn" :maxlength="13"></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col :span="16" :offset="3">
@@ -77,48 +83,52 @@
     export default {
         data() {
             return {
-                formCUS:{
-                    rank_id:'',
-                    firstname:'',
-                    lastname:'',
-                    address:'',
-                    contact:'',
-                    email:null,
-                    sex:'',
-                    ssn:''
+                formCUS: {
+                    rank_id: '',
+                    firstname: '',
+                    lastname: '',
+                    address: '',
+                    contact: '',
+                    email: null,
+                    sex: '',
+                    ssn: ' '
 
                 },
 
             }
+
         },
-        methods :{
-            createCustomer (form) {
+        methods: {
+            createCustomer(form) {
                 console.log(form);
                 let $query = "INSERT INTO customer SET ?";
-                conDB.query($query,[form],function (err,rows) {
+                conDB.query($query, [form], function (err, rows) {
                     if (err) {
                         console.log("createCUS error occurred performing the query.");
                         console.log(err);
                         return;
                     }
                     // res.sent(rows);
-                    console.log("createCUS successfully executed.",rows);
+                    console.log("createCUS successfully executed.", rows);
                 });
+
             },
             cancelForm() {
-                this.$router.push({name:"Member"})
+                this.$router.push({name: "Member"})
             },
-            async submitForm(form){
+            async submitForm(form) {
                 await this.createCustomer(form);
                 await this.$swal('submit!');
                 //this.createCustomer(form);
-                this.$router.push({name:"Member"});
+                this.$router.push({name: "Member"});
 
-            }
+            },
 
         }
-
     }
+
+
+
 
 </script>
 
