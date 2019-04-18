@@ -1,26 +1,34 @@
 <template>
     <el-card>
         <el-container>
-
-            <el-main >
+            <el-header>
                 <el-form  :inline="true" class="demo-form-inline">
-                    <el-form-item label="รหัสลูกค้า">
-                        <el-input v-model="keyGet" @change="selectM()"></el-input>
-                    </el-form-item>
-                    <el-form-item label="ชื่อลูกค้า">
-                        <el-input v-model="formCUS.firstname" ></el-input>
-                    </el-form-item>
-                    <el-form-item label="ระดับ">
-                        <el-input v-model="formCUS.rankName" ></el-input>
-                    </el-form-item>
+                       <el-form-item label="รหัสลูกค้า">
+                           <el-input v-model="keyGet" @change="selectM()"></el-input>
+                       </el-form-item>
+                        <el-form-item label="ชื่อลูกค้า">
+                            <el-input v-model="formCUS.firstname" ></el-input>
+                        </el-form-item>
+                        <el-form-item label="ระดับ">
+                            <el-input v-model="formCUS.rankName" ></el-input>
+                        </el-form-item>
+                        <el-form-item >
+                            <el-input v-model="Total" fontsize="20px"></el-input>
+                        </el-form-item>
+                </el-form>
+            </el-header>
+            <el-main >
+                <el-form :inline="true">
                     <el-form-item label="รหัสสินค้า">
-                    <el-input v-model="formPID" @change="selectP()"></el-input>
+                        <el-input v-model="formPID" @change="selectP()"></el-input>
+                    </el-form-item>
+                    <el-form-item label="จำนวน">
+                        <el-input v-model="Pcont" ></el-input>
                     </el-form-item>
                 </el-form>
 
-
                     <el-table
-                            :data="this.formProduct"
+                            :data="this.Psell"
                                 style= "width: 50% ">
                         <el-table-column
                                 prop="barcode"
@@ -96,22 +104,29 @@
                 keyGet:'',
                 formCUS:[],
                 formPID:'',
-                formProduct:[],
-                Calculate: {
-                    Discount: '',
-                    money: '',
-                    Getmoney: '',
-                    Refund: ''
+                formProduct:{
+
 
                 },
-                tableDate: {
-                    ID: '',
-                    Item: '',
-                    Type: '',
-                    Unit: '',
-                    Price: ''
+                Total :'0.00',
+                Psell:[],
+                Pcont: '0',
 
-                },
+                // Calculate: {
+                //     Discount: '',
+                //     money: '',
+                //     Getmoney: '',
+                //     Refund: ''
+                //
+                // },
+                // tableDate: {
+                //     ID: this.formProduct.id,
+                //     Item: this.formProduct.name,
+                //     Type: this.formProduct.cateName,
+                //     Unit: '1',
+                //     Price: '1'
+                //
+                // },
                 dialogFormVisible: false,
             }
         },
@@ -165,15 +180,18 @@
             },
             async selectM(){
                 let vm = this ;
-                console.log(this.keyGet);
-                await vm.getMember(this.keyGet);
-
+                console.log(vm.keyGet);
+                await vm.getMember(vm.keyGet);
                 await console.log(vm.formCUS,"ggggggg");
 
             },
             async selectP(){
                 let vm = this ;
-                await vm.getProductbyBarcode(this.formPID);
+                await vm.getProductbyBarcode(vm.formPID);
+                //await vm.formProduct.unit = 1
+                await vm.Psell.push(vm.formProduct);
+
+                console.log(vm.Psell);
             }
         }
     }

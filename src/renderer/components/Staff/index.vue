@@ -2,7 +2,7 @@
     <el-card class="BG">
         <el-container>
             <el-header>
-                <el-button type="success" plain round @click="$router.push({name:'registerStaff'})"><span class="iconify" data-icon="mdi:account" data-inline="false"></span>Register
+                <el-button type="success" plain round @click="goregisterStaff()"><span class="iconify" data-icon="mdi:account" data-inline="false"></span>Register
                     <font-awesome-icon icon="user-plus"/></el-button>
             </el-header>
             <el-main>
