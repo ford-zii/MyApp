@@ -173,7 +173,7 @@
                     }
                     // res.sent(rows);
                     console.log("Delete succesfully executed.",rows);
-                    this.$swal('Delete','Complete','success');
+                    // $swal('Delete','Complete','success');
 
                 });
             },
@@ -247,7 +247,11 @@
             async handleDelete(index, row) {
                 console.log(row.id);
                 await this.getDelete(row.id);
-                await this.$swal("Your imaginary file is safe!");
+                swal({
+                    title: "Delete Complete!",
+                    icon: "success",
+                    button: "OK",
+                });
                 this.loadData();
             },
             goImport(){

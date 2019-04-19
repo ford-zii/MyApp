@@ -91,7 +91,7 @@
                     contact: '',
                     email: null,
                     sex: '',
-                    ssn: ''
+                    ssn: ' '
 
                 },
 

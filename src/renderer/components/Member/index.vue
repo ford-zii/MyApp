@@ -124,6 +124,7 @@
 
 <script>
 
+
     export default {
         data() {
             return {
@@ -165,7 +166,7 @@
             },
             getDelete (res) {
                 console.log(res);
-                let $query = "DELETE FROM customer WHERE Cus_ID = ?";
+                let $query = "DELETE FROM customer WHERE id = ?";
                 conDB.query($query, [res], function (err, rows) {
                     if (err) {
                         console.log("An error occurred performing the query.");
@@ -229,11 +230,16 @@
                 await this.getByID(row.id);
                 this.dialogFormVisible = true;
             },
-            handleDelete(index, row) {
+            async handleDelete(index, row) {
                 // console.log(index,row);
-                console.log(row.Cus_ID);
-                this.getDelete(row.Cus_ID);
-                this.loadData();
+                console.log(row.id);
+                await this.getDelete(row.id);
+                swal({
+                    title: "Delete Complete!",
+                    icon: "success",
+                    button: "OK",
+                });
+                await  this.loadData();
             },
             goRegistermember () {
                 this.$router.push({name:"registerMember"})
