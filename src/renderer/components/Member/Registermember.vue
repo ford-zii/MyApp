@@ -7,6 +7,17 @@
             <el-main>
                 <!--กรอกข้อมูล-->
                     <el-form :model="formCUS">
+                        <el-col :span="16" :offset="3">
+                            <el-form-item :min="1" :max="13"
+                                          prop="ssn"
+                                          :rules="[
+                            { required: true, message: 'Please input ID card number', trigger: 'blur' },
+                            { type: 'number', message: 'Please input correct ID card number', trigger: ['blur', 'change' ]}
+                            ]"
+                            >
+                                <el-input placeholder="ID Card Number" v-model.number="formCUS.ssn" :maxlength="13"></el-input>
+                            </el-form-item>
+                        </el-col>
                         <el-col :span="16" :offset="3" >
                             <el-form-item  prop="firstname">
                                 <el-input placeholder="First name" v-model="formCUS.firstname"></el-input>
@@ -15,6 +26,12 @@
                         <el-col :span="16" :offset="3" >
                             <el-form-item  prop="lastname" >
                                 <el-input placeholder="Last name" v-model="formCUS.lastname"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="16" :offset="3">
+                            <el-form-item prop="SEX">
+                                <el-radio v-model="formCUS.sex" label="MALE"></el-radio>
+                                <el-radio v-model="formCUS.sex" label="FEMALE"></el-radio>
                             </el-form-item>
                         </el-col>
                         <el-col :span="16" :offset="3">
@@ -48,17 +65,8 @@
                                 <el-input placeholder="Email" v-model="formCUS.email"></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="16" :offset="3">
-                            <el-form-item :min="1" :max="13"
-                                    prop="ssn"
-                                    :rules="[
-                            { required: true, message: 'Please input ID card number', trigger: 'blur' },
-                            { type: 'number', message: 'Please input correct ID card number', trigger: ['blur', 'change' ]}
-                            ]"
-                            >
-                                <el-input placeholder="ID Card Number" v-model.number="formCUS.ssn" :maxlength="13"></el-input>
-                            </el-form-item>
-                        </el-col>
+
+
                         <el-col :span="16" :offset="3">
                             <el-form-item>
                                 <el-radio v-model="formCUS.rank_id" label="1">SILVER</el-radio>
@@ -91,7 +99,7 @@
                     contact: '',
                     email: null,
                     sex: '',
-                    ssn: ' '
+                    ssn: ''
 
                 },
 

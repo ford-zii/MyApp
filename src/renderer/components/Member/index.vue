@@ -197,8 +197,8 @@
             Update(form){
                 let vm = this;
                 console.log(form,"to SAVE");
-                let $query = 'UPDATE customer SET firstname = ?,lastname = ?,contact = ?,address = ?,sex = ?,email = ?,rank_id = ?';
-                conDB.query($query,[form.firstname,form.lastname,form.contact,form.address,form.sex,form.email,form.rank_id], function (err,rows) {
+                let $query = 'UPDATE customer SET firstname = ?,lastname = ?,contact = ?,address = ?,sex = ?,email = ?,rank_id = ? where id = ?';
+                conDB.query($query,[form.firstname,form.lastname,form.contact,form.address,form.sex,form.email,form.rank_id,form.id], function (err,rows) {
                     if (err) {
                         console.log("get error performing the query.");
                         console.log(err);
@@ -233,13 +233,24 @@
             async handleDelete(index, row) {
                 // console.log(index,row);
                 console.log(row.id);
-                await this.getDelete(row.id);
+
                 swal({
-                    title: "Delete Complete!",
-                    icon: "success",
-                    button: "OK",
-                });
-                await  this.loadData();
+                    title: "Are you sure?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then( async (willDelete) => {
+                        if (willDelete) {
+                            await  this.getDelete(row.id);
+                            await this.loadData();
+
+                            swal("Delete Complete", {
+                                icon: "success",
+                            });
+                            this.$router.push({name:"Member"})
+                        }
+                    });
             },
             goRegistermember () {
                 this.$router.push({name:"registerMember"})

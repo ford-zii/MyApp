@@ -246,13 +246,24 @@
             },
             async handleDelete(index, row) {
                 console.log(row.id);
-                await this.getDelete(row.id);
+
                 swal({
-                    title: "Delete Complete!",
-                    icon: "success",
-                    button: "OK",
-                });
-                this.loadData();
+                    title: "Are you sure?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then( async (willDelete) => {
+                        if (willDelete) {
+                            await  this.getDelete(row.id);
+                            this.loadData();
+
+                            swal("Delete Complete", {
+                                icon: "success",
+                            });
+                            this.$router.push({name:"Product"})
+                        }
+                    });
             },
             goImport(){
                 this.$router.push({name:"NImport"});
