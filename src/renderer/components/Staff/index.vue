@@ -176,8 +176,8 @@
             Update(form){
                 let vm = this;
                 console.log(form,"to SAVE");
-                let $query = 'UPDATE user SET username = ?,firstname = ?,lastname = ?,email = ?,sex = ?';
-                conDB.query($query,[form.username,form.firstname,form.lastname,form.email,form.sex],function (err,rows) {
+                let $query = 'UPDATE user SET username = ?,firstname = ?,lastname = ?,email = ?,sex = ? WHERE id = ?';
+                conDB.query($query,[form.username,form.firstname,form.lastname,form.email,form.sex,form.id],function (err,rows) {
                     if (err) {
                         console.log("get error performing the query.");
                         console.log(err);
