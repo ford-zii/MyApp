@@ -29,7 +29,9 @@
 
                     <el-table
                             :data="this.Psell"
-                                style= "width: 50% ">
+                            style= "width: 50% "
+                            :row-class-name="tableRowClassName"
+                            max-height="640">
                         <el-table-column
                                 prop="barcode"
                                 label="BarCode">
@@ -104,14 +106,11 @@
                 keyGet:'',
                 formCUS:[],
                 formPID:'',
-                formProduct:{
-
-
-                },
+                formProduct:[],
                 Total :'0.00',
                 Psell:[],
-                Pcont: '0',
-
+                Pcont: '1',
+                Pprice:'',
                 // Calculate: {
                 //     Discount: '',
                 //     money: '',
@@ -160,7 +159,7 @@
                         return;
                     }
                     let data = JSON.parse(JSON.stringify(rows));
-                    vm.formProduct = data;
+                    vm.formProduct = data[0];
                     console.log("Query successfully executed", rows, data);
                 });
             },
@@ -188,10 +187,15 @@
             async selectP(){
                 let vm = this ;
                 await vm.getProductbyBarcode(vm.formPID);
-                //await vm.formProduct.unit = 1
+                vm.formProduct.unit = vm.Pcont;
+                vm.Pprice = vm.Pcont * vm.formProduct.price;
+                vm.formProduct.price = vm.Pprice;
                 await vm.Psell.push(vm.formProduct);
-
+                this.formPID = '';
                 console.log(vm.Psell);
+            },
+            tableRowClassName({row, rowIndex}) {
+                return 'warning-row';
             }
         }
     }

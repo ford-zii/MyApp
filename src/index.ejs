@@ -10,8 +10,11 @@
       </script>
     <% } %>
   </head>
-  <body>
-    <div id="app"></div>
+  <body >
+  <div class="bg">
+    <div id="app"></div >
+  </div>
+
     <!-- Set `__static` path to static files in production -->
     <% if (!process.browser) { %>
       <script>
@@ -22,3 +25,19 @@
     <!-- webpack builds are automatically injected -->
   </body>
 </html>
+<style>
+  body, html {
+    height: 100%;
+  }
+  .bg{
+    background-image: linear-gradient(-225deg, #5271C4 0%, #B19FFF 48%, #ECA1FE 100%);
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+  }
+</style>
