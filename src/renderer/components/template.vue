@@ -1,6 +1,6 @@
 <template>
     <el-container >
-        <el-aside width="200px"   style="background-color: rgb(238, 241, 246);height: auto">
+        <el-aside    style="background-color: rgb(238, 241, 246);height: auto">
                 <el-menu
                         default-active="2"
                         @open="handleOpen"
