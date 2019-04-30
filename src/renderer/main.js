@@ -35,6 +35,7 @@ const config = {
   database:"stockmarket"
 
 };
+window.moment = require('moment');
 window.conDB = new  mysql.createConnection(config);
 
 
