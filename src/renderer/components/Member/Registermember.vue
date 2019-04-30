@@ -19,8 +19,9 @@
                             </el-form-item>
                         </el-col>
                         <el-col :span="16" :offset="3" >
-                            <el-form-item  prop="firstname">
+                            <el-form-item  prop="firstname" >
                                 <el-input placeholder="First name" v-model="formCUS.firstname"></el-input>
+
                             </el-form-item>
                         </el-col>
                         <el-col :span="16" :offset="3" >

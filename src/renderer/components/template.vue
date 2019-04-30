@@ -79,12 +79,10 @@
                 })
                     .then((willDelete) => {
                         if (willDelete) {
-                            this.$swal("Poof! Your imaginary file has been deleted!", {
+                            this.$swal("Logout Complete!", {
                                 icon: "success",
                             });
                             this.$router.push({name:"Login"})
-                        } else {
-                            this.$swal("Your imaginary file is safe!");
                         }
                     });
 
