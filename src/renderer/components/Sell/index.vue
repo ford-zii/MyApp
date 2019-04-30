@@ -2,28 +2,20 @@
     <el-card>
         <el-container>
             <el-header>
-                <el-row :gutter="10">
-                    <el-col :sm="12" :md="16" :xl="20" >
-                        <span v-text="currentTime"></span>
-                        <span v-text="DMY"></span>
-                    </el-col>
-                    <el-col :sm="12" :md="8" :xl="4">
-                        <el-divider direction="vertical"></el-divider>
-                        <span v-text="Total"></span>
-                    </el-col>
-                </el-row>
-                <!--<el-form  :inline="true" class="demo-form-inline">-->
-                       <!--<el-form-item label="รหัสลูกค้า">-->
-                           <!--<el-input v-model="keyGet" @change="selectM()"></el-input>-->
-                       <!--</el-form-item>-->
-                        <!--<el-form-item label="ชื่อลูกค้า">-->
-                            <!--<el-input v-model="formCUS.firstname" ></el-input>-->
-                        <!--</el-form-item>-->
-                        <!--<el-form-item label="ระดับ">-->
-                            <!--<el-input v-model="formCUS.rankName" ></el-input>-->
-                        <!--</el-form-item>-->
-
-                <!--</el-form>-->
+                <el-form  :inline="true" class="demo-form-inline">
+                       <el-form-item label="รหัสลูกค้า">
+                           <el-input v-model="keyGet" @change="selectM()"></el-input>
+                       </el-form-item>
+                        <el-form-item label="ชื่อลูกค้า">
+                            <el-input v-model="formCUS.firstname" ></el-input>
+                        </el-form-item>
+                        <el-form-item label="ระดับ">
+                            <el-input v-model="formCUS.rankName" ></el-input>
+                        </el-form-item>
+                        <el-form-item >
+                            <el-input v-model="Total" fontsize="20px"></el-input>
+                        </el-form-item>
+                </el-form>
             </el-header>
             <el-main >
                 <el-form :inline="true">
@@ -111,8 +103,6 @@
     export default {
         data() {
             return {
-                currentTime: null,
-                DMY:null,
                 keyGet:'',
                 formCUS:[],
                 formPID:'',
@@ -146,9 +136,6 @@
                     console.log(err.fatal);
                 }
             });
-            this.currentTime = moment().format('LTS');
-            this.DMY = moment().format('L');
-            setInterval(() => this.updateCurrentTime(), 1 * 1000);
             // con.end();
             //this.getMember(8850161160851);
         },
@@ -209,9 +196,6 @@
             },
             tableRowClassName({row, rowIndex}) {
                 return 'warning-row';
-            },
-            updateCurrentTime() {
-                this.currentTime = moment().format('LTS');
             }
         }
     }
