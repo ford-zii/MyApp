@@ -13,13 +13,15 @@
                 <el-input placeholder="Username" type="text" v-model="form.username" autocomplete="off" ></el-input>
               </el-form-item>
               <el-form-item  prop="Password" >
-                <el-input placeholder="Password" type="password" v-model="form.password" autocomplete="off"></el-input>
+                <el-input placeholder="Password" type="password" v-model="form.password" @blur="submitForm(form)" autocomplete="off"></el-input>
               </el-form-item>
               <el-form-item >
-                <el-button  plain @click="submitForm('form')" style="padding-left: 5em;padding-right: 5em; background-color: #a8daf4">Login
+                <el-button  plain @click="submitForm(form)" style="padding-left: 5em;padding-right: 5em; background-color: #a8daf4">Login
                   <font-awesome-icon icon="hand-pointer"/></el-button>
               </el-form-item>
             </el-form>
+
+
           </div>
         </el-card>
       </el-col>
@@ -34,25 +36,57 @@
 
         return {
           form: {
-            username:'',
+            username: '',
             password: ''
           },
+          user: null,
         };
       },
       methods: {
-        submitForm(formName) {
-          this.$refs[formName].validate((valid) => {
-            if (valid) {
-              this.$swal("",'Login Complete',"success");
-              this.$router.push({name:"Product"});
-            } else {
-              console.log('error submit!!');
-              return false;
-            }
-          });
+        async submitForm(formName) {
+          let vm = this;
+          //console.log(vm.username);
+           await vm.getByuser(formName);
+          //vm.check(formName)
         },
         resetForm(formName) {
           this.$refs[formName].resetFields();
+        },
+        async getByuser(user) {
+          let vm = this;
+          console.log(user);
+          let $query = `SELECT * FROM user WHERE username = ? and password = ?`;
+          console.log($query, "SQL");
+           await conDB.query($query,[user.username,user.password], function (err, rows) {
+            if (err) {
+              console.log("get error performing the query.");
+              console.log(err);
+            }
+            let data = JSON.parse(JSON.stringify(rows));
+            vm.user = data[0]
+            console.log("get by user succesfully executed.", rows, vm.user);
+            vm.check(vm.user)
+            //return vm.user;
+          });
+          //console.log("cat",cat);
+          //return cat;
+          //vm.check();
+        },
+        async check(user){
+          //let vm = this;
+          //let inputUser = form.password ;
+
+          // cnsole.log(inputUser,'input');
+          if (user) {
+            this.$swal(" ", "Login Complete", "success");
+            this.$router.push({name: "Product"});
+            console.log("A")
+
+          }else {
+            this.$swal('','Error',"error");
+            console.log("B",user)
+
+          }
         }
       }
     }
