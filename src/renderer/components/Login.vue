@@ -7,19 +7,18 @@
             <span >Login</span>
           </div>
           <div>
-            <el-form :model="form" status-icon  ref="form"  class="demo-ruleForm">
-              <i class="fas fa-id-card"></i>
-              <el-form-item prop="Username" >
-                <el-input placeholder="Username" type="text" v-model="form.username" autocomplete="off" ></el-input>
+
+            <el-form :model="form" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+              <el-form-item label="Username" prop="username">
+                <el-input v-model="form.username"></el-input>
               </el-form-item>
-              <el-form-item  prop="Password" >
-                <el-input placeholder="Password" type="password" v-model="form.password" @blur="submitForm(form)" autocomplete="off"></el-input>
+              <el-form-item label="Password" prop="password">
+                <el-input v-model="form.password" type="password"  @blur="submitForm(form)" ></el-input>
               </el-form-item>
               <el-form-item >
                 <el-button  plain @click="submitForm(form)" style="padding-left: 5em;padding-right: 5em; background-color: #a8daf4">Login
                   <font-awesome-icon icon="hand-pointer"/></el-button>
-              </el-form-item>
-            </el-form>
+              </el-form-item></el-form>
 
 
           </div>
@@ -40,6 +39,16 @@
             password: ''
           },
           user: null,
+          rules: {
+            username: [
+              {required: true, message: 'Please input Username', trigger: 'blur'},
+              {min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur'}
+              ],
+            password: [
+              {required: true, message: 'Please input Password', trigger: 'blur'},
+              {min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur'}
+              ]
+          }
         };
       },
       methods: {
@@ -83,7 +92,7 @@
             console.log("A")
 
           }else {
-            this.$swal('','Error',"error");
+            this.$swal('','Username or Password error!',"error");
             console.log("B",user)
 
           }
