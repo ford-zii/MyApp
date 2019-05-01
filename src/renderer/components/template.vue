@@ -30,16 +30,16 @@
                         </template>
                         <el-menu-item-group>
                             <el-menu-item index="1-1" @click="gomemberset">
-                                <font-awesome-icon icon="address-card"/>
+                                <font-awesome-icon icon="address-card" style="color: #f3e276" />
                                 <span>Member Setting</span></el-menu-item>
                             <el-menu-item index="1-2" @click="gocategory">
-                                <font-awesome-icon icon="file-signature" />
+                                <font-awesome-icon icon="file-signature" style="color: #f3af7a" />
                                 <span>Category Setting</span></el-menu-item>
                         </el-menu-item-group>
 
                     </el-submenu>
                     <el-menu-item index="6" @click="logout()">
-                        <font-awesome-icon icon="sign-out-alt" size="lg" style="color: #f34e68"/>
+                        <font-awesome-icon icon="sign-out-alt" size="lg" style="color:#f34e68"/>
 
                         <!--<i class="el-icon-goods"></i>-->
                         <span>Logout</span>

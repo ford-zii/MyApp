@@ -49,7 +49,7 @@
                     </el-table>
                 </el-col>
             </el-main>
-            <el-dialog title="Shipping address"  :visible.sync="dialogFormVisible" v-if="editForm">
+            <el-dialog title="Product" :visible.sync="dialogFormVisible" v-if="editForm">
                 <el-card>
                     <el-form :model="editForm[0]" ref="editForm"  class="demo-ruleForm">
                         <el-col :span="8" :offset="3">
