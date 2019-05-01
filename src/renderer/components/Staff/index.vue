@@ -39,7 +39,7 @@
                                     placeholder="ค้นหา"/>
                         </template>
                         <template slot-scope="scope">
-                                <el-button type="warning" style="background-color: #f4f0c1" icon="el-icon-edit" circle  plain @click="handleEdit(scope.$index, scope.row)"></el-button>
+                                <el-button type="warning" style="background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);" icon="el-icon-edit" circle  @click="handleEdit(scope.$index, scope.row)"></el-button>
                                 <!--<el-button-->
                                 <!--size="mini"-->
 

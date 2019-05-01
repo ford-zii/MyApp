@@ -8,6 +8,10 @@ import staff from '@/components/staff/index'
 import sell from '@/components/Sell/index'
 import mnm from '@/components/Management/index'
 import rs from '@/components/staff/registerStaff'
+import memset from '@/components/Management/member settings'
+import category from '@/components/Management/category'
+
+
 
 Vue.use(Router)
 
@@ -63,6 +67,16 @@ export default new Router({
           name: 'management',
           component: mnm
         },
+        {
+          path: 'memberset',
+          name: 'memberset',
+          component: memset
+        },
+        {
+          path: 'category',
+          name: 'category',
+          component: category
+        }
         ]
     },
 

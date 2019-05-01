@@ -10,12 +10,12 @@ import router from './router'
 import store from './store'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee ,faUser,faAddressCard,faShoppingCart,faStore,faDollarSign,faCogs,faSignOutAlt,faUserPlus,faCartPlus,faHandPointer} from '@fortawesome/free-solid-svg-icons'
+import { faCoffee ,faUser,faAddressCard,faShoppingCart,faStore,faDollarSign,faCogs,faSignOutAlt,faUserPlus,faCartPlus,faHandPointer,faClipboard,faFileSignature,faStar,faStarHalfAlt,faStarOfDavid} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import VueSwal from 'vue-swal'
 
-library.add(faCoffee,faUser,faAddressCard,faShoppingCart,faStore,faDollarSign,faCogs,faSignOutAlt,faUserPlus,faCartPlus,faHandPointer);
+library.add(faCoffee,faUser,faAddressCard,faShoppingCart,faStore,faDollarSign,faCogs,faSignOutAlt,faUserPlus,faCartPlus,faHandPointer,faClipboard,faFileSignature,faStar,faStarHalfAlt,faStarOfDavid);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
 Vue.use(VueSwal);

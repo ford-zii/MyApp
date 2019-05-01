@@ -1,6 +1,6 @@
 <template>
     <el-container >
-        <el-aside width="200px"   style="background-color: rgb(238, 241, 246);height: auto">
+        <el-aside width="200px"   style="background-color: rgb(238, 241, 246);height: auto ;" >
                 <el-menu
                         default-active="2"
                         @open="handleOpen"
@@ -23,16 +23,28 @@
 
                         <span> Sell</span>
                     </el-menu-item>
-                    <el-menu-item index="5" @click="goManagement()">
-                        <font-awesome-icon icon="cogs" size="lg" />
-                        <span>Management</span>
-                    </el-menu-item>
+                    <el-submenu index="5">
+                        <template slot="title">
+                            <font-awesome-icon icon="clipboard" size="lg"/>
+                            <span>Management</span>
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="1-1" @click="gomemberset">
+                                <font-awesome-icon icon="address-card"/>
+                                <span>Member Setting</span></el-menu-item>
+                            <el-menu-item index="1-2" @click="gocategory">
+                                <font-awesome-icon icon="file-signature" />
+                                <span>Category Setting</span></el-menu-item>
+                        </el-menu-item-group>
+
+                    </el-submenu>
                     <el-menu-item index="6" @click="logout()">
                         <font-awesome-icon icon="sign-out-alt" size="lg"/>
 
                         <!--<i class="el-icon-goods"></i>-->
                         <span>Logout</span>
                     </el-menu-item>
+
                 </el-menu>
         </el-aside>
 
@@ -70,6 +82,12 @@
             goManagement(){
                 this.$router.push({name:"management"})
             },
+            gomemberset() {
+                this.$router.push({name: "memberset"})
+            },
+            gocategory() {
+                this.$router.push({name: "category"})
+            },
             logout(){
                this.$swal({
                     title: "Are you sure?",
@@ -93,6 +111,8 @@
 </script>
 
 <style scoped>
+
+
     .menu {
         max-height: 1000px;
     }
