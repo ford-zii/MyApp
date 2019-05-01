@@ -1,23 +1,36 @@
 <template>
     <el-card>
         <el-container>
-            <el-header>
-                <el-form  :inline="true" class="demo-form-inline">
-                       <el-form-item label="รหัสลูกค้า">
-                           <el-input v-model="keyGet" @change="selectM()"></el-input>
-                       </el-form-item>
-                        <el-form-item label="ชื่อลูกค้า">
-                            <el-input v-model="formCUS.firstname" ></el-input>
-                        </el-form-item>
-                        <el-form-item label="ระดับ">
-                            <el-input v-model="formCUS.rankName" ></el-input>
-                        </el-form-item>
-                        <el-form-item >
-                            <el-input v-model="Total" fontsize="20px"></el-input>
-                        </el-form-item>
-                </el-form>
-            </el-header>
+            <!--<el-header>-->
+
+            <!--</el-header>-->
             <el-main >
+                <el-row :gutter="10">
+                    <el-col :sm="12" :md="16" :xl="20" :offset="14" >
+                        <span v-text="currentTime"></span>
+                         <span v-text="DMY"></span>
+                        <el-divider direction="vertical" ></el-divider>
+                        <span v-text="Total" style="color: lime;font-size: 80px"></span>
+                    </el-col>
+
+                </el-row>
+                <el-row :gutter="10">
+                    <el-col :xl="24" :md="18">
+                        <el-form  :inline="true" class="demo-form-inline">
+                            <el-form-item label="รหัสลูกค้า">
+                                <el-input v-model="keyGet" @change="selectM()"></el-input>
+                            </el-form-item>
+                            <el-form-item label="ชื่อลูกค้า">
+                                <el-input v-model="formCUS.firstname" ></el-input>
+                            </el-form-item>
+                            <el-form-item label="ระดับ">
+                                <el-input v-model="formCUS.rankName" ></el-input>
+                            </el-form-item>
+
+                        </el-form>
+                    </el-col>
+
+                </el-row>
                 <el-form :inline="true">
                     <el-form-item label="รหัสสินค้า">
                         <el-input v-model="formPID" @change="selectP()"></el-input>
@@ -29,9 +42,9 @@
 
                     <el-table
                             :data="this.Psell"
-                            style= "width: 50% "
+                            style="width: 50%"
                             :row-class-name="tableRowClassName"
-                            max-height="640">
+                            height="640">
                         <el-table-column
                                 prop="barcode"
                                 label="BarCode">
@@ -48,52 +61,57 @@
 
                             </el-table-column>
                             <el-table-column
-                                    prop="unit"
-                                    label="Unit">
-
-                            </el-table-column>
-                            <el-table-column
                                     prop="price"
                                     label="Price">
 
                             </el-table-column>
+                        <el-table-column
+                                prop="unit"
+                                label="Unit">
+
+                        </el-table-column>
+                        <el-table-column
+                                prop="Ptotal"
+                                label="Total">
+
+                        </el-table-column>
                     </el-table>
 
-                    <!--<el-form :inline="true" :model="Calculate" class="demo-form-inline"  >-->
+                    <el-form :inline="true" :model="Calculate" class="demo-form-inline"  >
 
 
-                        <!--<el-col :span="5" :offset="17" >-->
-                        <!--<el-form-item >ส่วนลด-->
-                            <!--<el-input placeholder="0.00"  v-model="formInline.Discount" ></el-input>-->
-                        <!--</el-form-item>-->
-                        <!--</el-col>-->
+                        <el-col :span="5" :offset="17" >
+                        <el-form-item >ส่วนลด
+                            <el-input placeholder="0.00"  v-model="Calculate.Discount" ></el-input>
+                        </el-form-item>
+                        </el-col>
 
-                        <!--<el-col :span="5" :offset="17" >-->
-                        <!--<el-form-item >จำนวนเงิน-->
-                            <!--<el-input placeholder="0.00" v-model="formInline.money"></el-input>-->
-                        <!--</el-form-item>-->
-                        <!--</el-col>-->
+                        <el-col :span="5" :offset="17" >
+                        <el-form-item >จำนวนเงิน
+                            <el-input placeholder="0.00" v-model="Calculate.money"></el-input>
+                        </el-form-item>
+                        </el-col>
 
-                        <!--<el-col :span="5" :offset="17">-->
-                        <!--<el-form-item >รับเงิน-->
-                            <!--<el-input placeholder="0.00"  v-model="formInline.Getmoney" ></el-input>-->
-                        <!--</el-form-item>-->
-                        <!--</el-col>-->
+                        <el-col :span="5" :offset="17">
+                        <el-form-item >รับเงิน
+                            <el-input placeholder="0.00"  v-model="Calculate.Getmoney" ></el-input>
+                        </el-form-item>
+                        </el-col>
 
-                        <!--<el-col :span="5" :offset="17" >-->
-                        <!--<el-form-item >เงินทอน-->
-                            <!--<el-input placeholder="0.00"  v-model="formInline.Refund" ></el-input>-->
-                        <!--</el-form-item>-->
-                        <!--</el-col>-->
-                    <!--</el-form>-->
+                        <el-col :span="5" :offset="17" >
+                        <el-form-item >เงินทอน
+                            <el-input placeholder="0.00"  v-model="Calculate.Refund" ></el-input>
+                        </el-form-item>
+                        </el-col>
+                    </el-form>
             </el-main>
 
-            <el-footer >
-                <el-form style="margin-left: 350px">
-                    <el-button  type="warning"  style="background-color: #f4736b" @click="submitForm(productForm)">คิดเงิน</el-button>
-                </el-form>
+            <!--<el-footer >-->
+                <!--<el-form style="margin-left: 350px">-->
+                    <!--<el-button  type="warning"  style="background-color: #f4736b" @click="submitForm(productForm)">คิดเงิน</el-button>-->
+                <!--</el-form>-->
 
-            </el-footer>
+            <!--</el-footer>-->
 
         </el-container>
     </el-card>
@@ -103,29 +121,24 @@
     export default {
         data() {
             return {
+                currentTime: null,
+                DMY:null,
                 keyGet:'',
                 formCUS:[],
                 formPID:'',
-                formProduct:[],
-                Total :'0.00',
+                formProduct:{Ptotal:''},
+                Total :'0',
                 Psell:[],
                 Pcont: '1',
-                Pprice:'',
-                // Calculate: {
-                //     Discount: '',
-                //     money: '',
-                //     Getmoney: '',
-                //     Refund: ''
-                //
-                // },
-                // tableDate: {
-                //     ID: this.formProduct.id,
-                //     Item: this.formProduct.name,
-                //     Type: this.formProduct.cateName,
-                //     Unit: '1',
-                //     Price: '1'
-                //
-                // },
+
+                Calculate: {
+                    Discount: '',
+                    money: '',
+                    Getmoney: '',
+                    Refund: ''
+
+                },
+
                 dialogFormVisible: false,
             }
         },
@@ -136,6 +149,10 @@
                     console.log(err.fatal);
                 }
             });
+            //delete this.formProduct[0];
+            this.currentTime = moment().format('LTS');
+            this.DMY = moment().format('L');
+            setInterval(() => this.updateCurrentTime(), 1 * 1000);
             // con.end();
             //this.getMember(8850161160851);
         },
@@ -188,14 +205,17 @@
                 let vm = this ;
                 await vm.getProductbyBarcode(vm.formPID);
                 vm.formProduct.unit = vm.Pcont;
-                vm.Pprice = vm.Pcont * vm.formProduct.price;
-                vm.formProduct.price = vm.Pprice;
+                vm.formProduct.Ptotal = vm.Pcont * vm.formProduct.price;
+
                 await vm.Psell.push(vm.formProduct);
                 this.formPID = '';
                 console.log(vm.Psell);
             },
             tableRowClassName({row, rowIndex}) {
                 return 'warning-row';
+            },
+            updateCurrentTime() {
+                this.currentTime = moment().format('LTS');
             }
         }
     }

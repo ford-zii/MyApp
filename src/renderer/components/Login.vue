@@ -8,7 +8,7 @@
           </div>
           <div>
 
-            <el-form :model="form" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+            <el-form :model="form" :rules="rules" ref="rules" label-width="120px" class="demo-ruleForm">
               <el-form-item label="Username" prop="username">
                 <el-input v-model="form.username"></el-input>
               </el-form-item>
@@ -42,11 +42,10 @@
           rules: {
             username: [
               {required: true, message: 'Please input Username', trigger: 'blur'},
-              {min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur'}
               ],
             password: [
               {required: true, message: 'Please input Password', trigger: 'blur'},
-              {min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur'}
+
               ]
           }
         };
@@ -72,16 +71,16 @@
               console.log(err);
             }
             let data = JSON.parse(JSON.stringify(rows));
-            vm.user = data[0]
+            vm.user = data[0];
             console.log("get by user succesfully executed.", rows, vm.user);
-            vm.check(vm.user)
+            vm.check(vm.user,user)
             //return vm.user;
           });
           //console.log("cat",cat);
           //return cat;
           //vm.check();
         },
-        async check(user){
+        async check(user,form){
           //let vm = this;
           //let inputUser = form.password ;
 
@@ -93,6 +92,7 @@
 
           }else {
             this.$swal('','Username or Password error!',"error");
+            this.resetForm(form);
             console.log("B",user)
 
           }
