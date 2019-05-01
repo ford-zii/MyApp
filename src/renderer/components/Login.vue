@@ -13,7 +13,7 @@
                 <el-input v-model="form.username"></el-input>
               </el-form-item>
               <el-form-item label="Password" prop="password">
-                <el-input v-model="form.password" type="password"  @blur="submitForm(form)" ></el-input>
+                <el-input v-model="form.password" type="password"  @change="submitForm(form)" ></el-input>
               </el-form-item>
               <el-form-item >
                 <el-button  plain @click="submitForm(form)" style="padding-left: 5em;padding-right: 5em; background-color: #a8daf4">Login
