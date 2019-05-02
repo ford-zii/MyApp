@@ -27,7 +27,7 @@ const config = {
 
   //host:"127.0.0.1",
   user: "root",
-  password: "12345678",
+  password: "1234567",
   port: "3306",
 
  // database:"store"
@@ -35,6 +35,11 @@ const config = {
   database:"stockmarket"
 
 };
+
+// We declare it globally
+window.JsBarcode = require('jsbarcode');
+window.$ = require('jquery');
+window.moment = require('moment');
 window.conDB = new  mysql.createConnection(config);
 
 

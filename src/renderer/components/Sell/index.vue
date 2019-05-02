@@ -5,16 +5,16 @@
 
             <!--</el-header>-->
             <el-main >
-                <el-row :gutter="10">
-                    <el-col :sm="12" :md="16" :xl="20" :offset="14" >
+
+                    <el-col :sm="6" :md="8" :xl="10" :offset="14" >
                         <span v-text="currentTime"></span>
                          <span v-text="DMY"></span>
                         <el-divider direction="vertical" ></el-divider>
                         <span v-text="Total" style="color: lime;font-size: 80px"></span>
                     </el-col>
 
-                </el-row>
-                <el-row :gutter="10">
+
+
                     <el-col :xl="24" :md="18">
                         <el-form  :inline="true" class="demo-form-inline">
                             <el-form-item label="รหัสลูกค้า">
@@ -30,26 +30,31 @@
                         </el-form>
                     </el-col>
 
-                </el-row>
-                <el-form :inline="true">
-                    <el-form-item label="รหัสสินค้า">
-                        <el-input v-model="formPID" @change="selectP()"></el-input>
-                    </el-form-item>
-                    <el-form-item label="จำนวน">
-                        <el-input v-model="Pcont" ></el-input>
-                    </el-form-item>
-                </el-form>
 
-                    <el-table
-                            :data="this.Psell"
-                            style="width: 50%"
-                            :row-class-name="tableRowClassName"
-                            height="640">
-                        <el-table-column
-                                prop="barcode"
-                                label="BarCode">
 
-                        </el-table-column>
+                    <el-col :xs="24">
+                        <el-form :inline="true">
+                            <el-form-item label="รหัสสินค้า">
+                                <el-input v-model="formPID" @change="selectP()"></el-input>
+                            </el-form-item>
+                            <el-form-item label="จำนวน">
+                                <el-input v-model="Pcont" ></el-input>
+                            </el-form-item>
+                        </el-form>
+                    </el-col>
+
+
+                    <el-col :xl="20" :md="18">
+                        <el-table
+                                :data="this.Psell"
+                                style="width: 100%"
+                                :row-class-name="tableRowClassName"
+                                height="640">
+                            <el-table-column
+                                    prop="barcode"
+                                    label="BarCode">
+
+                            </el-table-column>
                             <el-table-column
                                     prop="name"
                                     label="รายการ">
@@ -65,45 +70,42 @@
                                     label="Price">
 
                             </el-table-column>
-                        <el-table-column
-                                prop="unit"
-                                label="Unit">
+                            <el-table-column
+                                    prop="unit"
+                                    label="Unit">
 
-                        </el-table-column>
-                        <el-table-column
-                                prop="Ptotal"
-                                label="Total">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="Ptotal"
+                                    label="Total">
+                            </el-table-column>
+                            <el-table-column>
+                                <template slot-scope="scope">
+                                    <el-button type="danger" icon="el-icon-delete" circle @click="handleDelete(scope.$index, scope.row)"></el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </el-col>
+                    <el-col :xl="3" :md="5" :offset="1">
+                        <el-form :inline="true" :model="Calculate" class="demo-form-inline"  >
 
-                        </el-table-column>
-                    </el-table>
+                                <el-form-item >จำนวนเงิน
+                                    <el-input placeholder="0.00" v-model="Calculate.money" :disabled="true"></el-input>
+                                </el-form-item>
 
-                    <el-form :inline="true" :model="Calculate" class="demo-form-inline"  >
+
+                                <el-form-item >รับเงิน
+                                    <el-input placeholder="0.00"  v-model="Calculate.Getmoney" ></el-input>
+                                </el-form-item>
+
+                                <el-form-item >เงินทอน
+                                    <el-input placeholder="0.00"  v-model="Calculate.Refund" ></el-input>
+                                </el-form-item>
+
+                        </el-form>
+                    </el-col>
 
 
-                        <el-col :span="5" :offset="17" >
-                        <el-form-item >ส่วนลด
-                            <el-input placeholder="0.00"  v-model="Calculate.Discount" ></el-input>
-                        </el-form-item>
-                        </el-col>
-
-                        <el-col :span="5" :offset="17" >
-                        <el-form-item >จำนวนเงิน
-                            <el-input placeholder="0.00" v-model="Calculate.money"></el-input>
-                        </el-form-item>
-                        </el-col>
-
-                        <el-col :span="5" :offset="17">
-                        <el-form-item >รับเงิน
-                            <el-input placeholder="0.00"  v-model="Calculate.Getmoney" ></el-input>
-                        </el-form-item>
-                        </el-col>
-
-                        <el-col :span="5" :offset="17" >
-                        <el-form-item >เงินทอน
-                            <el-input placeholder="0.00"  v-model="Calculate.Refund" ></el-input>
-                        </el-form-item>
-                        </el-col>
-                    </el-form>
             </el-main>
 
             <!--<el-footer >-->
@@ -126,8 +128,8 @@
                 keyGet:'',
                 formCUS:[],
                 formPID:'',
-                formProduct:{Ptotal:''},
-                Total :'0',
+                formProduct:{Ptotal:0},
+                Total :0,
                 Psell:[],
                 Pcont: '1',
 
@@ -149,21 +151,16 @@
                     console.log(err.fatal);
                 }
             });
-            //delete this.formProduct[0];
+
             this.currentTime = moment().format('LTS');
             this.DMY = moment().format('L');
             setInterval(() => this.updateCurrentTime(), 1 * 1000);
             // con.end();
             //this.getMember(8850161160851);
         },
-        // mounted:function(){
-        //     console.log(formInline,"test")
-        // },
-        // watch:{
-        //     ketGet:function(val){
-        //         this.getMember(val)
-        //     }
-        // },
+         mounted:function(){
+
+         },
 
         methods: {
             getProductbyBarcode(bc){
@@ -206,7 +203,7 @@
                 await vm.getProductbyBarcode(vm.formPID);
                 vm.formProduct.unit = vm.Pcont;
                 vm.formProduct.Ptotal = vm.Pcont * vm.formProduct.price;
-
+                vm.Total = vm.Total + vm.formProduct.Ptotal ;
                 await vm.Psell.push(vm.formProduct);
                 this.formPID = '';
                 console.log(vm.Psell);
@@ -216,7 +213,16 @@
             },
             updateCurrentTime() {
                 this.currentTime = moment().format('LTS');
-            }
+            },
+            handleChange(value) {
+                console.log(value)
+                //this.Psell[index].unit = value;
+            },
+            async handleDelete(index, row) {
+                console.log(row.id,index);
+                this.Psell.splice (index,1);
+                console.log(this.Psell,"test")
+            },
         }
     }
 
